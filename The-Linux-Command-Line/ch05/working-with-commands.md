@@ -133,3 +133,35 @@ The `whatis` program displays the name and a one-line description of a man page 
 $ whatis ls
 ls (1)               - list directory contents
 ```
+
+#### info - Display a Program's Info Entry
+
+To invoke `info`, type `info` followed optionally by the name of a program.
+
+Info pages are _hyperlinked_ much like web pages.
+
+```
+info ls
+Next: dir invocation,  Up: Directory listing
+
+10.1 ‘ls’: List directory contents
+==================================
+
+The ‘ls’ program lists information about files (of any type, including
+directories).  Options and file arguments can be intermixed arbitrarily,
+as usual.
+
+   For non-option command-line arguments that are directories, by
+default ‘ls’ lists the contents of directories, not recursively, and
+omitting files with names beginning with ‘.’.  For other non-option
+arguments, by default ‘ls’ lists just the file name.  If no non-option
+argument is specified, ‘ls’ operates on the current directory, acting as
+if it had been invoked with a single argument of ‘.’.
+
+   By default, the output is sorted alphabetically, according to the
+locale settings in effect.(1)  If standard output is a terminal, the
+output is in columns (sorted vertically) and control characters are
+output as question marks; otherwise, the output is listed one per line
+-----Info: (coreutils)ls invocation, 57 lines --Top-----------------------------------------------------------------------------------
+Welcome to Info version 6.7.  Type H for help, h for tutorial.
+```
