@@ -58,4 +58,13 @@
 * -f, --force
 * -v, --verbose
 
+### ln - Create Links
 
+#### Hard Links
+
+A hard link cannot reference a file outside its own file system.
+
+#### Symbolic Links
+
+Symbolic links were created to overcome the limitations of hard links.
+They operate like a Windows shortcut.
