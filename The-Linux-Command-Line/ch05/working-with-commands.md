@@ -175,3 +175,49 @@ Other files may have a .gz file extension.
 
 `zless` can display the contents of .gzip compressed text files.
 
+### Creating Our Own Commands with alias
+
+A user defined command can be defined using the `alias` command.
+
+It is possible to put more than one command on a line by separating
+each command with a semicolon.
+
+```
+$ cd /usr; ls; cd -
+bin  games  include  lib  libexec  local  sbin  share  src
+/home/dstevenson/Linux/GitHub/Linux/The-Linux-Command-Line/ch05
+```
+You can determine if a command already exists, so as to not re-use an
+existing command using alias.
+
+```
+$ type test
+test is a shell builtin
+```
+
+```
+$ alias foo='cd /usr ; ls; cd -'
+$ foo
+bin  games  include  lib  libexec  local  sbin  share  src
+/home/dstevenson/Linux/GitHub/Linux/The-Linux-Command-Line/ch05
+$ type foo
+foo is aliased to `cd /usr ; ls; cd -'
+$ unalias foo
+$ type foo
+bash: type: foo: not found
+```
+
+You can display existing aliases:
+
+```
+$ alias
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+alias rm='rm --preserve-root'
+```
