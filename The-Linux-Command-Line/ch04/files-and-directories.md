@@ -19,8 +19,20 @@
 
 #### Commmonly Used Character Classes
 
-* `[:alnum]` - Matches any alphanumeric character
-* `[:alpha]` - Matches any alphabetic character
-* `[:digit]` - Matches any numeral
-* `[:lower]` - Matches any lowercase letter
-* `[:upper]` - Matches any uppercase letter
+* `[:alnum:]` - Matches any alphanumeric character
+* `[:alpha:]` - Matches any alphabetic character
+* `[:digit:]` - Matches any numeral
+* `[:lower:]` - Matches any lowercase letter
+* `[:upper:]` - Matches any uppercase letter
+
+#### Wildcard Examples
+
+* `*` - All Files
+* `g*` - Any file beginning with g
+* `b*.txt` - Any file beginning with b, followed by any characters, ending with .txt
+* `Data???` - Any file beginning with Data followed by exactly 3 characters
+* `[abc]*` - Amny file beginning with either an a, b, or c
+* `BACKUP.[0-9][0-9][0-9]` - Any file beginning with BACKUP followed by exactly 3 digits
+* `[[:upper:]]*` - Any file beginning with an upper case letter
+* `[![:digit:]]*` - Any file not beginning with a number
+* `[*[[:lower:]]123] - Any file ending with a lowercase letter or the numbers 1, 2, or 3
