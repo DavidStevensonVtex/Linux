@@ -32,3 +32,10 @@ ls is aliased to `ls --color=auto'
 $ type cp
 cp is /bin/cp
 ```
+
+#### which - Display an Executable's location
+
+```
+$ which ls
+/bin/ls
+```
