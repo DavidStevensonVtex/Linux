@@ -125,3 +125,11 @@ gparted (8)          - GNOME Partition Editor for manipulating disk partitions.
 mpartition (1)       - partition an MSDOS hard disk
 ...
 ```
+
+#### whatis - Display One-line Manual Page Descriptions
+
+The `whatis` program displays the name and a one-line description of a man page matching a specified keyword.
+```
+$ whatis ls
+ls (1)               - list directory contents
+```
