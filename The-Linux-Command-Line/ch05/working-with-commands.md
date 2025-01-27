@@ -109,3 +109,19 @@ DESCRIPTION
 
        •   numerical group ID
 ```
+
+#### apropos  - Display Appropriate Commands
+
+```
+$ apropos partition
+addpart (8)          - tell the kernel about the existence of a partition
+cfdisk (8)           - display or manipulate a disk partition table
+cgdisk (8)           - Curses-based GUID partition table (GPT) manipulator
+delpart (8)          - tell the kernel to forget about a partition
+fdisk (8)            - manipulate disk partition table
+fixparts (8)         - MBR partition table repair utility
+gdisk (8)            - Interactive GUID partition table (GPT) manipulator
+gparted (8)          - GNOME Partition Editor for manipulating disk partitions.
+mpartition (1)       - partition an MSDOS hard disk
+...
+```
