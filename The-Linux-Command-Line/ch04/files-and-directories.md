@@ -36,3 +36,11 @@
 * `[[:upper:]]*` - Any file beginning with an upper case letter
 * `[![:digit:]]*` - Any file not beginning with a number
 * `[*[[:lower:]]123] - Any file ending with a lowercase letter or the numbers 1, 2, or 3
+
+### cp Options
+
+* -a, --archive
+* -i, --interactive
+* -r --recursive
+* -u, --update
+* -v, --verbose
