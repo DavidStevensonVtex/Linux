@@ -44,3 +44,9 @@
 * -r --recursive
 * -u, --update
 * -v, --verbose
+
+### mv options
+
+* -i, --interactive
+* -u, --update
+* -v, --verbose
