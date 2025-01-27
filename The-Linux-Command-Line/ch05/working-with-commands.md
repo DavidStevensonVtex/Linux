@@ -16,4 +16,19 @@
 * An executable program
 * A command built into the shell itself. Example: cd
 * A shell function
-* An alias
+* An alias]
+
+### Identifying Commands 
+
+#### type - Display a Command's type
+
+`type command`
+
+```
+$ type type
+type is a shell builtin
+$ type ls
+ls is aliased to `ls --color=auto'
+$ type cp
+cp is /bin/cp
+```
