@@ -165,3 +165,13 @@ output as question marks; otherwise, the output is listed one per line
 -----Info: (coreutils)ls invocation, 57 lines --Top-----------------------------------------------------------------------------------
 Welcome to Info version 6.7.  Type H for help, h for tutorial.
 ```
+
+#### README and Other Program Documentation Files
+
+There is documentation in the `/usr/share/doc` directory.
+
+Some files are in the HTML format and can be viewed with a browser.
+Other files may have a .gz file extension.
+
+`zless` can display the contents of .gzip compressed text files.
+
