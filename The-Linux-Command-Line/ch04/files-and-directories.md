@@ -50,3 +50,12 @@
 * -i, --interactive
 * -u, --update
 * -v, --verbose
+
+### rm options
+
+* -i, --interactive
+* -r, --recursive
+* -f, --force
+* -v, --verbose
+
+
