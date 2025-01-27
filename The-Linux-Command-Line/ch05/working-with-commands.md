@@ -11,3 +11,9 @@
 * whatis Display one-line manual page descriptions
 * alias Create an alias for a command
 
+### What Exactly Are Commands?
+
+* An executable program
+* A command built into the shell itself. Example: cd
+* A shell function
+* An alias
