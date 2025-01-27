@@ -73,3 +73,39 @@ Mandatory arguments to long options are mandatory for short options too.
       --version  output version information and exit
 ```
 
+#### man - Display a Program's Manual Page
+
+```
+man ls
+LS(1)                                                       User Commands                                                      LS(1)
+
+NAME
+       ls - list directory contents
+
+SYNOPSIS
+       ls [OPTION]... [FILE]...
+
+DESCRIPTION
+       List  information  about  the FILEs (the current directory by default).  Sort entries alphabetically if none of -cftuvSUX nor
+       --sort is specified.
+```
+
+You can also specify a section number for the man page.
+```
+$ man 5 passwd
+PASSWD(5)                                           File Formats and Conversions                                           PASSWD(5)
+
+NAME
+       passwd - the password file
+
+DESCRIPTION
+       /etc/passwd contains one line for each user account, with seven fields delimited by colons (“:”). These fields are:
+
+       •   login name
+
+       •   optional encrypted password
+
+       •   numerical user ID
+
+       •   numerical group ID
+```
