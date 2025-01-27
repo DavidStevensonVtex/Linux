@@ -9,3 +9,9 @@
 * ln - Create hard and symbolic links
 * 
 ### Wildcards
+
+* \* - Matches any characters
+* \? - Matches any single character
+* '[characters]'- Matches any character that is a member of the set _characters_
+* `[!characters]` - Matches any character that is not a member of the set _characters_
+* `[[:class:]]` - Matches any character that is a member of the specified class.
