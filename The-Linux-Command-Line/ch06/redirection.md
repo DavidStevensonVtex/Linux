@@ -59,3 +59,12 @@ $ ls -l /usr/bin >> ls-output.txt # Append to file using >>
 $ ll ls-output.txt
 -rw-rw-r-- 1 dstevenson dstevenson 265314 Jan 28 13:58 ls-output.txt
 ```
+
+#### Redirecting Standard Error
+
+```
+$ ls -l /bin/usr 2> ls-error.txt
+$ cat ls-error.txt
+ls: cannot access '/bin/usr': No such file or directory
+```
+
