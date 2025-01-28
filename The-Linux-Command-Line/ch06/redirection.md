@@ -121,3 +121,16 @@ The pipe operator | is used.
 
 `ls -l /usr/bin | less`
 
+#### Filters
+
+Filters take input, change it somehow, and then output it.
+
+`ls /bin /usr/bin | sort | less`
+
+The Difference Between > and | 
+
+The redirection operator connects a command with a file, while a pipeline operator
+connects the output of one command with the input of a second command.
+
+command1 > command2 is bad because it overwrites command2 without the output of command1 (if the command2 exists within the current directory) or creates a file called command2 instead of executing command2 using the output of command1 and the input to command2.
+
