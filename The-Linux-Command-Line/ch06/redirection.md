@@ -190,3 +190,22 @@ $ tail -n 5 ls-output.txt
 
 Using the -f option, `tail` continues to monitor the file, and when new lines are appended, 
 they immidately appear on the display. This continues until you type `Ctrl-C`.
+
+##### tee: Read from Stdin and Output to Stdout and Files
+
+```
+$ ls /usr/bin | tee ls.txt | grep zip
+funzip
+gpg-zip
+mzip
+preunzip
+prezip
+prezip-bin
+...
+$ head -n 5 ls.txt
+[
+411toppm
+aa-enabled
+aa-exec
+ac
+```
