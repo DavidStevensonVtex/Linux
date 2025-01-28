@@ -87,3 +87,9 @@ or it doesn't work.
 Recent versions of `bash` provide a second more streamlined method for performing this combined redirection, shown here:
 
 `ls -l /bin/usr &> ls-output.txt`
+
+##### Disposing of Unwanted Output
+
+When Silence Is Golden:
+
+`ls -l /bin/usr 2> /dev/null`
