@@ -110,3 +110,14 @@ Input is terminated with Ctrl-D.
 Redirect standard input from the screen to input from a file:
 
 `cat < lazy_dog.txt`
+
+### Pipelines
+
+The capability of commands to read data from standard input and send to standard output is utilized by a shell featuire called _pipelines_.
+
+The pipe operator | is used.
+
+`command1 | command2`
+
+`ls -l /usr/bin | less`
+
