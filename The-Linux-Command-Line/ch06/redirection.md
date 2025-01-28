@@ -134,3 +134,12 @@ connects the output of one command with the input of a second command.
 
 command1 > command2 is bad because it overwrites command2 without the output of command1 (if the command2 exists within the current directory) or creates a file called command2 instead of executing command2 using the output of command1 and the input to command2.
 
+##### uniq: Report or Omit Repeated Lines
+
+`ls /bin /usr/bin | sort | uniq | less`
+
+In this example, we use `uniq` to remove any duplicate lines.
+
+If we want to see the list of duplicates instead, use the -d option with `uniq`.
+
+`ls /bin /usr/bin | sort | uniq -d | less`
