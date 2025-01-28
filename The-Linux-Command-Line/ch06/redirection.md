@@ -169,3 +169,24 @@ Useful options:
 
 * -i - ignore case
 * -v - print only lines which do not match the pattern
+
+##### head/tail: Print First/Last Part of Files
+
+```
+$ ls -l /usr/bin > ls-output.txt
+$ head -n 5 ls-output.txt
+total 923852
+-rwxr-xr-x 1 root       root           59736 Sep  5  2019 [
+-rwxr-xr-x 1 root       root           10104 Apr 23  2016 411toppm
+-rwxr-xr-x 1 root       root           31248 Mar  6  2024 aa-enabled
+-rwxr-xr-x 1 root       root           35344 Mar  6  2024 aa-exec
+$ tail -n 5 ls-output.txt
+-rwxr-xr-x 2 root       root          186664 Feb  1  2024 zipinfo
+-rwxr-xr-x 1 root       root           89488 Apr 21  2017 zipnote
+-rwxr-xr-x 1 root       root           93584 Apr 21  2017 zipsplit
+-rwxr-xr-x 1 root       root           26952 Mar 20  2023 zjsdecode
+-rwxr-xr-x 1 root       root           14584 Jul 28  2021 zlib-flate
+```
+
+Using the -f option, `tail` continues to monitor the file, and when new lines are appended, 
+they immidately appear on the display. This continues until you type `Ctrl-C`.
