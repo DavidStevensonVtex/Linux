@@ -67,4 +67,23 @@ $ ls -l /bin/usr 2> ls-error.txt
 $ cat ls-error.txt
 ls: cannot access '/bin/usr': No such file or directory
 ```
+##### Redirecting Standard Output and Standard Error to One File
 
+```
+$ ls -l /bin/usr > ls-output.txt 2>&1
+$ cat ls-output.txt
+ls: cannot access '/bin/usr': No such file or directory
+```
+
+Note: The order of the redirections is significant
+
+The redirection of standard error must always occur after redirecting standard output
+or it doesn't work.
+
+`> ls-output.txt 2>&1` redirects standard error to the ls-output.txt file.
+
+`2>&1 > ls-output.txt` redirects standard error to the screen and standard output to the ls-output.txt file.
+
+Recent versions of `bash` provide a second more streamlined method for performing this combined redirection, shown here:
+
+`ls -l /bin/usr &> ls-output.txt`
