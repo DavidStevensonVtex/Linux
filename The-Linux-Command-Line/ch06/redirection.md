@@ -143,3 +143,9 @@ In this example, we use `uniq` to remove any duplicate lines.
 If we want to see the list of duplicates instead, use the -d option with `uniq`.
 
 `ls /bin /usr/bin | sort | uniq -d | less`
+
+##### wc: Print Line, Word and Byte Counts
+
+`wc ls-output.txt`
+
+`ls /bin /usr/bin | sort | uniq | wc -l`
