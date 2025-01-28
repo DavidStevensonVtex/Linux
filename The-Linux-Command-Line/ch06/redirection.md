@@ -149,3 +149,23 @@ If we want to see the list of duplicates instead, use the -d option with `uniq`.
 `wc ls-output.txt`
 
 `ls /bin /usr/bin | sort | uniq | wc -l`
+
+##### grep: Print Lines Matching a Pattern
+
+`grep pattern filename`
+
+Advanced patterns include regular expressions.
+
+```
+$ ls /bin /usr/bin | sort | uniq | grep zip
+bunzip2
+bzip2
+bzip2recover
+funzip
+...
+```
+
+Useful options:
+
+* -i - ignore case
+* -v - print only lines which do not match the pattern
