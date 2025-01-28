@@ -93,3 +93,20 @@ Recent versions of `bash` provide a second more streamlined method for performin
 When Silence Is Golden:
 
 `ls -l /bin/usr 2> /dev/null`
+
+#### Redirecting Standard Input
+
+##### cat: Concatenate Files
+
+The `cat` command reads one or more files and copies them to standard output like so:
+
+`cat filename`
+
+`cat` is often used to display short text files.
+
+`cat` used with no arguments can be used to read from standard input and output to standard output.
+Input is terminated with Ctrl-D.
+
+Redirect standard input from the screen to input from a file:
+
+`cat < lazy_dog.txt`
