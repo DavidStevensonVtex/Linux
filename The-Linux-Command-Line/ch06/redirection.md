@@ -21,3 +21,41 @@ I/O redirection allows us to change where output goes and where input comes from
 
 Normally, output goes to the s creen and input comes from the keyboard,
 but with I/O redirection, we can change that.
+
+#### Redirecting Standard Output
+
+I/O redirection allows us to redefine where standard output goes.
+
+`ls -l /usr/bin > ls-output.txt`
+
+`less ls-output.txt`
+
+Using a directory that does not exist:
+
+```
+$ ls -l /bin/usr > ls-output.txt
+ls: cannot access '/bin/usr': No such file or directory
+```
+
+Errors are output to Standard Error.
+
+Truncate a file:
+
+```
+$ ll ls-output.txt
+-rw-rw-r-- 1 dstevenson dstevenson 132657 Jan 28 13:54 ls-output.txt
+$ > ls-output.txt
+$ ll ls-output.txt
+-rw-rw-r-- 1 dstevenson dstevenson 0 Jan 28 13:54 ls-output.txt
+```
+
+Append to a file:
+
+```
+$ ls -l /usr/bin > ls-output.txt
+$ ll ls-output.txt
+-rw-rw-r-- 1 dstevenson dstevenson 132657 Jan 28 13:58 ls-output.txt
+$ ls -l /usr/bin >> ls-output.txt # Append to file using >>
+$ ll ls-output.txt
+-rw-rw-r-- 1 dstevenson dstevenson 265314 Jan 28 13:58 ls-output.txt
+```
