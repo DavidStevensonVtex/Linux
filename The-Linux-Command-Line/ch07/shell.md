@@ -43,3 +43,29 @@ It expands into the name of the home directory.
 $ echo ~
 /home/dstevenson
 ```
+
+#### Arithmetic Expansion
+
+```
+$ echo $((2 + 2))
+4
+```
+
+Operators / Description
+* \+ Addition
+* \- Subtraction
+* \* Multiplication
+* \/ Division
+* \% Modulo
+* \*\* Exponentiation
+
+Spaces are not significant in arithmetic expressions, and expressions can be nested.
+
+```
+$ echo $(($((5**2)) * 3))
+75
+```
+
+[Shell Arithmetic](https://www.gnu.org/software/bash/manual/html_node/Shell-Arithmetic.html)
+
+Arithmetic expansion is covered in greater detail in Chapter 34.
