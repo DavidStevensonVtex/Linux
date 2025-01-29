@@ -233,3 +233,20 @@ $ mv bad\&filename good_filename
 ```
 
 To allow a backslash character to appear, escape it by typing \\\\.
+
+#### Backslash Escape Sequences
+
+* \\a Bell (an alert that causes the computer to beep)
+* \\b Backspace
+* \\n Newline
+* \\r Carriage Return
+* \\t Tab
+
+Adding the \-e option to `echo` will enable interpretation of `escape` sequences.
+
+```
+$ sleep 2; echo -e "Time's up\a"
+Time's up
+$ sleep 2 ; echo -e "Time's up" $'\a'
+Time's up 
+```
