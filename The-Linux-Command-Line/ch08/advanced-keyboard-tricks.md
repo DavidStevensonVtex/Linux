@@ -24,3 +24,13 @@
 * `Alt-T` Transpose the word at the cursor location with the one preceding it.
 * `Alt-L` Convert the characters from the cursor location to the end of the word to lowercase.
 * `Alt-U` Convert the characters from the cursor location to the end of the word to uppercase.
+
+#### Cutting and Pasting (Killing and Yanking) Text
+
+* `Ctrl-K` Kill text from the cursor location to the end of the line.
+* `Ctrl-U` Kill text from the cursor location to the beginning of the line.
+* `Alt-D` Kill text from the cursor location to the end of the current word.
+* `Alt-Backspace` Kill text from the cursor location to the beginning of the current word. If the cursor is at the beginning of the word, kill the previous word.
+* `Ctrl-Y` Yank text from the kill-ring and insert it at the cursor location.
+
+While the ALT key serves as the meta key on modern keyboards, you can also press and release the ESC key to get the same effect as holding down the ALT key.
