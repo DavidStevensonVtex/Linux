@@ -207,3 +207,13 @@ Su Mo Tu We Th Fr Sa
                       
 ```
 
+##### Single Quotes
+
+If we need to suppress _all_ expansions, we use _single quotes_.
+
+```
+$ echo "text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER"
+text ~/*.txt {a,b} foo 4 dstevenson
+$ echo 'text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER'
+text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER
+```
