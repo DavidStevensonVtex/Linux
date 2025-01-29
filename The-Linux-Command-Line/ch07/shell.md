@@ -217,3 +217,19 @@ text ~/*.txt {a,b} foo 4 dstevenson
 $ echo 'text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER'
 text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER
 ```
+
+##### Escaping Characters
+
+Sometimes we want to quote only a single character. To do this, we can precede a character with a backslash,
+which in this context is called the _escape character_.
+
+```
+$ echo "The balance for user $USER is: \$5.00"
+The balance for user dstevenson is: $5.00
+```
+
+```
+$ mv bad\&filename good_filename
+```
+
+To allow a backslash character to appear, escape it by typing \\\\.
