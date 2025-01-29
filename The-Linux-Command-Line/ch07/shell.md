@@ -4,3 +4,13 @@
 
 * echo Display a line of text
 
+### Expansion
+
+`echo this is a test`
+
+```
+$ echo *
+shell.md
+```
+
+Wildcards are expanded to file names.
