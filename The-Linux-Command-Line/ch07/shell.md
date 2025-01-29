@@ -33,3 +33,13 @@ $ echo .*
 ```
 
 `ls -d .* | less`
+
+#### Tilde Expansion
+
+The tilde character (~) has special meaning.
+It expands into the name of the home directory.
+
+```
+$ echo ~
+/home/dstevenson
+```
