@@ -145,3 +145,65 @@ There is an alternate syntax for command substitution in older shell programs th
 $ ls -l `which cp`
 -rwxr-xr-x 1 root root 153976 Sep  5  2019 /bin/cp
 ```
+
+#### Quoting
+
+```
+$ echo this is a           test
+this is a test
+```
+
+##### Double Quotes
+
+If we place text inside double quotes, all the special characters used by the shell lose their special meaning and are treated as ordinary characters. The exceptions are \$ (dollar sign), \\ (backslash), and \` (backtick).
+
+This means that word  splitting, pathname expansion, tilde expansion, and brace expansion are suppressed;
+however, parameter expansion, arithmetic expansion, and command substitution are still carried out.
+
+```
+$ touch "two words.txt"
+$ ls -l two words.txt
+ls: cannot access 'two': No such file or directory
+ls: cannot access 'words.txt': No such file or directory
+$ ls -l "two words.txt"
+-rw-rw-r-- 1 dstevenson dstevenson 0 Jan 29 14:30 'two words.txt'
+```
+
+```
+$ echo "$USER $((2+2)) $(cal)"
+dstevenson 4     January 2025      
+Su Mo Tu We Th Fr Sa  
+          1  2  3  4  
+ 5  6  7  8  9 10 11  
+12 13 14 15 16 17 18  
+19 20 21 22 23 24 25  
+26 27 28 29 30 31     
+                     
+```
+
+```
+$ echo "this is a                test"
+this is a                test
+```
+
+By defeault, word splitting looks for the presence of spaces, tabs, and newlines (line feed characters)
+and treats them as _delimiters_ between words.
+This means unquoted  spaces, tabas, and newlines are not considered to be part of the text.
+
+The fact that newlines are considered delimiters by word-splitting mechanism causes an interesting,
+albeit subtle, effect on command substitution.
+
+```
+$ echo $(cal)
+January 2025 Su Mo Tu We Th Fr Sa 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+$ echo "$(cal)"
+    January 2025      
+Su Mo Tu We Th Fr Sa  
+          1  2  3  4  
+ 5  6  7  8  9 10 11  
+12 13 14 15 16 17 18  
+19 20 21 22 23 24 25  
+26 27 28 29 30 31     
+                      
+```
+
