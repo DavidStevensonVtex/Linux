@@ -34,3 +34,11 @@
 * `Ctrl-Y` Yank text from the kill-ring and insert it at the cursor location.
 
 While the ALT key serves as the meta key on modern keyboards, you can also press and release the ESC key to get the same effect as holding down the ALT key.
+
+#### Completion
+
+Completion occurs when you press the TAB key while typing a command (or part of a file name).
+
+* `Alt-?` Display a list of possible completions. On most systems, you can also do this by pressing the TAB key a second time, which is much easier.
+* `Alt-*` Insert all possible completions. This is useful when you want to use more than one match.
+
