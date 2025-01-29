@@ -116,3 +116,32 @@ $ ls
 2007-05  2007-11  2008-05  2008-11  2009-05  2009-11
 2007-06  2007-12  2008-06  2008-12  2009-06  2009-12
 ```
+
+#### Command Substitution
+
+```
+$ echo $(ls -d *s)
+Documents Downloads Pictures Templates Videos
+```
+
+```
+$ ls -l $(which cp)
+-rwxr-xr-x 1 root root 153976 Sep  5  2019 /bin/cp
+```
+
+```
+$ file $(ls -d /usr/bin/* | grep zip)
+/usr/bin/funzip:     ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=b9453771956bf0369a0a65476c7c42183dca34ba, for GNU/Linux 3.2.0, stripped
+/usr/bin/gpg-zip:    POSIX shell script, ASCII text executable
+/usr/bin/mzip:       symbolic link to mtools
+/usr/bin/preunzip:   POSIX shell script, ASCII text executable
+/usr/bin/prezip:     POSIX shell script, ASCII text executable
+...
+```
+
+There is an alternate syntax for command substitution in older shell programs that is also supported in `bash`.
+
+```
+$ ls -l `which cp`
+-rwxr-xr-x 1 root root 153976 Sep  5  2019 /bin/cp
+```
