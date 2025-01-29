@@ -16,3 +16,11 @@
 * `Alt-F` Move cursor forward one word
 * `Alt-B` Move cursor backward one word
 * `Ctrl-L` Clear the screen and move the cursor to the top left corner. The `clear` command does the same thing.
+
+#### Modifying Text
+
+* `Ctrl-D` Delete the character at the cursor location
+* `Ctrl-T` Transpose (exchange) the character at the cursor location with the one preceding it.
+* `Alt-T` Transpose the word at the cursor location with the one preceding it.
+* `Alt-L` Convert the characters from the cursor location to the end of the word to lowercase.
+* `Alt-U` Convert the characters from the cursor location to the end of the word to uppercase.
