@@ -97,3 +97,12 @@ Keystrokes to manipulate the history list:
 * `Alt-P` Reverse search, non-incremental. With this key, type in the search string and press `ENTER` before the search is performed.
 * `Alt-N` Forward search, non-incremental.
 * `Ctrl-O` Execute the current item in the history list and advance to the next one. This is handy if you are trying to re-execute a sequenceof commands in a history list.
+
+#### History Expansion
+
+The shell offers a specialized type of expansion for items in the history list by using the \! character.
+
+* `!!` Repeat the last command. It is probably easier to press the up arrow and ENTER
+* `!number` Repeat history list item _number_.
+* `!string` Repeat last history list item starting with _string_.
+* `!?string` Repeat last history list item containing _string_.
