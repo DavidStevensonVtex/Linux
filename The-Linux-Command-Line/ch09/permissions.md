@@ -221,3 +221,26 @@ The `sudo` command allows an administrator to set up a configuration file called
 
 The choice of which command to use is largely determined by which Linux distribution you use. 
 Your distribution probably includes both commands, but its configuratino will favor one or the other.
+
+#### su: Run a Shell with Substitute User and Group IDs
+
+`su [-[l]] [user]`
+
+If the `-l` option is included, the resulting shell session is a _login shell_ for the specified user. This means the user's environment is loaded and the working diretory is changed to the user's home directory. This is usually what we want.
+
+If the user is not specified, the superuser is assumed. Notice that (strangely) the `-l` command may be abbreviated as `-`, which is how it is most often used.
+
+```
+$ us -
+Password:
+# 
+...
+# exit
+```
+
+It is also possible to execute a single command rather than starting a new interactive session by using `su` this way:
+
+`su -c 'command'`
+
+`su -c 'ls -l /root/*'`
+
