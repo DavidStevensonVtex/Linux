@@ -134,3 +134,42 @@ chmod Symbolic Notation Examples
 
 The Files application (GUI) In GNOME allows changing permissions by right-clicking on the file and selecting permissions, and then selecting the Permissions tab.
 
+### umask: Set Default Permissions
+
+```
+$ umask
+0002
+$ > foo.txt
+$ ls -l foo.txt
+-rw-rw-r-- 1 dstevenson dstevenson 0 Jan 30 16:25 foo.txt
+```
+
+We can see that both the owner and group get read and write permissions, while evveryone else gets only read permission. The reason that world does not have write permission is because of the value of the mask. Repeating our example:
+
+```
+$ rm foo.txt
+$ umask 0000 
+$ > foo.txt
+$ ls -l foo.txt
+-rw-rw-rw- 1 dstevenson dstevenson 0 Jan 30 16:27 foo.txt
+```
+
+When we set the mask to 0000 (effectively turning it off), we see that the file is now writable.
+To understand how this works, we have to use octal numbers again.
+
+* Original file mode: --- rw- rw- rw-
+* Mask: 000 000 000 010
+* Result: --- rw- rw- r--
+
+If we look at a mask value of 0022, we can see what it does.
+
+It appears that the bit mask supplied to umask turns off permission bits in user, group and world permissions.
+
+* Original file mode: --- rw- rw- rw-
+* Mask: 000 000 010 010
+* Result: --- rw- r-- r--
+
+Resetting umask permissions; cleaning up
+
+`$ rm foo.txt; umask 0002`
+
