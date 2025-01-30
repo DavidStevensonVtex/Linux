@@ -244,3 +244,22 @@ It is also possible to execute a single command rather than starting a new inter
 
 `su -c 'ls -l /root/*'`
 
+#### sudo: Execute a Command As Another User
+
+```
+$ sudo backup_script
+Password:
+...
+```
+
+`sudo` does not start a new shell, nor does it load another user's environment. This means that commands do not need to be quoted any differently than they would be without using `sudo`.
+
+```
+$ sudo -l
+[sudo] password for dstevenson: 
+Matching Defaults entries for dstevenson on dstevensonlinux1:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User dstevenson may run the following commands on dstevensonlinux1:
+    (ALL : ALL) ALL
+```
