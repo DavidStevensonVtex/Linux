@@ -275,3 +275,17 @@ Superuser privileges are required to use this command.
 
 In older versions of Unix, the chown command changed only file ownership, not group ownership.
 For that purpose, a separate command, `chgrp`, was used.
+
+### Exercising Our Privileges
+
+#### Changing Your Password
+
+`passwd [user]`
+
+```
+$ passwd
+(current) UNIX password:
+New UNIX password:
+```
+
+The `passwd` command will try to enforce strong passwords.
