@@ -173,3 +173,36 @@ Resetting umask permissions; cleaning up
 
 `$ rm foo.txt; umask 0002`
 
+### Some Special Permissions
+
+Though we usually see an octal permission mask expressed as a three digit number, it is more technically correct to express it in four digits. Why? Because in addition to read, write and execute permissions, there are some other, les used, permission settings.
+
+* _setuid bit_ (octal 4000) When applied to an executable file, it changes the effective user ID from that of the real user (the user actually running the program) to that of the program's owner. Most often this is given to a few programs owned by the superuser. When an ordinary user runs a program that is _setuid root_, the program runs with the effective privileges of the superuser.
+
+* _setgid bit_ (octal 2000) changes the _effective group id_ from the real group ID of the real user to that of the file owner. If the setgid bit is set on a directory, newly created files in the directory will be  given the group ownership of the directory rather than the group ownership of the file's creator. This is useful in a shared directory when members of a common group need access to all the files in the directory, regardless of the file owner's primary group.
+
+* _sticky bit_ (octoal 1000) This is a holdover from ancient Unix, where it was possible to mark an executable file as "not swappable". On files, Linux ignores the sticky bit, but if applied to a directory, it prevents users from deleting or renaming files unles the user is either the owner of the directory, the owner of the file, or the superuser. This is often used to control access to a shared directory, such as tmp.
+
+Example: Assign setuid to a program:
+
+chmod u+s program
+
+Example: Assign setgid to a directory
+
+chmod g+s dir
+
+Example: Assigning the sticky bit to a directory
+
+chmod +t dir
+
+An example of a program that is setuid:
+
+-rwsr-xr-x
+
+An example of a diretory that has the setgid attribute:
+
+drwxrwsr-x
+
+An example of a directory with the sticky bit set:
+
+drwxrwxrwt
