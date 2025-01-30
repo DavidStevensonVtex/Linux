@@ -263,3 +263,11 @@ Matching Defaults entries for dstevenson on dstevensonlinux1:
 User dstevenson may run the following commands on dstevensonlinux1:
     (ALL : ALL) ALL
 ```
+
+#### chown: Change File Owner and group
+
+The `chown` command is used to change the owner and group owner of a file or diretory.
+Superuser privileges are required to use this command.
+
+`chown [owner][:group]] file...`
+
