@@ -130,3 +130,7 @@ chmod Symbolic Notation Examples
 * go=rw Set the group owner and world to have read and write permissions. If either the group owner or the world previously had execute permission, it is removed.
 * u+x,go=rw Add execute permission for the owner and set the permissions for the group and others to read and eecute. Multiple specifications may be separated by commas.
 
+### Setting File Mode with the GUI
+
+The Files application (GUI) In GNOME allows changing permissions by right-clicking on the file and selecting permissions, and then selecting the Permissions tab.
+
