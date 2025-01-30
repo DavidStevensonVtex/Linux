@@ -271,3 +271,7 @@ Superuser privileges are required to use this command.
 
 `chown [owner][:group]] file...`
 
+#### chgrp: Change Group Ownereship
+
+In older versions of Unix, the chown command changed only file ownership, not group ownership.
+For that purpose, a separate command, `chgrp`, was used.
