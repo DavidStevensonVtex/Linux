@@ -43,3 +43,35 @@ dstevenson adm cdrom sudo dip plugdev lpadmin sambashare
 
 User accounts are defined in the `/etc/passwd` file, and groups
 are defined in the `/etc/group` file.
+
+### Reading, Writing and Executing
+
+Access rights to files and directories are defined in terms of read access, write access, and execution access.
+
+```
+$ > foo.txt
+$ ls -l foo.txt
+-rw-rw-r-- 1 dstevenson dstevenson 0 Jan 30 15:58 foo.txt
+```
+
+The first 10 characters of the listign are the _file attributes_. The first of these characters is the file type.
+
+#### File Types
+
+* \- A regular file
+* d A directory
+* l A symbolic link
+* c A character special file. This file type refers to a device that handles data as a stream of bytes, such as a terminal or /dev/null.
+* b A block special file. This file type refers to a device that handles data in blocks, such as a hard drive or DVD drive.
+
+The remaining nine characters of the file attributes, called the file mode, represent the read, write, and execute permissions file's owner, the file's group owner, and everybody else.
+
+* Owner rwx
+* Group rwx
+* World rwx
+
+#### Permission Attributes
+
+* r Allows a file to be opened and read
+* w Allows a file to be written or truncated. This attribute does not allow files to be renamed or deleted. The ability to delete or rename files is determined by directory attributes.
+* x Allows a file to be treated as a program and executed. Program files written in scripting languages must also be set as readable to be executed.
