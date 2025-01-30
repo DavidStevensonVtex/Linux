@@ -206,3 +206,18 @@ drwxrwsr-x
 An example of a directory with the sticky bit set:
 
 drwxrwxrwt
+
+### Changing Identities
+
+There are three ways to take on an alternate identity:
+
+1. Log out and log back in as the alternate user.
+2. Use the `su` command.
+3. Use the `sudo` command.
+
+From within our own shell session, the `su` command allows you to assume the identity of another user and either start a new session with that user's ID or issue a single command as that user.
+
+The `sudo` command allows an administrator to set up a configuration file called /etc/sudoers and define specific commands that particular users are permitted to execute under an assumed identity.
+
+The choice of which command to use is largely determined by which Linux distribution you use. 
+Your distribution probably includes both commands, but its configuratino will favor one or the other.
