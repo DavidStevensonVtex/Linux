@@ -75,3 +75,58 @@ The remaining nine characters of the file attributes, called the file mode, repr
 * r Allows a file to be opened and read
 * w Allows a file to be written or truncated. This attribute does not allow files to be renamed or deleted. The ability to delete or rename files is determined by directory attributes.
 * x Allows a file to be treated as a program and executed. Program files written in scripting languages must also be set as readable to be executed.
+
+
+### chmod: Change File Mode (Permissions)
+
+`chmod` supports two distinct ways of specifying mode changes.
+
+* Octal number representation
+* Symbolic representation
+
+Octal is base 8.
+
+0, 1, 2, 3, 4, 5, 6, 7, 10, 12, 13, 14, 15, 16, 17, 20, 21, ...
+
+Octal, Binary, File Mode
+
+* 0 000 ---
+* 1 001 --x
+* 2 010 -w-
+* 3 011 -wx
+* 4 100 r--
+* 5 101 r-x
+* 6 110 rw-
+* 7 111 rwx
+
+```
+$ ls -l foo.txt
+-rw-rw-r-- 1 dstevenson dstevenson 0 Jan 30 16:11 foo.txt
+$ chmod 600 foo.txt
+$ ls -l foo.txt
+-rw------- 1 dstevenson dstevenson 0 Jan 30 16:11 foo.txt
+```
+
+`chmod` als supports a symbolic notation for specifying file modes.
+Symbolic notation is divided into 3 parts.
+
+* Who the change will affect
+* Which operation will be performed
+* What permission will be set
+
+chmod Symbolic Notation
+
+Symbol Meaning
+* u Short for user, but means the file or directory owner
+* g Group owner
+* o Short for others but means world.
+* a Short for all. This is a combination of u, g and o.
+
+chmod Symbolic Notation Examples
+* u+x Add execute permission for the owner
+* u-x Remove execute permission for the owner
+* +x Add execute permission for the owner, group, and world. This is equivalent to a+x.
+* o-rw Removethe read and write permissions for anyone besides the owner and group owner
+* go=rw Set the group owner and world to have read and write permissions. If either the group owner or the world previously had execute permission, it is removed.
+* u+x,go=rw Add execute permission for the owner and set the permissions for the group and others to read and eecute. Multiple specifications may be separated by commas.
+
