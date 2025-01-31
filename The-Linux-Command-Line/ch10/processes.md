@@ -190,3 +190,12 @@ $
 [1]-  Terminated              xlogo
 [2]+  Terminated              xlogo
 ```
+
+### Shutting Down the System
+
+`sudo reboot`
+
+`sudo shutdown -h now`
+
+`sudo shutdown -r now`
+
