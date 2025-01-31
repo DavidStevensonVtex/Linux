@@ -88,3 +88,14 @@ $ jobs
 [1]+  Running                 xlogo &
 ```
 
+#### Returning a Process to the Foreground
+
+```
+$ jobs
+[1]+  Running                 xlogo &
+$ fg %1
+xlogo
+```
+
+The `fg` command followed by a percent sign and the job number (called a _jobspec_).
+
