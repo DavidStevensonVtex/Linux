@@ -99,3 +99,18 @@ xlogo
 
 The `fg` command followed by a percent sign and the job number (called a _jobspec_).
 
+#### Stopping (Pausing) a Process
+
+To stop a foreground process and place it in the background press `Ctrl-Z`. 
+
+```
+$ xlogo
+^Z
+[1]+  Stopped                 xlogo
+```
+
+The book says the xlogo window should appear quite dead and unable to be resized.
+I was able to resize the xlogo window on Ubuntu 20.04.
+
+We can bring the xlogo program to the foreground by using the `fg` command, or
+resume the program's execution in the background with the `bg` command.
