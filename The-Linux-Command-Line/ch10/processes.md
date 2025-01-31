@@ -10,3 +10,9 @@
 * kill Send a signal to a process
 * killall Kill processes by name
 * shutdown Shutdown or reboot the system
+
+### How a Process Works
+
+A _parent process_ produces a _child process_.
+
+Each process is assigned a number called a _process ID (PID)_.
