@@ -10,7 +10,7 @@
 ### What is Stored in the Environment
 
 Two basic types of data in the environment:
- 
+
 * _environment variables_
 * _shell variables_
 
@@ -18,3 +18,37 @@ Programmatic data:
 
 * _aliases_
 * _shell functions_
+
+#### Examining the Environment
+
+`$ printenv | less`
+
+The `printenv` can calso list the value of a specific variable.
+
+```
+$ printenv USER
+dstevenson
+````
+
+The `set` command, when used without options or arguments, will display both the shell and environment variables, 
+as well as any defined shell functions. Unlike `printenv`, the output is sorted in alphabetical order.
+
+`$ set | less`
+
+```
+$ echo $HOME
+/home/dstevenson
+```
+
+```
+$ alias
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+alias rm='rm --preserve-root'
+```
