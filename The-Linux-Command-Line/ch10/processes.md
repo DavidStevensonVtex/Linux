@@ -135,3 +135,43 @@ The kill command doesn't exactly "kill" processes; rather it sends them _signals
 Signals are one of the several ways that the operating system communicates with programs.
 We have already seen signals in action with the use of `Ctrl-C` and `Ctrl-Z`.
 
+#### Sending Signals to Processes with kill
+
+`kill -signal PID`
+
+Common Signals
+
+Number Name Meaning
+* 1 HUP Hangup
+* 2 INT Interrupt
+* 9 KILL Kill. The kernel immediately terminates the process.
+* 15 TERM Terminate. Default signal sent by the kill command.
+* 18 CONT Continue. This will restore a process after a STOP or TSTP signal.
+* 19 STOP Stop. This signal causes a process to pause with terminating.
+* 20 TSTP Terminal Stop. This is the signal sent by the terminal when `Ctrl-Z` is pressed. The program may choose to ignore this signal.
+
+```
+$ xlogo &
+[1] 15339
+$ kill -1 15339
+$ # xlogo window disappears
+```
+
+```
+$ xlogo &
+[1] 15384
+$ kill -INT 15384
+$ # xlogo window disappears
+[1]+  Interrupt               xlogo
+$ ps
+    PID TTY          TIME CMD
+  13548 pts/1    00:00:00 bash
+  15387 pts/1    00:00:00 ps
+```
+
+Other Common Signals
+
+Number Name Meaning
+* 3 QUIT Quit
+* 11 SEGV Segmentation violation. Illegal use of memory.
+* 28 WINCH Window change. This is the signal sent by the system when a window changes size
