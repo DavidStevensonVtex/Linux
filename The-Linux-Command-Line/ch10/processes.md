@@ -114,3 +114,24 @@ I was able to resize the xlogo window on Ubuntu 20.04.
 
 We can bring the xlogo program to the foreground by using the `fg` command, or
 resume the program's execution in the background with the `bg` command.
+
+### Signals
+
+The `kill`  command is used to "kill" processes.
+This allows us to terminate programs that need killing (some kind of pausing or termination).
+
+```
+$ ps
+    PID TTY          TIME CMD
+  13548 pts/1    00:00:00 bash
+  15127 pts/1    00:00:00 ps
+$ xlogo &
+[1] 15129
+$ kill 15129
+```
+
+The kill command doesn't exactly "kill" processes; rather it sends them _signals_.
+
+Signals are one of the several ways that the operating system communicates with programs.
+We have already seen signals in action with the use of `Ctrl-C` and `Ctrl-Z`.
+
