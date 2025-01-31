@@ -69,3 +69,23 @@ Variable Contents
 * TERM The name of your terminal type. 
 * TZ Specifies your time zone.
 * USER Your username.
+
+### How Is the Environment Established?
+
+When we log on to the system, the `bash` program starts and reads a series of configuration scripts called _startup files_, which define the current environment shared by all users. This is followed by more startup files in your home directory that define our personal environment. The exact sequence depends on the type of shell sesssion being started. There are two kidns:
+
+* A login shell session
+* A non-login shell session
+
+Startup files
+* /etc/profile
+* ~/.bash_profile
+* ~/.bash_login Used if ~/.bash_profile is not found.
+* ~/.profile Used if neither ~/.bash_profile nor ~/.bash_login is found.
+
+Startup Files for Non-Login Shell Sessions
+
+* /etc/bash.bashrc A global configuration script that applies to all users
+* ~/.bashrc A user's personal startup file.
+
+The ~/.bashrc is probably the most important startup file from the ordinary user's point of view, because it is almost always read.
