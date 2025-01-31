@@ -122,4 +122,16 @@ Backup
 
 `nano .bashrc`
 
+#### Activating Our Changes
+
+The .bashrc file is started at the beginning of a dession.
+
+During a session, use:
+
+`$ source ~/.bashrc`
+
+or:
+`. ~/.bashrc`
+
+
 
