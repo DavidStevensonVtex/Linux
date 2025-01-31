@@ -68,3 +68,23 @@ Header Meaning
 #### Interrupting a Process
 
 `Ctrl-C` interrupts the process.
+
+#### Putting a Process in the Background
+
+* _foreground_ visible on the surface like the shell prompt
+* _background_ stuff hidden behind the surface
+
+To launch a program in the background, use the ampersand (&) character.
+
+`xlogo &`
+
+```
+$ ps
+    PID TTY          TIME CMD
+  13548 pts/1    00:00:00 bash
+  14378 pts/1    00:00:00 xlogo
+  14379 pts/1    00:00:00 ps
+$ jobs
+[1]+  Running                 xlogo &
+```
+
