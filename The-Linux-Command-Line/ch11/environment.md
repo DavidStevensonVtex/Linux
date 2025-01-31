@@ -102,4 +102,14 @@ To modify your PATH or define additional environment variables, place those chan
 
 Otherwise, place changes in ~/.bashrc.
 
+#### Text Editors
+
+Text editors fall into two basic categories: graphical and text-based.
+GNOME and KDE both include some popular graphical editors.
+GNOME shipes with gedit, which is usually called "Text Editor" in the GNOME menu.
+KDE usually ships with three, which are kedit, kwrite, and kate.
+
+There are many text-based editors. The popular ones we'll encounter are nano, vi and emacs.
+vi has been mostly replaced by "vim" (vi imiproved).
+
 
