@@ -54,3 +54,9 @@ Header Meaning
 * VSZ Virtual Memory Size
 * RSS Resident set size. Amount of physical memory (RAM) is using in kilobytes
 * START Time when the process started. For values over 24 hours, a date is used.
+
+#### Viewing Processes Dynamically with top
+
+`$ top`
+
+`h` displays the program's help screen, and `q`, which quits top.
