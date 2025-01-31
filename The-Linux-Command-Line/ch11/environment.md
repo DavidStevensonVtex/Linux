@@ -6,3 +6,15 @@
 * set Set shell options
 * export Export environment to subsequently executed programs
 * alias Create an alias for a command
+
+### What is Stored in the Environment
+
+Two basic types of data in the environment:
+ 
+* _environment variables_
+* _shell variables_
+
+Programmatic data:
+
+* _aliases_
+* _shell functions_
