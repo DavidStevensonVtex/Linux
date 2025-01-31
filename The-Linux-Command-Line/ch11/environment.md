@@ -92,4 +92,14 @@ The ~/.bashrc is probably the most important startup file from the ordinary user
 
 #### What's  in a Startup File?
 
-A typical .bash_profile might run ~/.bashrc (if it exists) to get aliases and functions, set and export the PATH variable.
+A typical .bash_profile might run ~/.bashrc (if it exists) to get aliases and functions, set and export the PATH variable. Ubuntu uses ~/.profile instead of ~/.bash_profile.
+
+### Modifying the Environment
+
+#### Which Files Should We Modify?
+
+To modify your PATH or define additional environment variables, place those changes in _.bash_profile_ (or .profile in Ubuntu).
+
+Otherwise, place changes in ~/.bashrc.
+
+
