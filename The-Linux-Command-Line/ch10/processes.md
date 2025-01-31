@@ -199,3 +199,9 @@ $
 
 `sudo shutdown -r now`
 
+### More Process-Related Commands
+
+* pstree Outputs a process list arranged in a tree-like patttern showing the parent-child relationships between the processes.
+* vmstat - Outputs a snapshot of system resource usage including memory, swap and disk I/o>
+* xload A graphical programt hat draws a graph showing system load over time.
+* tload Similar to the xload program but draws a graph in the terminal. Terminate the output with `Ctrl-C`.
