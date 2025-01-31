@@ -60,3 +60,11 @@ Header Meaning
 `$ top`
 
 `h` displays the program's help screen, and `q`, which quits top.
+
+### Controlling Processes
+
+`xlogo `
+
+#### Interrupting a Process
+
+`Ctrl-C` interrupts the process.
