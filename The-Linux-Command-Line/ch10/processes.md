@@ -175,3 +175,18 @@ Number Name Meaning
 * 3 QUIT Quit
 * 11 SEGV Segmentation violation. Illegal use of memory.
 * 28 WINCH Window change. This is the signal sent by the system when a window changes size
+
+#### Sending Signals to Multiple Processes with killall
+
+`killall [-u user] [-signal] name`
+
+```
+$ xlogo &
+[1] 15581
+$ xlogo &
+[2] 15584
+$ killall xlogo
+$ 
+[1]-  Terminated              xlogo
+[2]+  Terminated              xlogo
+```
