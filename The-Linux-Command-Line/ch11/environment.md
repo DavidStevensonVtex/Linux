@@ -112,4 +112,14 @@ KDE usually ships with three, which are kedit, kwrite, and kate.
 There are many text-based editors. The popular ones we'll encounter are nano, vi and emacs.
 vi has been mostly replaced by "vim" (vi imiproved).
 
+#### Using a Text Editor
+
+`gedit some_file`
+
+Backup
+
+`$ cp .bashrc .bashrc.bak`
+
+`nano .bashrc`
+
 
