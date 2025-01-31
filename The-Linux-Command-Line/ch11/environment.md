@@ -89,3 +89,7 @@ Startup Files for Non-Login Shell Sessions
 * ~/.bashrc A user's personal startup file.
 
 The ~/.bashrc is probably the most important startup file from the ordinary user's point of view, because it is almost always read.
+
+#### What's  in a Startup File?
+
+A typical .bash_profile might run ~/.bashrc (if it exists) to get aliases and functions, set and export the PATH variable.
