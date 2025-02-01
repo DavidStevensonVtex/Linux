@@ -1,0 +1,9 @@
+/usr/share/vim/vim81/doc/usr_01.txt
+/usr/share/vim/vim81/doc/usr_02.txt
+/usr/share/vim/vim81/doc/usr_03.txt
+/usr/share/vim/vim81/doc/usr_04.txt
+/usr/share/vim/vim81/doc/usr_05.txt
+/usr/share/vim/vim81/doc/usr_06.txt
+/usr/share/vim/vim81/doc/usr_07.txt
+/usr/share/vim/vim81/doc/usr_08.txt
+/usr/share/vim/vim81/doc/usr_09.txt

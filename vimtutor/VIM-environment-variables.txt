@@ -1,0 +1,3 @@
+# These are defined when running vim, but not before.
+VIMRUNTIME=/usr/share/vim/vim81
+VIM=/usr/share/vim
