@@ -148,3 +148,11 @@ Escape Code, Action
 * \033[u Recall the stored cursor position
 
 
+### Saving the Prompt
+
+If we like our changes to the Prompt, we need to store the new PS1 value in our _\.bashrc_ file.
+
+```
+PS1=<new value>
+export PS1
+```
