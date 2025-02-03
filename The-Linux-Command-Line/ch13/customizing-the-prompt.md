@@ -42,3 +42,30 @@ The hostname appears in green and the current directory in blue, both apparently
 * \\$ This displays a character unless we have supervisor privoleges. In that case, it displays a # instead.
 * \\[ Signals the start of a series of one or more non-printing characters. This is used to embed non-printing control characters that manipulate the terminal emulator in some way, such as moving the cursor or changing text colors.
 * \\] Signals the end of non-printing character sequence.
+
+### Trying Some Alternative Prompt Designs
+
+```
+ps1_old="$PS1"
+echo $ps1_old
+```
+
+We can restore the original prompt at any time by reversing the process.
+
+`PS1="$ps1_old"`
+
+Set the prompt to an empty string.
+
+`PS1=`
+
+`PS1="\$ "`
+
+```
+$ PS1="\A \h \$ "
+11:46 dstevensonlinux1 $ 
+```
+
+```
+11:46 dstevensonlinux1 $ PS1="<\u@\h \W>\$ "
+<dstevenson@dstevensonlinux1 ch13>$ 
+```
