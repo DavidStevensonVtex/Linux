@@ -69,3 +69,57 @@ $ PS1="\A \h \$ "
 11:46 dstevensonlinux1 $ PS1="<\u@\h \W>\$ "
 <dstevenson@dstevensonlinux1 ch13>$ 
 ```
+
+### Adding Color
+
+#### Terminal Confusion
+
+Unix and Unix-like systems have two rather complex subsystems to deal with the Babel of terminal control (called `termcap` and `terminfo`).
+
+Character color is controlled by sending the terminal emulator an ANSI _escape code_ embedded in the stream of characters to be displayed. The control code does not "print out" on the display; rather it is interpretned by the terminal as an instruction.
+
+For example, the code to set the text color to normal (attribute=0), black text is as follows:
+
+\033[0;30m
+
+##### Escape Sequences used to Set Text Colors
+
+Sequence, Text Color
+
+* \033[0;30m Black
+* \033[0;31m Red
+* \033[0;32m Green
+* \033[0;33m Brown
+* \033[0;34m Blue
+* \033[0;35m Purple
+* \033[0;36m Cyan
+* \033[0;37m Light gray
+
+* \033[1;30m Dark gray
+* \033[1;31m Light red
+* \033[1;32m Light green
+* \033[1;33m Yellow
+* \033[1;34m Light blue
+* \033[1;35m Light purple
+* \033[1;36m Light cyan
+* \033[1;37m White
+
+```
+$ PS1="\033[0;31m<\u@\h \W>\$ "
+<dstevenson@dstevensonlinux1 ch13>$ 
+```
+
+##### Escape Sequences used to Set Background Color
+
+Sequence, Background color
+
+* \033[0;40m Black
+* \033[0;41m Red
+* \033[0;42m Green
+* \033[0;43m Brown
+* \033[0;44m Blue
+* \033[0;45m Purple
+* \033[0;46m Cyan
+* \033[0;47m Light gray
+
+
