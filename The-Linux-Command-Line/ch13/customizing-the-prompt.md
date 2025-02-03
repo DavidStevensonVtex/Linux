@@ -123,3 +123,28 @@ Sequence, Background color
 * \033[0;47m Light gray
 
 
+```
+>$ PS1="\[\033[0;41m\]\u@\h \W\$\[\033[0m\] "
+dstevenson@dstevensonlinux1 ch13$ 
+```
+The above prompt is displayed with white text and red background, while text typed by the user is black background  white white text.
+
+### Moving the Cursor
+
+Escape c odes can be used to position the cursor.
+
+#### Cursor Movement Escape Sequences
+
+Escape Code, Action
+
+* \033[1;cH Move the cursor to line 1 and column c
+* \033[nA Move the cursor up n lines
+* \033[nB Move the cursor down n lines
+* \033[nC Move the cursor forward n characters
+* \033[nD Move the cursor backward n characters
+* \033[2J Clear the screen and move the cursor to the upper-left corner (line 0, column 0)
+* \033[K Clear the cursor position to the end of the current line
+* \033[s Store the current cursor position
+* \033[u Recall the stored cursor position
+
+
