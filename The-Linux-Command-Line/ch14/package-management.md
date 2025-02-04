@@ -51,3 +51,18 @@ Distributions, Low-level tools, High-level tools
 
 * Debian-style, dpkg apt-get, apt, aptitude
 * Fedora, Red Hat Enterprise Linux, CentOS, rpm yum, dnf
+
+### Common Package Management Tasks
+
+The term _package\_name_ refers to the actual name of a package rather than the term _package\_file_, which is the name of the file that contains the package.
+
+#### Finding a Package in a Repository
+
+* Debian apt-get update, apt-cache search search_string
+* Red Hat yum search search_string
+
+Example 
+
+`yum search emacs`
+
+
