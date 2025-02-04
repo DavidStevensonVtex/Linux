@@ -58,6 +58,8 @@ The term _package\_name_ refers to the actual name of a package rather than the 
 
 #### Finding a Package in a Repository
 
+Using high-level tools to search repository metadata, a package can be located based on its name or description.
+
 * Debian apt-get update, apt-cache search search_string
 * Red Hat yum search search_string
 
@@ -65,4 +67,12 @@ Example
 
 `yum search emacs`
 
+#### Installing a Package from a Repository
 
+High-level tools permit a package to be downloaded from a repository and installed with full dependency resolution.
+
+Package Installation Commands
+
+Style, Command(s)
+* Debian apt-get update, apt-get install _package\_name_
+* Red Hat um install _package\_name_
