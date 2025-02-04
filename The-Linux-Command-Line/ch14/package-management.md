@@ -40,3 +40,14 @@ A distribution may maintain several different repositories for different stages 
 
 Programs are seldom "stand alone": rather they rely on the presence of other software components to get their work done. These routines are stoerd in _shared libraries_, which provide essential services to more than one program. If a package requires a shared resource such as a shared library, it is said to have a _dependency_. Modern package managment systems all provide some method of _dependency resolution_ to ensure that when a package is installed, all its dependencies are installed, too.
 
+#### High- and Low-Level Package Tools
+
+* Low-level tools that handle tasks such as installing and removing package files.
+* High-level tools that perform metadata searching and dependency resolution.
+
+Packaging System tools
+
+Distributions, Low-level tools, High-level tools
+
+* Debian-style, dpkg apt-get, apt, aptitude
+* Fedora, Red Hat Enterprise Linux, CentOS, rpm yum, dnf
