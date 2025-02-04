@@ -140,3 +140,8 @@ Example
 
 * Debian: dpkg -s package\_name
 * Red Hat: rpm -q package\_name
+
+#### Displaying Information About an Installed Package
+
+* Debian: apt-cache show package\_name
+* Red Hat: ym info package\_name
