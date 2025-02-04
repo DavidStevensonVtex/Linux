@@ -92,3 +92,15 @@ Example
 
 `rpm -i emacs-22.1.7.fc7-i386.rpm`
 
+#### Removing a Package
+
+Packages can be uninstalled using either the high-level or low-level tools.
+
+Package Removal Commands
+
+* Debian: `apt-get remove package_name`
+* Red Hat: `yum erase package_name`
+
+Example:
+
+`apt-get remove emacs`
