@@ -17,4 +17,13 @@ Packaging System, Distributions (partial listing)
 * Debian-style (.deb) Debian, Unbuntu, Linux Mint, Raspbian
 * Red Hat-style (.rpm) Fedora, CentOS, Red Hat Enterprise Linux, OpenSUSE
 
+### How a Package System Works
 
+Most software will by provided by the distrubution vendor in the form of _package files_, and the rest will be available in source code form that can be installed manually.
+
+#### Package Files
+
+The basic unit of software in a packaging system is the _package file_. A package file is a compressed collection of files that comprise the software package.
+
+Package files are created by a person known as a _package maintainer_.
+The package maintainer gets the software in source code form from the _upstream provider_ (the author of the program), compiles it, and creates the package metadata and any necessary installation scripts.
