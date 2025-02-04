@@ -76,3 +76,19 @@ Package Installation Commands
 Style, Command(s)
 * Debian apt-get update, apt-get install _package\_name_
 * Red Hat um install _package\_name_
+
+Example
+
+`apt-get update; apt-get install emacs`
+
+### Installing a Package from a Package File
+
+Low-Level Package Installation Commands
+
+* Debian: `dpkg -i package_file`
+* Red Hat: `rpm -i package_file`
+
+Example
+
+`rpm -i emacs-22.1.7.fc7-i386.rpm`
+
