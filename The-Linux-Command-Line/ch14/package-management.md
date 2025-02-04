@@ -118,3 +118,16 @@ Example
 
 `sudo apt-get update && sudo apt-get upgrade`
 
+#### Upgrading a Package from a Package File
+
+If an updated version of a package has been downloaded from a non-repository source, it can be installed, replacing the previous version.
+
+Low-Level Package Upgrade Commands
+
+* Debian: `dpkg -i package_file`
+* Red Hat: `rpm -U package_file`
+
+Example
+
+`rpm -U emacs-22.1.7.fc7-i386.rpm`
+
