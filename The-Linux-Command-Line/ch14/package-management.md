@@ -104,3 +104,17 @@ Package Removal Commands
 Example:
 
 `apt-get remove emacs`
+
+#### Updating Packages from a Repository
+
+The most common package management task is keeping the system up-to-date with the latest versions of packages.This high-level tools can perform this vital task in a single step.
+
+Package Update Commands
+
+* Debian: apt-get update; apt-get upgrade
+* Red Hat: yum update
+
+Example
+
+`sudo apt-get update && sudo apt-get upgrade`
+
