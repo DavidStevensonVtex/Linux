@@ -27,3 +27,11 @@ The basic unit of software in a packaging system is the _package file_. A packag
 
 Package files are created by a person known as a _package maintainer_.
 The package maintainer gets the software in source code form from the _upstream provider_ (the author of the program), compiles it, and creates the package metadata and any necessary installation scripts.
+
+#### Repositories 
+
+Most packages today are created by the distribution vendors and interested third parties.
+
+Packages are made available to the users of a distribution in central repositories that may contain many thousands of packages, each specially built and maintained for the distribution.
+
+A distribution may maintain several different repositories for different stages of the software development life cycle.
