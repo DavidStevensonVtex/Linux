@@ -35,3 +35,8 @@ Most packages today are created by the distribution vendors and interested third
 Packages are made available to the users of a distribution in central repositories that may contain many thousands of packages, each specially built and maintained for the distribution.
 
 A distribution may maintain several different repositories for different stages of the software development life cycle.
+
+#### Dependencies
+
+Programs are seldom "stand alone": rather they rely on the presence of other software components to get their work done. These routines are stoerd in _shared libraries_, which provide essential services to more than one program. If a package requires a shared resource such as a shared library, it is said to have a _dependency_. Modern package managment systems all provide some method of _dependency resolution_ to ensure that when a package is installed, all its dependencies are installed, too.
+
