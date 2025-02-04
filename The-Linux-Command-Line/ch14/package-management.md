@@ -135,3 +135,8 @@ Example
 
 * Debian: dpkg -l
 * Red Hat: rpm -qa
+
+#### Determining Whether a Package Is Installed
+
+* Debian: dpkg -s package\_name
+* Red Hat: rpm -q package\_name
