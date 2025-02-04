@@ -131,3 +131,7 @@ Example
 
 `rpm -U emacs-22.1.7.fc7-i386.rpm`
 
+#### Listing Installed Packages
+
+* Debian: dpkg -l
+* Red Hat: rpm -qa
