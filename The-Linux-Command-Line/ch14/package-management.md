@@ -144,4 +144,17 @@ Example
 #### Displaying Information About an Installed Package
 
 * Debian: apt-cache show package\_name
-* Red Hat: ym info package\_name
+* Red Hat: yum info package\_name
+
+Example
+
+`apt-cache show emacs`
+
+#### Finding Which Package Installed a File
+
+* Debian: dpkg -S file\_name
+* Red Hat: rpm -qf file\_name
+
+Example:
+
+`rpm -qf /usr/bin/vim`
