@@ -367,3 +367,18 @@ It copies blocks of data from one place to another.
 
 `dd if/dev/sdb of=flash_drive.img`
 
+#### Creating CD-ROM Images
+
+Writing a recordable CD-ROM (either a CD-R or CD-RW) consists of two steps.
+
+1. Constructing an ISO image file that is the exact file system image of tbe CD-ROM.
+2. Writing the image file onto the CD-ROM.
+
+##### Creating an Image Copy of a CD-ROM
+
+If we want to make an ISO image of an existing CD-ROM, we can use dd to read all the data blocks off the CD-ROM and copy them to a local file. Say we had an Ubuntu CD and we wanted to make an ISO file that we could later use to make more copies.
+
+`dd if=/dev/cdrom of=ubuntu.iso`
+
+This technique works for data DVDs as well but will not work for audio cdS, as they do not use a file system for storage.
+
