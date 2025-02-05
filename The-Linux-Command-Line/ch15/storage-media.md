@@ -407,3 +407,8 @@ mount -t iso9660 -o loop image.iso /mnt/iso_image
 
 In this example, we created a mount point named _/mnt/iso_image_ and then mounted the image file _image.iso_ at that mount point. After the image is mounted, it  can be treated just as though it were a real CD-ROM or DVD. _Remember to unmount the image when it is no longer needed_.
 
+#### Blanking a Rewritable CD-ROM
+
+Rewritable CD-RW media needs to be erased or _blanked_ before it can be reused. To this, we can use _wodim_, specifying the device name forthe CD writer and the type of blanking to be performed.
+
+`wodim dev=/dev/cdrw blank=fast`
