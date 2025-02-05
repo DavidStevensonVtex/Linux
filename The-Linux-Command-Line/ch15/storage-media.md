@@ -339,3 +339,19 @@ Writing superblocks and filesystem accounting information: done
 To reformat as its original FAT32 file system, specify `vfat` as the file system type.
 
 `$ sudo mkfs -t vfat /dev/sdg`
+
+### Testing and Repairing File Systems
+
+To check our flash drive (which should be unmounted first), we could do the following:
+
+```
+$ umount /dev/sdg
+$ sudo fsck /dev/sdg
+fsck from util-linux 2.34
+e2fsck 1.45.5 (07-Jan-2020)
+/dev/sdg: clean, 11/245760 files, 35658/983040 blocks
+```
+
+These days, file system corruption is  quite rare unless there is a hardware problem, such as a failing disk drive.
+
+On most systems, file system corruption detected at boot time will cause the system to stop and drirect you to run `fsck` before continuing.
