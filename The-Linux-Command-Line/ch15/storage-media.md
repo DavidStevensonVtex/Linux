@@ -412,3 +412,15 @@ In this example, we created a mount point named _/mnt/iso_image_ and then mounte
 Rewritable CD-RW media needs to be erased or _blanked_ before it can be reused. To this, we can use _wodim_, specifying the device name forthe CD writer and the type of blanking to be performed.
 
 `wodim dev=/dev/cdrw blank=fast`
+
+##### Writing an Image
+
+To write an image, we again use _wodim_, specifying the name of the optical media writer device and the name of the image file.
+
+`wodim dev/dev/cdrw image.iso`
+
+Options
+
+* \-v for verbose output
+* \-dao Writes the disc in _disc-at-once_ mode.
+* The default mode for _wodim_ is _track-at-once_, which is useful for recording music tracks.
