@@ -355,3 +355,15 @@ e2fsck 1.45.5 (07-Jan-2020)
 These days, file system corruption is  quite rare unless there is a hardware problem, such as a failing disk drive.
 
 On most systems, file system corruption detected at boot time will cause the system to stop and drirect you to run `fsck` before continuing.
+
+### Moving Data Directly to and from Devices
+
+The `dd` program performs this task.
+It copies blocks of data from one place to another.
+
+`dd if=input_file of=output_file [bs=block_size [count=blocks]]`
+
+`dd if=/dev/sdb of=/dev/sdc`
+
+`dd if/dev/sdb of=flash_drive.img`
+
