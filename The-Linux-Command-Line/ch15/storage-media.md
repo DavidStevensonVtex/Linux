@@ -315,3 +315,27 @@ The partition table has been altered.
 Calling ioctl() to re-read partition table.
 Syncing disks.
 ```
+
+#### Creating a New File System with mkfs
+
+`mkfs` - Make File System
+
+```
+$ sudo mkfs -t ext4 /dev/sdg
+mke2fs 1.45.5 (07-Jan-2020)
+Found a dos partition table in /dev/sdg
+Proceed anyway? (y,N) y
+Creating filesystem with 983040 4k blocks and 245760 inodes
+Filesystem UUID: a8677690-e1dc-48fe-bd0b-ad959e206cde
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (16384 blocks): done
+Writing superblocks and filesystem accounting information: done 
+```
+
+To reformat as its original FAT32 file system, specify `vfat` as the file system type.
+
+`$ sudo mkfs -t vfat /dev/sdg`
