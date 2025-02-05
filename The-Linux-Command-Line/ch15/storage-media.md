@@ -424,3 +424,17 @@ Options
 * \-v for verbose output
 * \-dao Writes the disc in _disc-at-once_ mode.
 * The default mode for _wodim_ is _track-at-once_, which is useful for recording music tracks.
+
+### Extra Credit - md5sum
+
+It is often useful to verify the integrity of an ISO image that we have downloaded. In most cases, a distributor of an ISO image will also supply a _checksum_ file. 
+
+`md5sum image.iso`
+
+`md5sum /dev/cdrom`
+
+Checking the integrity of the image file _dvd-image.iso_ and the disc in the DVD reader _/dev/dvd_.
+
+```
+md5sum dvd-image.iso; dd if=/dev/dvd bs=2048 count=$(( $(stat -c "%s" dvd-image.iso) / 2048)) | md5sum
+```
