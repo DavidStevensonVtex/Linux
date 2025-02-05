@@ -45,3 +45,60 @@ UUID=70C9-E06B  /boot/efi       vfat    umask=0077      0       1
 * 4 Options
 * 5 Frequency
 * 6 Order
+
+#### Viewing a List of Mounted File Systems
+
+The _mount_ command is used to mount file systems.
+This command without arguments will display a list of file systems currently mounted.
+
+
+```
+$ ls /dev
+autofs           fd         input   loop23        psaux   sg2       tty14  tty31  tty49  tty9       ttyS24   userio  vcsu4
+block            full       kmsg    loop3         ptmx    sg3       tty15  tty32  tty5   ttyprintk  ttyS25   vcs     vcsu5
+bsg              fuse       log     loop4         pts     sg4       tty16  tty33  tty50  ttyS0      ttyS26   vcs1    vcsu6
+btrfs-control    gpiochip0  loop0   loop5         random  sg5       tty17  tty34  tty51  ttyS1      ttyS27   vcs2    vfio
+bus              hidraw0    loop1   loop6         rfkill  sg6       tty18  tty35  tty52  ttyS10     ttyS28   vcs3    vga_arbiter
+cdrom            hidraw1    loop10  loop7         rtc     shm       tty19  tty36  tty53  ttyS11     ttyS29   vcs4    vhci
+cdrw             hpet       loop11  loop8         rtc0    snapshot  tty2   tty37  tty54  ttyS12     ttyS3    vcs5    vhost-net
+char             hugepages  loop12  loop9         sda     snd       tty20  tty38  tty55  ttyS13     ttyS30   vcs6    vhost-vsock
+console          hwrng      loop13  loop-control  sda1    sr0       tty21  tty39  tty56  ttyS14     ttyS31   vcsa    zero
+core             i2c-0      loop14  mapper        sda2    stderr    tty22  tty4   tty57  ttyS15     ttyS4    vcsa1   zfs
+cpu              i2c-1      loop15  mcelog        sdb     stdin     tty23  tty40  tty58  ttyS16     ttyS5    vcsa2
+cpu_dma_latency  i2c-2      loop16  mei0          sdb1    stdout    tty24  tty41  tty59  ttyS17     ttyS6    vcsa3
+cuse             i2c-3      loop17  mem           sdb2    tty       tty25  tty42  tty6   ttyS18     ttyS7    vcsa4
+disk             i2c-4      loop18  mqueue        sdc     tty0      tty26  tty43  tty60  ttyS19     ttyS8    vcsa5
+dri              i2c-5      loop19  net           sdd     tty1      tty27  tty44  tty61  ttyS2      ttyS9    vcsa6
+dvd              i2c-6      loop2   null          sde     tty10     tty28  tty45  tty62  ttyS20     udmabuf  vcsu
+dvdrw            i2c-7      loop20  nvram         sdf     tty11     tty29  tty46  tty63  ttyS21     uhid     vcsu1
+ecryptfs         i2c-8      loop21  port          sg0     tty12     tty3   tty47  tty7   ttyS22     uinput   vcsu2
+fb0              initctl    loop22  ppp           sg1     tty13     tty30  tty48  tty8   ttyS23     urandom  vcsu3
+```
+
+CDs are auto-mounted. An alert recognizing the CD/DVD insertion will prompt use to open the Files application to see the contents of the CD/DVD. The Files application can be also used to unmount the
+CD/DVD.
+
+* Parent Folder: /media/dstevenson
+* Volume: GRMSXEVAL_EN_DVD
+
+
+```
+$ ll /media/dstevenson
+total 10
+drwxr-x---+ 3 root       root       4096 Feb  5 08:06 ./
+drwxr-xr-x  3 root       root       4096 Dec  5 15:27 ../
+dr-xr-xr-x  7 dstevenson dstevenson  548 Jul 14  2009 GRMSXEVAL_EN_DVD/
+```
+
+Unmounting CD/DVD
+
+`$ umount /media/dstevenson/GRMSXEVAL_EN_DVD/`
+
+
+##### Unmounting a CD and Remounting at new mount point
+
+```
+$ sudo umount /dev/sdc
+[sudo] password for dstevenson: 
+umount: /dev/sdc: not mounted.
+```
