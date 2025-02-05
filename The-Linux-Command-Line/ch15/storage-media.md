@@ -391,3 +391,19 @@ Create an image file named _cd-rom.iso_ from ~/cd-rom-files.
 `genisoimage -o cd-rom.iso -R-J ~/cd-rom-files`
 
 The \-R option adds metadata for the _Rock Ridge extensions_, which allows the use of long filenames and POSIX-style file permissions. Likewise, the \-J option enables the _Joliet extensions_, which permit long filenames for Windows.
+
+#### Writing CD-ROM Images
+
+After we have an image file, we can bur it onto our optical media.
+
+##### Mounting an ISO Image Directly
+
+By adding the -o loop option to _mount_ (along with the required -t iso9660 file system type), we can mount the image file as though it were a device and attach it to the file system tree.
+
+```
+mkdir /mnt/iso_image
+mount -t iso9660 -o loop image.iso /mnt/iso_image
+```
+
+In this example, we created a mount point named _/mnt/iso_image_ and then mounted the image file _image.iso_ at that mount point. After the image is mounted, it  can be treated just as though it were a real CD-ROM or DVD. _Remember to unmount the image when it is no longer needed_.
+
