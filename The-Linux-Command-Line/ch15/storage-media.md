@@ -382,3 +382,12 @@ If we want to make an ISO image of an existing CD-ROM, we can use dd to read all
 
 This technique works for data DVDs as well but will not work for audio cdS, as they do not use a file system for storage.
 
+##### Creating an Image from a Collection of Files
+
+To create an ISO image file containing the contents of a diretory, we use the `genisoimage` program.
+
+Create an image file named _cd-rom.iso_ from ~/cd-rom-files.
+
+`genisoimage -o cd-rom.iso -R-J ~/cd-rom-files`
+
+The \-R option adds metadata for the _Rock Ridge extensions_, which allows the use of long filenames and POSIX-style file permissions. Likewise, the \-J option enables the _Joliet extensions_, which permit long filenames for Windows.
