@@ -58,3 +58,13 @@ $ which mlocate
 ```
 
 The `locate` atabase is created by another program named `updatedb`.
+
+### find - Find Files the Hard Way
+
+To produce a listing of hour home directory and sub-directories:
+
+`$ find ~`
+
+Count the number of files
+
+`$ find ~ | wc -l`
