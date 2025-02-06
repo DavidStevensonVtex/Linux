@@ -41,3 +41,34 @@ traceroute to slashdot.org (104.18.4.215), 30 hops max, 60 byte packets
  9  141.101.73.222 (141.101.73.222)  25.349 ms 141.101.73.202 (141.101.73.202)  25.253 ms 141.101.73.206 (141.101.73.206)  25.109 ms
 10  104.18.4.215 (104.18.4.215)  28.564 ms  25.712 ms  24.848 ms
 ```
+#### ip
+
+The `ip` program is a multipurpose network configuration tool that makes use of the full range of networking features available in modern Linux kernels.
+
+```
+$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp6s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether e0:69:95:c7:ad:84 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.150/24 brd 192.168.1.255 scope global dynamic noprefixroute enp6s0
+       valid_lft 73894sec preferred_lft 73894sec
+    inet6 2603:7080:9603:e32e:6c95:785:1bc1:3e00/64 scope global temporary dynamic 
+       valid_lft 444235sec preferred_lft 77731sec
+    inet6 2603:7080:9603:e32e:7d7f:ea2f:16c8:3a75/64 scope global temporary deprecated dynamic 
+       valid_lft 444235sec preferred_lft 0sec
+    inet6 2603:7080:9603:e32e:5f3f:2073:8d40:9e4/64 scope global dynamic mngtmpaddr noprefixroute 
+       valid_lft 444235sec preferred_lft 444235sec
+    inet6 fe80::7002:bfc8:1612:1d6c/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: wlp5s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN group default qlen 1000
+    link/ether ac:81:12:76:ee:5c brd ff:ff:ff:ff:ff:ff
+```
+
+The network interface, called `lo`, is the _loopback interface_, a virtual interface that the system uses to "talk to itself", and the second enp6so (eth0?), is the Ethernet interface.
+
+The presence of the word UP indicates that the network interface is enabled.
