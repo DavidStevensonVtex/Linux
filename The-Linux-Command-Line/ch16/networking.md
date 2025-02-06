@@ -137,3 +137,11 @@ The destination _default_ means any traffic destined for a network that is not o
 #### lftp - A better ftp
 
 This has many additional convenience features including multiple-protocol support (including HTTP), automatic retry on failed downloads, background processes, tab completion of path names, and many more.
+
+#### wget 
+
+wget is useful for downloading content from both web and FTP sites.
+
+`wget http://linuxcommand.org/index.php`
+
+The programs many options allow wget to recursively download, download files in the background (allowing you to logg off but continue downloading), and complete the download of a partially downloaded file.
