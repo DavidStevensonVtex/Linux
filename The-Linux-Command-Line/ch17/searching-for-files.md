@@ -68,3 +68,50 @@ To produce a listing of hour home directory and sub-directories:
 Count the number of files
 
 `$ find ~ | wc -l`
+
+### Tests
+
+Find the directories in our home directory and sub-directories.
+
+`$ find ~ -type d | wc -l`
+
+`$ find ~ -type f | wc -l`
+
+#### File Types
+
+* b Block special device file
+* c Character special device file
+* d Directory
+* f Regular File
+* l Symbolic link
+
+`$ find ~ -type f -name "*.jpg" -size +1M | wc -l`
+
+#### Find Size Units
+
+* b 512-byte blocks. This is the default if no unit is specified
+* c Bytes
+* w 2-byte words
+* k Kilobytes
+* M Megabytes
+* G Gigabytes
+
+#### Find Tests
+
+* -cmin n Match files or directories whose content or attributes were modified exact n minutes ago. To specify less than n minutes ago, use -n, and to specify more than n minutes ago, use +n.
+* -cnewer file Match files or directories whose contents or attributes were last modified more recently than those of _file_.
+* -ctime n Match files or directories whose contents or attributes were last moidified n*24 hours ago.
+* -empty Match empty files and directories
+* -group _name_ Match file or directories belonging to group _name_. _name_ may be expressed either as a group name or as a numeric group id.
+* -iname _pattern_  Like the `-name` test but case-insensitive.
+* -inum n Match files with inode number n. This is helpful for finding all the hard links to a particular node.
+* -mmin n Match files or directories whose contents were last modified n minutes ago.
+* -mtime n Match fiiles or directories whose contents were last modified n*24 hours.
+* -newere file Match files and directories whose contents were modified more recently than specified _file_.
+* -nouser Match file and directories that do not belong to a valid user.
+* -nogroup Match file anddirectories that do not beong to a valid group.
+* -perm mode Match files or directories that have permissiosn set to the specified _mode_. _mode_ can be expressed by either octal or symbolic notation.
+* -samefile name Similar to the -inum test. Match files that share the same inode number as file _name_.
+* -size n Match files of size n.
+* -type c Match files of type c.
+* -user name Match files or directories belonging to user _name_. The user may bexpressed by a username or by a numeric user ID.
