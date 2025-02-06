@@ -133,4 +133,7 @@ The destination _default_ means any traffic destined for a network that is not o
 * get `<filename>` Tell the remote system to transfer the file to the local directory.
 * bye Log off the remote server
 * help
-* 
+
+#### lftp - A better ftp
+
+This has many additional convenience features including multiple-protocol support (including HTTP), automatic retry on failed downloads, background processes, tab completion of path names, and many more.
