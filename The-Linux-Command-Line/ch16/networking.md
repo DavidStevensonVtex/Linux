@@ -160,3 +160,8 @@ usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
            [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] destination [command]
 ```
+
+#### scp and sftp
+
+* scp Secure Copy
+* sftp Secure FTP
