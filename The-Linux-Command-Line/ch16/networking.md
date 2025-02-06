@@ -119,3 +119,18 @@ default         Linksys01376.ro 0.0.0.0         UG        0 0          0 enp6s0
 link-local      0.0.0.0         255.255.0.0     U         0 0          0 enp6s0
 192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 enp6s0
 ```
+
+The destination _default_ means any traffic destined for a network that is not otherwise listed in the table.
+
+### Transporting Files over a Network
+
+#### ftp - File Transfer Protocol
+
+* ftp fileserver
+* anonymous Login name
+* cd `<directory>` Change the directory on the remote system
+* lcd Change the directory on the local system
+* get `<filename>` Tell the remote system to transfer the file to the local directory.
+* bye Log off the remote server
+* help
+* 
