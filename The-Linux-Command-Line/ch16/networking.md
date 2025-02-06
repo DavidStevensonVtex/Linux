@@ -72,3 +72,50 @@ $ ip a
 The network interface, called `lo`, is the _loopback interface_, a virtual interface that the system uses to "talk to itself", and the second enp6so (eth0?), is the Ethernet interface.
 
 The presence of the word UP indicates that the network interface is enabled.
+
+#### netstat
+
+The `netstat` program is used to examine various network settings and statistics. Using the `-ie` optipn, we can examine network interfaces in our system.
+
+```
+$ netstat -ie
+Kernel Interface table
+enp6s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.150  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 2603:7080:9603:e32e:7d7f:ea2f:16c8:3a75  prefixlen 64  scopeid 0x0<global>
+        inet6 2603:7080:9603:e32e:5f3f:2073:8d40:9e4  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::7002:bfc8:1612:1d6c  prefixlen 64  scopeid 0x20<link>
+        inet6 2603:7080:9603:e32e:6c95:785:1bc1:3e00  prefixlen 64  scopeid 0x0<global>
+        ether e0:69:95:c7:ad:84  txqueuelen 1000  (Ethernet)
+        RX packets 2655739  bytes 3500246197 (3.5 GB)
+        RX errors 0  dropped 15  overruns 0  frame 0
+        TX packets 944328  bytes 182043087 (182.0 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 49694  bytes 5270537 (5.2 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 49694  bytes 5270537 (5.2 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+wlp5s0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether ac:81:12:76:ee:5c  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+Using the `-r` option will display the kernel's network routing table.
+
+```
+$ netstat -r
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+default         Linksys01376.ro 0.0.0.0         UG        0 0          0 enp6s0
+link-local      0.0.0.0         255.255.0.0     U         0 0          0 enp6s0
+192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 enp6s0
+```
