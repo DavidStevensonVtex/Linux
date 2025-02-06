@@ -115,3 +115,27 @@ Find the directories in our home directory and sub-directories.
 * -size n Match files of size n.
 * -type c Match files of type c.
 * -user name Match files or directories belonging to user _name_. The user may bexpressed by a username or by a numeric user ID.
+
+#### Operators 
+
+_logical relationships_
+
+`$ find ~ \( -type f -not -perm 0600 \) -or \( -type d -not -perm 0700 \)`
+
+##### Find Logical Operators
+
+* -and 
+* -or
+* -not
+* \( \)
+
+##### Find AND/OR Logic
+
+Results of `expr1`, Operator, `expr2` is...
+
+* True -and Always Performed
+* False -and Never Performed
+* True -or Never performed
+* False -or Always performed
+
+
