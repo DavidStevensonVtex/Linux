@@ -7,3 +7,14 @@
 * tar Tape archiving utility
 * zip Package and compress files
 * rsync Remote file and directory synchronization
+
+### Compressing Files
+
+Data compression is the process of removing _redundancy_ from data.
+
+_run-length encoding_
+
+Two general categories:
+
+* _Lossless_
+* _Lossy_
