@@ -138,4 +138,26 @@ Results of `expr1`, Operator, `expr2` is...
 * True -or Never performed
 * False -or Always performed
 
+#### Predefined Actions
+
+* -delete Delete the currently matching file
+* -ls Perform the equivalent of ls -dils on the matching file. Output is sent to standard output
+* -print Output the full pathname of the matching file to standard output. This is the default action if no other action is specified.
+* -quit Quit once a match has been made
+
+Use caution when deleting files. Issue the command without the `-delete` option to determine what files will be deleted first.
+
+`$ find -type f -name "*.bak" -delete`
+
+`$ find -type f -name "*.bak" -print`
+
+There is an implied `-and` between each test and action.
+
+`find ~ -type f -and -name '*bak' -and -print`
+
+Order of terms is important.
+
+`find ~ -print -and -type f -and -name '*.bak'`
+
+All files, regardless of file extension are printed.
 
