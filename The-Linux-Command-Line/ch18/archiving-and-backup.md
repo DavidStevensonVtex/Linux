@@ -81,3 +81,28 @@ Alternatively, there is a program supplied with `gzip`, called `zcat`, that is e
 There is a zless program, too. It performs the same function as the previous pipeline.
 
 `$ zless foo.txt.gz`
+
+#### bzip2
+
+The `bzip2` program is similar to `gzip` but uses a different compression algorithm that achieves higher levels of compression at thecost of compression speed.
+
+```
+$ ls -l /etc > foo.txt
+$ ls -l foo.txt
+-rw-rw-r-- 1 dstevenson dstevenson 13351 Feb  7 13:52 foo.txt
+$ bzip2 foo.txt
+$ ls -l foo.txt.bz2 
+-rw-rw-r-- 1 dstevenson dstevenson 2577 Feb  7 13:52 foo.txt.bz2
+$ bunzip2 foo.txt.bz2 
+$ ls -l foo.txt 
+-rw-rw-r-- 1 dstevenson dstevenson 13351 Feb  7 13:52 foo.txt
+```
+
+`bzip2` comes with `bunzip2` and `bzcat` for decompressing files.
+
+##### Don't be compresssive compulsive
+
+`gzip picture.jpg`
+
+Compressed image files shouldn't be compressed again as it is a waste of time.
+
