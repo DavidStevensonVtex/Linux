@@ -161,3 +161,26 @@ Order of terms is important.
 
 All files, regardless of file extension are printed.
 
+#### User-Defined Actions
+
+We can invoke arbtrary commands. The traditional way of doing this is with the `-exec` action.
+This command works like this:
+
+`-exec command {} ;
+
+{} is a symbolic representation of the current pathname, and the semicolon is a required delimiter indicating the end of the command.
+Here's an example of using `-exec` to act like the `-delete` action discussed earlier.
+
+`-exec rm '{}' ';'`
+
+Again, because the brace and semicolon characters have special meaning to the shell, they must be quoted or escaped.
+
+```
+$ find ~ -type f -name 'foo*' -ok ls -l '{}' ';'
+< ls ... /home/dstevenson/.vscode/extensions/ms-python.vscode-pylance-2025.2.1/dist/bundled/stubs/skimage/morphology/footprints.pyi > ? y
+-rw-rw-r-- 1 dstevenson dstevenson 865 Feb  6 08:15 /home/dstevenson/.vscode/extensions/ms-python.vscode-pylance-2025.2.1/dist/bundled/stubs/skimage/morphology/footprints.pyi
+< ls ... /home/dstevenson/.vscode/extensions/ms-python.vscode-pylance-2025.2.1/dist/typeshed-fallback/stubs/Markdown/markdown/extensions/footnotes.pyi > ? n
+< ls ... /home/dstevenson/.vscode/extensions/ms-python.python-2024.22.2-linux-x64/python_files/lib/jedilsp/jedi/third_party/typeshed/third_party/2and3/markdown/extensions/footnotes.pyi > ? 
+```
+
+Actions which inhibit the default -print are -delete, -exec, -execdir, -ok, -okdir, -fls, -fprint, -fprintf, -ls, -print and -printf.
