@@ -271,3 +271,12 @@ playground/dir-052/file-B
 
 `find playground \( -type f -not -perm 0600 -exec chmod 0600 '{}' ';' \) -or \( -type d -not -perm 0700 -exec chmod 0700 '{}' ';'  \)`
 
+### find Options
+
+#### Commonly used `find` options
+
+* -depth Direct `find` to process a directory's files before the directory itself. This option is automatically applied when the -delete action is specified.
+* -maxdepth _levels_ Sets the maximum number of levels that `find` will descend into adirectory tree when performing tests and actions.
+* -mindepth _levels_ Sets the minimum number of levels that find will descend into a diretory tree before applying tests and actions.
+* -mount Direct find not to traverse directories that are mounted on other file systems.
+* -nolead Direct find not to optimize its search based on the assumption that it is searching Unix-like file system. This is needed when scanning DOS/Windows file systems and CD-ROMs.
