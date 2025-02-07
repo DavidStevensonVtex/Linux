@@ -184,3 +184,22 @@ $ find ~ -type f -name 'foo*' -ok ls -l '{}' ';'
 ```
 
 Actions which inhibit the default -print are -delete, -exec, -execdir, -ok, -okdir, -fls, -fprint, -fprintf, -ls, -print and -printf.
+
+#### Improving Efficiency
+
+```
+ls -l file1
+ls -l file2
+```
+
+`ls -l file1 file2`
+
+This causes the command to be executed only one time rather than multiple times. There are two ways we can do this: the traditional way, using the external command `xargs`, and the alternate way, using a new feature in `find` itself.
+
+By changing the trailing semicolon to a plus sign, we activate the capability of `find` to combine the results of the search into an argument list for a single execution of the desired command.
+
+`find ~ -type f -name 'foo*' -exec ls -l '{}' ';'`
+
+`find ~ -type f -name 'foo*' -exec ls -l '{}' +`
+
+We get the same results, but the system has to execute the `ls` command only once.
