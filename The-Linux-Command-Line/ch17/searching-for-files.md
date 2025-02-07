@@ -230,3 +230,44 @@ File names containing an embedded space will be treated as a separate argument.
 To overcome this, `find` and `xargs` allow the optional use of a _null_ character as an argument separator. A null character is defined in ASCII as the character represented by the number zero. The `find` command provides the action `-print0` which produces a null separated output, and the `xargs` command has the `--null` (or `-0`) option, which accepts null separated input. 
 
 `find ~ -name '*.jpg' -print0 | xargs --null ls -l`
+
+### A Return to the Playground
+
+The `-p` option for `mkdir` creates the parent directories.
+If a non-existent file is specified for `touch`, touch creates the file.
+
+```
+$ mkdir -p playground/dir-{001..100}
+$ touch playground/dir-{001..100}/file-{A..Z}
+```
+
+```
+$ find playground -type f -name 'file-A' | wc -l
+100
+```
+
+```
+$ touch playground/timestamp
+$ stat playground/timestamp
+  File: playground/timestamp
+  Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+Device: 802h/2050d	Inode: 51010818    Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/dstevenson)   Gid: ( 1000/dstevenson)
+Access: 2025-02-07 10:06:07.417824325 -0500
+Modify: 2025-02-07 10:06:07.417824325 -0500
+Change: 2025-02-07 10:06:07.417824325 -0500
+```
+
+Find all 'file-B' regular files that are newer than the playground/timestamp file.
+```
+$ find playground -type f -name 'file-B' -exec touch '{}' ';'
+$ find playground -type f -newer playground/timestamp
+playground/dir-076/file-B
+playground/dir-052/file-B
+...
+```
+
+`find playground \( -type f -not -perm 0600 \) -or \( -type d -not -perm 0700 \) | sort`
+
+`find playground \( -type f -not -perm 0600 -exec chmod 0600 '{}' ';' \) -or \( -type d -not -perm 0700 -exec chmod 0700 '{}' ';'  \)`
+
