@@ -203,3 +203,30 @@ By changing the trailing semicolon to a plus sign, we activate the capability of
 `find ~ -type f -name 'foo*' -exec ls -l '{}' +`
 
 We get the same results, but the system has to execute the `ls` command only once.
+
+
+#### xargs
+
+The `xargs` command accepts input from the standard input and converts it into an argument list for a specified command.
+
+`find ~ -type f -name 'foo*' -print | xargs ls -l`
+
+While the number of arguments that can be placed into a command line is quite large, it's not unlimited. It is possible to create commands that are too long fro the shell to accept. When a command line exceeds the maximum length supported by the system, `xargs` executes the specified command with the maximum number of arguments possible and then repeats this process until standard input is exhausted. To see the maximum size of the command line, execute `xargs` with the --show-limits option.
+
+```
+$ xargs --show-limits
+Your environment variables take up 3875 bytes
+POSIX upper limit on argument length (this system): 2091229
+POSIX smallest allowable upper limit on argument length (all systems): 4096
+Maximum length of command we could actually use: 2087354
+Size of command buffer we are actually using: 131072
+Maximum parallelism (--max-procs must be no greater): 2147483647
+```
+
+##### Dealing With Funny Filenames
+
+File names containing an embedded space will be treated as a separate argument.
+
+To overcome this, `find` and `xargs` allow the optional use of a _null_ character as an argument separator. A null character is defined in ASCII as the character represented by the number zero. The `find` command provides the action `-print0` which produces a null separated output, and the `xargs` command has the `--null` (or `-0`) option, which accepts null separated input. 
+
+`find ~ -name '*.jpg' -print0 | xargs --null ls -l`
