@@ -106,3 +106,137 @@ $ ls -l foo.txt
 
 Compressed image files shouldn't be compressed again as it is a waste of time.
 
+### Archiving Files
+
+A common file-management task often used in conjunction with compression is _archiving_.
+Archiving is the process of gathering up many files and bundling them together into a single large file.
+Archiving is often done as part of system backups. It is also used when old data is moved from a system to some type of long-term storage.
+
+#### tar
+
+`tar` is short for _tape archive_. We often see filenames that end with the extension _.tar_ or _.tgz_, which indicate a "plain" tar archive and a gzipped archive, respectively. A tar archive can consist of a group of separate files, one or more directory hierarchies, or a mizture of both.
+
+`tar mode[otions] pathname`
+
+##### tar modes
+
+* c Create an archive from a list of files and/or directories
+* x Extract an archive
+* r Append specified pathnames to the end of an archive
+* t List the contents of an archive
+
+
+```
+$ tar cf playground.tar playground
+$ ls -l playground.tar 
+-rw-rw-r-- 1 dstevenson dstevenson 1392640 Feb  7 14:10 playground.tar
+```
+
+Top list the contents of the archive:
+
+```
+$ tar tf playground.tar | head -5
+playground/
+playground/dir-076/
+playground/dir-076/file-L
+playground/dir-076/file-W
+playground/dir-076/file-B
+```
+
+For a more detailed listing, we can add the v (verbose) option:
+
+```
+$ tar tvf playground.tar | head -5
+drwx------ dstevenson/dstevenson 0 2025-02-07 14:08 playground/
+drwx------ dstevenson/dstevenson 0 2025-02-07 10:01 playground/dir-076/
+-rw------- dstevenson/dstevenson 0 2025-02-07 10:01 playground/dir-076/file-L
+-rw------- dstevenson/dstevenson 0 2025-02-07 10:01 playground/dir-076/file-W
+-rw------- dstevenson/dstevenson 0 2025-02-07 10:08 playground/dir-076/file-B
+```
+
+Extracting the playground tar files:
+
+```
+$ mkdir foo
+$ cd foo
+$ tar xf ../playground.tar
+$ ls
+playground
+```
+
+```
+$ cd
+$ tar cf playground2.tar ~/playground
+tar: Removing leading `/' from member names
+```
+
+```
+$ cd foo
+$ tar xf ../playground2.tar
+$ ls
+home  playground
+$ ls home
+dstevenson
+$ ls home/dstevenson
+playground
+$ 
+```
+
+Here we can see that when we extracted our second archive, it re-created the directory _home/dstevenson/playground_ relative to our current working directory. This allows us to extract archives to any location rather than being forced to extract them to their original locations.
+
+If wanted to extract a single file from the archive, it could be done like this:
+
+`tar xf archive.tar pathname`
+
+By adding the trailing _pathname_ to the command, `tar` will restore only the specified file. Multiple pathnames may be specified. Note that the path name must be the full, exact relative pathname as restored in the archive. When specifying pathnames, wildcards are not normally supported; however, the GNU version of `tar` (which is the version most often found in Linux distrubtions) supports them with the _--wildcards_ option.
+
+```
+$ cd foo
+$ tar xf ../playground2.tar --wildcards 'home/dstevenson/playground/dir-*/file-A'
+```
+
+```
+find playground -name 'file-A' -exec tar rf playground.tar '{}' '+'
+```
+
+The _tar_ _r_ option appends to a _.tar_ file.
+
+Using _tar_ with _find_ is a good way of creating _incremental backups_ of a directory tree or an entire system.
+
+By using _find_ to match files newer than a timestamp file, we could create an archive that contains only those files newer than the last archive, assuming that the timestamp file is updated right after each archive is created.
+
+_tar_ can also make use of both standard input and output.
+
+```
+$ find playground -name 'file-A' | tar cf - --files-from=- | gzip > playground.tgz
+$ ll playground.tgz
+-rw-rw-r-- 1 dstevenson dstevenson 1013 Feb  8 17:47 playground.tgz
+```
+
+In a Linux "tar" command, "empty -" means that you are instructing the "tar" utility to create a new, empty archive and write its contents to standard output (represented by the "-") instead of saving it to a named file; essentially, you are creating an empty archive that is immediately piped to another command. 
+
+If you give a single dash as a file name for ' --files-from ', (i.e., you specify either --files-from=- or -T - ), then the file names are read from standard input.
+
+Modern versions of GNU _tar_ support both _gzip_ and _bzip2_ compression directly with the use of the _z_ and _j_ options.
+
+```
+$ find playground -name 'file-A' | tar czf playground.tgz -T -
+$ ll -rt playground.tgz
+-rw-rw-r-- 1 dstevenson dstevenson 1013 Feb  8 17:51 playground.tgz
+```
+
+What is the z option in tar?
+
+The -z option compresses archives using gzip, -j uses bzip2, and -J uses xz compression. Each offers different compression ratios and speeds, with gzip being the fastest and xz providing the highest compression.
+
+‘-T file’
+
+tar will use the contents of file as a list of archive members or files to operate on, in addition to those specified on the command-line.
+
+If we had wanted to create a _bzip2_ compressed archive instead:
+
+```
+$ find playground -name 'file-A' | tar cjf playground.tbz -T -
+$ ll playground.tbz
+-rw-rw-r-- 1 dstevenson dstevenson 562 Feb  8 17:53 playground.tbz
+```
