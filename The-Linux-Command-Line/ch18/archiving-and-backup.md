@@ -240,3 +240,72 @@ $ find playground -name 'file-A' | tar cjf playground.tbz -T -
 $ ll playground.tbz
 -rw-rw-r-- 1 dstevenson dstevenson 562 Feb  8 17:53 playground.tbz
 ```
+
+#### zip
+
+The _zip_ program is both a compression tool and an archiver. The file format used by the program is familiar to Windows users, as it reads and writes _.zip_ files. In Linux, however, _gzip_ is the predominant compression program, with _bzip2_ being a close second.
+
+`zip options zipfile file...`
+
+```
+$ zip -r playground.zip playground
+  adding: playground/ (stored 0%)
+  adding: playground/dir-076/ (stored 0%)
+  adding: playground/dir-076/file-L (stored 0%)
+  ...
+```
+
+```
+$ cd foo
+$ unzip ../playground.zip
+Archive:  ../playground.zip
+   creating: playground/
+   creating: playground/dir-076/
+ extracting: playground/dir-076/file-L  
+ ...
+```
+
+We can list and extract files selectively from a zip archive by specifying them to unzip.
+
+```
+$ unzip -l playground.zip playground/dir-087/file-Z
+Archive:  playground.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  2025-02-07 10:01   playground/dir-087/file-Z
+---------                     -------
+        0                     1 file
+
+$ cd foo
+$ unzip ../playground.zip playground/dir-087/file-Z
+Archive:  ../playground.zip
+replace playground/dir-087/file-Z? [y]es, [n]o, [A]ll, [N]one, [r]ename: y
+ extracting: playground/dir-087/file-Z 
+```
+
+Like _tar_, _zip_ can make use of standard input and output, though its implementation is somewhat less than useful.
+It is possible to pipe a list of file names to _zip_ via the `-@` option.
+
+```
+$ cd
+$ find playground -name "file-A" | zip -@ file-A.zip
+  adding: playground/dir-076/file-A (stored 0%)
+  adding: playground/dir-052/file-A (stored 0%)
+  adding: playground/dir-049/file-A (stored 0%)
+  ...
+```
+
+_zip_ also supports writing its output to standard output, but its use is limited because few programs can make use of the output. Unfortunately, the _unzip_ programdoes not accept standard input.
+
+_zip_ can, however, accept standard input, so it c an be used to compress the output of other programs.
+
+```
+$ ls -l /etc/ | zip ls-etc.zip -
+  adding: - (deflated 79%)
+```
+
+The _unzip_ program allows its output to be sent to standard output when the `-p` (for pipe) option is specified.
+
+```
+$ unzip -p ls-etc.zip | less
+```
