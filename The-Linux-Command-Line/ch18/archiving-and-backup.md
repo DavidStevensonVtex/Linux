@@ -309,3 +309,59 @@ The _unzip_ program allows its output to be sent to standard output when the `-p
 ```
 $ unzip -p ls-etc.zip | less
 ```
+
+### Synchronizing Files and Directories
+
+In the Unix-like world, the preferred tool for this task is _rsync_.
+This program can synchronize both local and remote directories by using the _rsync remote-update protocol_, which allows _rsync_ to quickly detect the differences between two directories and perform the minimum amount of copying required to bring them into sync.
+
+_rsync_ is invoked like this:
+
+`rsync options source destination`
+
+where source and destination are one of the following:
+
+* A local file or directory
+* A remote file or directory in the form of `[user@]host:path`
+* A remote sync server specified with a URI of `rsync://[user@]host[:port]/path`
+
+```
+$ rm -rf foo/*
+$ rsync -av playground foo
+sending incremental file list
+playground/
+playground/timestamp
+playground/dir-001/
+playground/dir-001/file-A
+playground/dir-001/file-B
+...
+```
+
+We included bot the `-a` option (for archiving -- causes recursion and preservation of file attributes)and the `-v` option (verbose output) to make a _mirror_ of the _playground_ directory within _foo_.
+
+If we run the command again, we will see a different result:
+
+```
+$ rsync -av playground foo
+sending incremental file list
+
+sent 36,548 bytes  received 134 bytes  73,364.00 bytes/sec
+total size is 0  speedup is 0.00
+```
+
+_rsync_ detected that there were no differences between the two directories.
+
+```
+$ touch playground/dir-099/file-Z
+$ rsync -av playground foo
+sending incremental file list
+playground/dir-099/file-Z
+
+sent 36,603 bytes  received 159 bytes  73,524.00 bytes/sec
+total size is 0  speedup is 0.00
+```
+
+`rsync source destination`
+
+If we append a trailing / to the source directory name, _rsync_ will copy only the contents of the source directory and not the directory itself.
+
