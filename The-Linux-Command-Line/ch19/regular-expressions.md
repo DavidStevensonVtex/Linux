@@ -135,3 +135,23 @@ bzip2recover
 gzip
 ```
 
+##### Negation
+
+If the first character in a bracket expression is a caret (^), the remaining characters are taken to be a set of characters that must not be present at the given character position.
+
+```
+$ grep -h '[^bg]zip' dirlist*.txt
+bunzip2
+gunzip
+funzip
+gpg-zip
+mzip
+preunzip
+prezip
+prezip-bin
+unzip
+unzipsfx
+```
+
+The caret character invokes negation only if it is the first character within a bracket expression.
+
