@@ -155,3 +155,36 @@ unzipsfx
 
 The caret character invokes negation only if it is the first character within a bracket expression.
 
+##### Traditional Character Ranges
+
+```
+$ grep -h '[ABCDEFGHIJKLMNOPQRSTUVWXYZ]' dirlist*.txt
+amuFormat.sh
+GET
+HEAD
+NF
+POST
+X
+X11
+Xephyr
+Xorg
+Xwayland
+$ grep -h '[A-Z]' dirlist*.txt
+amuFormat.sh
+GET
+HEAD
+NF
+POST
+X
+X11
+Xephyr
+Xorg
+Xwayland
+```
+
+`$ grep -h '[A-Za-z0-9]' dirlist*.txt`
+
+How do we include the dash character as a search character.
+By making it the first character in the expression.
+
+`$ grep -h '[-AZ]' dirlist*.txt`
