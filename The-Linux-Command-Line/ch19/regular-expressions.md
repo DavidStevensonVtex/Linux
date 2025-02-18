@@ -70,3 +70,28 @@ Regular expression metacharacters consist of the following:
 `^ $ . [ ] { } - ? + ( ) | \`
 
 All other characters are considered literals.
+
+#### The Any Character
+
+The first metacharacter we will look at is the dot (.) or period character, which is used to match any character.
+
+```
+$ grep -h '.zip' dirlist*.txt
+bunzip2
+bzip2
+bzip2recover
+gunzip
+gzip
+funzip
+gpg-zip
+mzip
+preunzip
+prezip
+prezip-bin
+unzip
+unzipsfx
+```
+
+Note that the _zip_ program was not found.
+The period matches one character, not zero characters.
+
