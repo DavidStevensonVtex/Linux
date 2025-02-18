@@ -231,3 +231,29 @@ $ ls -1 /usr/sbin/[[:upper:]]*
 
 Remember, however, that this is not an example of a regular expression; rather, it is the shell performing pathname expansion.
 
+##### Reverting to Traditional Collation Order
+
+```
+$ locale
+LANG=en_US.UTF-8
+LANGUAGE=
+LC_CTYPE="en_US.UTF-8"
+LC_NUMERIC="en_US.UTF-8"
+LC_TIME="en_US.UTF-8"
+LC_COLLATE="en_US.UTF-8"
+LC_MONETARY="en_US.UTF-8"
+LC_MESSAGES="en_US.UTF-8"
+LC_PAPER="en_US.UTF-8"
+LC_NAME="en_US.UTF-8"
+LC_ADDRESS="en_US.UTF-8"
+LC_TELEPHONE="en_US.UTF-8"
+LC_MEASUREMENT="en_US.UTF-8"
+LC_IDENTIFICATION="en_US.UTF-8"
+LC_ALL=en_US.UTF-8
+```
+
+To change the locale to use the traditional Unix behaviors, set the LANG variable to POSIX.
+
+`$ export LANG=POSIX`
+
+You can make this change permanent by adding this line to your _.bashrc_ file.
