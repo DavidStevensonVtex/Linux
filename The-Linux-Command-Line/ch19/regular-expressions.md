@@ -123,3 +123,15 @@ zip
 $ grep -h '^zip$' dirlist*.txt
 zip
 ```
+
+#### Bracket Expresssions and Character Classes
+
+With bracket expressions, we can specify a set of characters (including characters that would otherwise be interpreted as metacharacters) to be matched.
+
+```
+$ grep -h '[bg]zip' dirlist*.txt
+bzip2
+bzip2recover
+gzip
+```
+
