@@ -8,3 +8,55 @@ Regular expressions are symbolic notations used to identify patterns in text.
 
 Not all regular expressions are the same; they vary from tool to tool and from programming language to language.
 
+#### grep
+
+The name _grep_ is actually derived from the phrase "global regular expression print".
+
+```
+$ ls /usr/bin | grep zip
+funzip
+gpg-zip
+mzip
+preunzip
+prezip
+...
+```
+
+`grep [options] regex [file...]`
+
+##### grep options
+
+Option Long option Description
+
+* -i --ignore-case Do not distinguish between upper and lower case characters
+* -v --invert-match Causes grep to print every line that does not contain a match
+* -c --count Print the number of matches
+* -l --file-with-matches Print the name of each file that contains a match instead of the lines themselves.
+* -L --files-without-match Like the -l option, but print only the names of files that do not contain matches.
+* -n --line-number Prefix each matching line with the number of the line within the file
+* -h --no-filename For multifile searches, suppress the output of filenames
+
+```
+$ ls /bin > dirlist-bin.txt
+$ ls /usr/bin > dirlist-user-bin.txt
+$ ls /sbin > dirlist-sbin.txt
+$ ls dirlist*.txt
+dirlist-bin.txt  dirlist-sbin.txt  dirlist-user-bin.txt
+```
+
+```
+$ grep bzip dirlist*.txt
+dirlist-bin.txt:bzip2
+dirlist-bin.txt:bzip2recover
+```
+
+```
+$ grep -l bzip dirlist*.txt
+dirlist-bin.txt
+```
+
+```
+$ grep -L bzip dirlist*.txt
+dirlist-sbin.txt
+dirlist-user-bin.txt
+```
