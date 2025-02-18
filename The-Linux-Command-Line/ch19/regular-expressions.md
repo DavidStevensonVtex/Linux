@@ -188,3 +188,46 @@ How do we include the dash character as a search character.
 By making it the first character in the expression.
 
 `$ grep -h '[-AZ]' dirlist*.txt`
+
+#### POSIX Character Classes
+
+```
+$ ls -1  /usr/sbin/[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*
+/usr/sbin/ModemManager
+/usr/sbin/NetworkManager
+$ ls -1  /usr/sbin/[A-Z]*
+/usr/sbin/ModemManager
+/usr/sbin/NetworkManager
+```
+
+```
+$ echo $LANG
+en_US.UTF-8
+```
+
+With this setting, POSIX-compliant applications will use a dictionary collation order rather than ASCII order. The character range `[A-Z]` when interpreted in dictionary order includes all of the alphabetic characters except the lowercase _a_, hence our results.
+
+##### POSIX Character Class and Description
+
+* [:alnum:] alphanumeric characters [A-Za-z0-9]
+* [:word:] Same as [:alnum:] with the addition of the underscore.
+* [:alpha:] The alphabetic characters. [A-Za-z]
+* [:blank:] Includes the space and tab characters
+* [:cntrl:] The ASCII control codes. 0 through 31 and 127
+* [:digit:] The numbers 0 through 9.
+* [:graph:] The visible characters. ASCII 33-126.
+* [:lower:] Lowercase letters.
+* [:punct:] Punctuation characters
+* [:print:] The printable characters.
+* [:space:] The whitespace characters including space, tab, carriage return, newline, vertical tab, and form feed. In ASCII, `[ \t\r\n\v\f]`
+* [:upper:] Uppercase characters.
+* [:xdigit:] Characters used to express hexadecimal numbers. In ASCII, [0-9A-Fa-f].
+
+```
+$ ls -1 /usr/sbin/[[:upper:]]*
+/usr/sbin/ModemManager
+/usr/sbin/NetworkManager
+```
+
+Remember, however, that this is not an example of a regular expression; rather, it is the shell performing pathname expansion.
+
