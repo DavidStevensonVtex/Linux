@@ -95,3 +95,31 @@ unzipsfx
 Note that the _zip_ program was not found.
 The period matches one character, not zero characters.
 
+
+#### Anchors
+
+The caret (\^) and dollar sign (\$) are treated as _anchors_ in regular expressions.
+This means they cause the match to occur only if the regular expression is found at the beginning of the line (\^) or at the end of the line (\$).
+
+```
+$ grep -h '^zip' dirlist*.txt
+zip
+zipcloak
+zipdetails
+zipgrep
+zipinfo
+zipnote
+zipsplit
+$ grep -h 'zip$' dirlist*.txt
+gunzip
+gzip
+funzip
+gpg-zip
+mzip
+preunzip
+prezip
+unzip
+zip
+$ grep -h '^zip$' dirlist*.txt
+zip
+```
