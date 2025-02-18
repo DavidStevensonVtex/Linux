@@ -60,3 +60,13 @@ $ grep -L bzip dirlist*.txt
 dirlist-sbin.txt
 dirlist-user-bin.txt
 ```
+
+#### Metacharacters and Literals
+
+The characters in the string _bzip_ are all _literal characters_.
+
+Regular expression metacharacters consist of the following:
+
+`^ $ . [ ] { } - ? + ( ) | \`
+
+All other characters are considered literals.
