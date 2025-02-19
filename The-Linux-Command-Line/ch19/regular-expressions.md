@@ -401,3 +401,23 @@ This Works.
 $ echo "this does not" | grep -E '^[[:upper:]][[:upper:][:lower:] ]*\.'
 $ 
 ```
+
+##### \+ -- Match an Element One or More Times
+
+The \+ metacharacter works much like the *, except it requires at least one instance of the preceding element to cause a match.
+
+Here is a regular expresssion that will match only the lines consisting of groups of one or more alphabetic characters separated by single spaces:
+
+`^([[:alpha:]]+ ?)+$`
+
+```
+$ echo "This that" | grep -E '^([[:alpha:]]+ ?)+$'
+This that
+$ echo "a b c" | grep -E '^([[:alpha:]]+ ?)+$'
+a b c
+$ echo "a b 9" | grep -E '^([[:alpha:]]+ ?)+$'
+$ echo "abc   d" | grep -E '^([[:alpha:]]+ ?)+$'
+```
+
+Thiis does not match the line `a b 9` because it contains a non-alphabetic character; nor does it match `abc   9` because more than one space character separates the characters c and d.
+
