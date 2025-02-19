@@ -491,3 +491,15 @@ $ grep -Ev '^\(?[0-9]{3}\)? [0-9]{3}-[0-9]{4}$' phonelist.txt
 
 Here we use the `-v` option to produce an inverse match so that we will output only the lines in the list that do not match the specified expression.
 
+#### Finding Ugly Fillenames with find
+
+`find` requies that a pathname _exactly match_ the regular expression.
+
+In the following example, we will use find with a regular expresssion to find every pathname that contains any character that is not a member of the following set:
+
+`[-_./0-9a-zA-Z]`
+
+`$ find . -regex '.*[^-_./0-9a-zA-Z].*'`
+
+Because of the requirement for an exact match of the entire pathname, we use `.*` at both ends of the rexpression to match zero or more instances of any character. In the middle of the expresssion, we use a negated bracket expression containing ourself of acceptable pathname characters.
+
