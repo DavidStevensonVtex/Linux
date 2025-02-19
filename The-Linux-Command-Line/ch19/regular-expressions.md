@@ -281,3 +281,82 @@ However, the \(, \), \{, and \} characters are treated as metacharacters in BRE 
 
 POSIX stands for Portable Operating System Interface (with the X added to the end for extra snappiness), was suggested by Richard Stallman (yes, that Richard Stallman) and was adopted by the IEEE.
 
+Because the features we are going to discuss next are part of ERE, we are going to need a different grep. Traditionally, this has been performed by the egrep program, but the GNU version of grep also supports extended regular expressions when the \-E option is used.
+
+
+#### Alternation
+
+
+_Alternation_ allows a match to occur from among a set of expressions.
+
+```
+$ echo AAA | grep 'AAA|BBB'
+$ echo AAA | grep -E 'AAA|BBB'
+AAA
+$ echo BBB | grep -E 'AAA|BBB'
+BBB
+$ echo CCC | grep -E 'AAA|BBB'
+$ echo AAA | grep -E 'AAA|BBB|CCC'
+AAA
+```
+
+```
+$ grep -Eh '^(bz|gz|zip)' dirlist*.txt
+bzcat
+bzcmp
+bzdiff
+bzegrep
+bzexe
+bzfgrep
+bzgrep
+bzip2
+bzip2recover
+bzless
+bzmore
+gzexe
+gzip
+zip
+zipcloak
+zipdetails
+zipgrep
+zipinfo
+zipnote
+zipsplit
+```
+
+This expression will match the filenames in our lists that start with either _bz_, _gz_, or _zip_. Had we left off the parentheses, the meaning of this regular expression chanages to match any filename that begins with _bz_ or contains _gz_ or contains _zip_.
+
+```
+$ grep -Eh '^bz|gz|zip' dirlist*.txt
+bunzip2
+bzcat
+bzcmp
+bzdiff
+bzegrep
+bzexe
+bzfgrep
+bzgrep
+bzip2
+bzip2recover
+bzless
+bzmore
+gunzip
+gzexe
+gzip
+funzip
+gpg-zip
+mzip
+preunzip
+prezip
+prezip-bin
+tgz
+unzip
+unzipsfx
+zip
+zipcloak
+zipdetails
+zipgrep
+zipinfo
+zipnote
+zipsplit
+```
