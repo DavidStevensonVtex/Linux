@@ -503,3 +503,24 @@ In the following example, we will use find with a regular expresssion to find ev
 
 Because of the requirement for an exact match of the entire pathname, we use `.*` at both ends of the rexpression to match zero or more instances of any character. In the middle of the expresssion, we use a negated bracket expression containing ourself of acceptable pathname characters.
 
+#### Searching for files with locate
+
+```
+$ locate --regex 'bin/(bz|gz|zip)'
+/bin/bzcat
+/bin/bzcmp
+/bin/bzdiff
+/bin/bzegrep
+/bin/bzexe
+/bin/bzfgrep
+/bin/bzgrep
+/bin/bzip2
+/bin/bzip2recover
+/bin/bzless
+/bin/bzmore
+/bin/gzexe
+/bin/gzip
+...
+```
+
+Using alternation, we perform a search for pathnames that contain either _bin/bz_, _bin/gz_, or _bin/zip_.
