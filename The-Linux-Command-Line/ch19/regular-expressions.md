@@ -421,3 +421,26 @@ $ echo "abc   d" | grep -E '^([[:alpha:]]+ ?)+$'
 
 Thiis does not match the line `a b 9` because it contains a non-alphabetic character; nor does it match `abc   9` because more than one space character separates the characters c and d.
 
+##### { } -- Match an Element a Specific Number of Times
+
+* {n} Match the preceding element if it occurs exactly n times
+* {n,m} Match the preceding element if it occurs at least n times but no more than m times
+* {n,} Match the preceding element if it occurs n or more times
+* {,m} Match the preceding element if it occurs no more than m times
+
+Let's change the following:
+
+`^\(?[0-9][0-9][0-9]\)? [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]$`
+
+to the following:
+
+`^\(?[0-9]{3}\)? [0-9]{3}-[0-9]{4}$`
+
+```
+$ echo "(555) 123-4567" | grep -E '^\(?[0-9]{3}\)? [0-9]{3}-[0-9]{4}$'
+(555) 123-4567
+$ echo "555 123-4567" | grep -E '^\(?[0-9]{3}\)? [0-9]{3}-[0-9]{4}$'
+555 123-4567
+$ echo "5555 123-4567" | grep -E '^\(?[0-9]{3}\)? [0-9]{3}-[0-9]{4}$'
+$ 
+```
