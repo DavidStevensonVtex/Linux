@@ -524,3 +524,21 @@ $ locate --regex 'bin/(bz|gz|zip)'
 ```
 
 Using alternation, we perform a search for pathnames that contain either _bin/bz_, _bin/gz_, or _bin/zip_.
+
+#### Searching for Text with less and vim
+
+`$ less phonelist.txt`
+
+Search using the following:
+
+`/^([0-9]{3}) [0-9]{3}-[0-9]{4}$`
+
+less will highlight the strings that match.
+
+vim, on the other hand, supports basic regular expresssions, so our search expression would look like this:
+
+`/([0-9]\{3\}) [0-9]\{3\}-[0-9]\{4\}`
+
+If matches are not highlighted, try this command mode:
+
+`:h1search`
