@@ -360,3 +360,27 @@ zipinfo
 zipnote
 zipsplit
 ```
+
+#### Quantifiers
+
+##### \? -- Match an Element Zero or One Time
+
+This quantifier means, in effect, "make the preceding element optional."
+
+Let's say we wanted to check a phone number for validity and we considered the phone number to be valid if it matched either of these two forms, where n is a numeral:
+
+* (nnn) nnn-nnnn
+* nnn nnn-nnnn
+
+We could construct a regular expression like this:
+
+`^\(?[0-9][0-9][0-9]\)? [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]`
+
+```
+$ echo "(555) 123-4567" | grep -E '^\(?[0-9][0-9][0-9]\)? [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'
+(555) 123-4567
+$ echo "555 123-4567" | grep -E '^\(?[0-9][0-9][0-9]\)? [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'
+555 123-4567
+$ echo "AAA 123-4567" | grep -E '^\(?[0-9][0-9][0-9]\)? [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'
+$ 
+```
