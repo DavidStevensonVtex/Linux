@@ -384,3 +384,20 @@ $ echo "555 123-4567" | grep -E '^\(?[0-9][0-9][0-9]\)? [0-9][0-9][0-9]-[0-9][0-
 $ echo "AAA 123-4567" | grep -E '^\(?[0-9][0-9][0-9]\)? [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'
 $ 
 ```
+
+##### \* -- Match an Element Zero or More Times
+
+The \* is used to denote an optional item; however, unlike the \?, the item may occur any number of times, not just once.
+
+Let's say we wanted to see whether a string was a sentence; that is, it starts with an uppercase letter, then contains any number of uppercase and lwoercase letters and spaces and ends with a period.
+
+`^[[:upper:]][[:upper:][:lower:] ]*\.`
+
+```
+$ echo "This works." | grep -E '^[[:upper:]][[:upper:][:lower:] ]*\.'
+This works.
+$ echo "This Works." | grep -E '^[[:upper:]][[:upper:][:lower:] ]*\.'
+This Works.
+$ echo "this does not" | grep -E '^[[:upper:]][[:upper:][:lower:] ]*\.'
+$ 
+```
