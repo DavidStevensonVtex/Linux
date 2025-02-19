@@ -257,3 +257,27 @@ To change the locale to use the traditional Unix behaviors, set the LANG variabl
 `$ export LANG=POSIX`
 
 You can make this change permanent by adding this line to your _.bashrc_ file.
+
+
+### POSIX Basic vs. Extended Regular Expressions
+
+POSIX splits regular expression implementations into two kinds: _basic regular expressions_ (BRE) and _extended regular expressions_ (ERE).
+
+What's the difference between BRE and ERE? It's a matter of metacharacters.
+
+With BRE, the following metacharacters are recognized.
+
+`^ $ . [ ] *`
+
+All other characters are considered literals.
+
+With ERE, the following metacharacters (and their associated functions) are added:
+
+`( ) { } ? + |`
+
+However, the \(, \), \{, and \} characters are treated as metacharacters in BRE if they are escaped with a backslash, whereas in ERE, preceding any metacharacter with a backslash causes it to be treated as a literal.
+
+#### POSIX 
+
+POSIX stands for Portable Operating System Interface (with the X added to the end for extra snappiness), was suggested by Richard Stallman (yes, that Richard Stallman) and was adopted by the IEEE.
+
