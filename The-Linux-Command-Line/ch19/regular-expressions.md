@@ -542,3 +542,13 @@ vim, on the other hand, supports basic regular expresssions, so our search expre
 If matches are not highlighted, try this command mode:
 
 `:h1search`
+
+### Summing Up
+
+We can search man pages using zgrep.
+
+`$ zgrep -El 'regex|regular expression' *.gz`
+
+The `zgrep` program provides a front end for grep, allowing it to read compressed files.
+
+There is one feature found in basic regular expressions that we did not cover. Called _back references_, this feature will be discussed in the next chapter.
