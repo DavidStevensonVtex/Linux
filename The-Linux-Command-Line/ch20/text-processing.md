@@ -16,3 +16,23 @@ All Unix-like operating systems rely heavily on text files for data storage.
 * tr Translate or delete characters
 * sed Stream editor for filtering and transforming text
 * aspell Interactive spell checker
+
+### Applications of Text
+
+#### Documents
+
+Many people write documents using plain text formats.
+
+Many scientific papers are written using this method, as Unix-based text processing systems were among the first systems that supported the advanced typographical layout needed by writers in technical disciplines.
+
+#### Web Pages
+
+Web pages are text documents that use either Hypertext Markup Language (HTML) or Extensible Markup Language (XML) as markup languages to describe the documents visual format.
+
+#### Email
+
+An email begins with a header that describes the source of the message and processing it received during its journey, followed by the body of the message with its content.
+
+#### Printer Output
+
+#### Program Source Code
