@@ -247,3 +247,89 @@ $ sort foo.txt | uniq -c
       2 c
 ```
 
+### Slicing and Dicing
+
+#### cut -- Remove Sections from Each Line of Files
+
+The `cut` program is used to extract a section of text from a line and output the extracted section to standard output. It can accept multiple file arguments or input from standard input.
+
+**cut Selection Options**
+
+* -c list --characters=_list_ Extract the portion of the line defined by _list_. The list may consist of one or more comma-separated numerical ranges.
+* -f list --fields=_list_ Extract one or more fields from the line as defined by _list_. The list may contain one or more field ranges separated by commas.
+* -d delim --delimiter=_delim_ When -f is specified, use _delim_ as the field delimiting character. By default, fields must  be separated by a single tab character.
+* --complement Extract the entire line of text, except for those portions specified by -c and/or -f.
+
+
+```
+$ cat -A distros.txt
+SUSE^I10.2^I12/07/2006$
+Fedora^I10^I11/25/2008$
+SUSE^I11.0^I06/19/2008$
+Ubuntu^I8.04^I04/24/2008$
+Fedora^I8^I11/08/2007$
+SUSE^I10.3^I10/04/2007$
+Ubuntu^I6.10^I10/26/2006$
+Fedora^I7^I05/31/2007$
+Ubuntu^I7.10^I10/18/2007$
+Ubuntu^I7.04^I04/19/2007$
+SUSE^I10.1^I05/13/2008$
+Fedora^I6^I10/24/2006$
+Fedora^I9^I05/13/2008$
+Ubuntu^I6.06^I06/01/2006$
+Ubuntu^I8.10^I10/30/2008$
+```
+
+```
+$ cut -f 3 distros.txt
+12/07/2006
+11/25/2008
+06/19/2008
+04/24/2008
+11/08/2007
+10/04/2007
+10/26/2006
+05/31/2007
+10/18/2007
+04/19/2007
+05/13/2008
+10/24/2006
+05/13/2008
+06/01/2006
+10/30/2008
+03/20/2006
+```
+
+```
+$ cut -f 3 distros.txt | cut -c7-10
+2006
+2008
+2008
+2008
+2007
+2007
+2006
+2007
+2007
+2007
+2008
+2006
+2008
+2006
+2008
+2006
+```
+
+```
+$ cut -d ':' -f 1 /etc/passwd | head
+root
+daemon
+bin
+sys
+sync
+games
+man
+lp
+mail
+news
+```
