@@ -60,3 +60,145 @@ $ cat -ns foo.txt
      2
      3  jumped over the lazy dog.
 ```
+
+#### sort
+
+The `soft` program sorts the contents of standard output, or one or more files specified on the command line, and sends the results to standard output.
+
+```
+$ sort > foo.txt
+c
+b
+a
+$ cat foo.txt
+a
+b
+c
+```
+
+It is possible to _merge_ multiple files into a single sorted whole.
+
+`sort file1.txt file2.txt file3.txt > final_sorted_list.txt`
+
+**Common sort Options**
+
+* -b --ignore-leading-blanks
+* -f --ignore-case
+* -n --numeric-sort
+* -r --reverse 
+* -k --key=field1[,field2] Sort based on a key field from _field1_ to _field2_.
+* -m -merge Treat each argument as the name of a presorted file. Merge multiple files into a single sorted result without performing any additional sorting.
+* -o --output-file Send sorted output to _file_ rather than standard output
+* -t --field-separator=char Define the field separateor character. By default fields are separated by spaces or tabs
+
+```
+$ du -s /usr/share/* | sort -nr | head
+434536  /usr/share/code
+186316  /usr/share/fonts
+91520   /usr/share/doc
+75340   /usr/share/icons
+65804   /usr/share/libreoffice
+51092   /usr/share/gimp
+50692   /usr/share/backgrounds
+46860   /usr/share/locale
+46152   /usr/share/help
+42840   /usr/share/ibus
+```
+
+by using the n and r options, we produce a reverse numerical sort, with the largest values appearing first in the results.
+
+```
+$ ls -l /usr/bin | sort -nrk 5 | head
+-rwxr-xr-x 1 root       root       217608984 Dec 19  2013 mongod
+-rwxr-xr-x 1 root       root       168212624 Dec 19  2013 mongos
+-rwxr-xr-x 1 root       root       149245160 Feb  4 12:38 mongosh
+-rwxr-xr-x 1 root       root        76771480 Feb  7 08:26 atlas
+-rwxr-xr-x 1 dstevenson dstevenson  18100544 Jan 22 11:58 mongorestore
+-rwxr-xr-x 1 dstevenson dstevenson  17767248 Jan 22 11:58 mongodump
+-rwxr-xr-x 1 dstevenson dstevenson  17677776 Jan 22 11:58 mongoimport
+-rwxr-xr-x 1 root       root        17605304 Oct 11 04:05 snap
+-rwxr-xr-x 1 dstevenson dstevenson  17505256 Jan 22 11:58 mongoexport
+-rwxr-xr-x 1 dstevenson dstevenson  17490664 Jan 22 11:58 mongofiles
+```
+
+It mostly worked. The problem occurs in the sorting of the Fedora version numbers.
+Because 1 comes before 5 in the character set, version 10 ends up at the top while version 9 falls to the bottom.
+
+
+```
+$ sort distros.txt
+Fedora          10      11/25/2008
+Fedora          5       03/20/2006
+Fedora          6       10/24/2006
+Fedora          7       05/31/2007
+Fedora          8       11/08/2007
+Fedora          9       05/13/2008
+SUSE            10.1    05/13/2008
+SUSE            10.2    12/07/2006
+SUSE            10.3    10/04/2007
+SUSE            11.0    06/19/2008
+Ubuntu          6.06    06/01/2006
+Ubuntu          6.10    10/26/2006
+Ubuntu          7.04    04/19/2007
+Ubuntu          7.10    10/18/2007
+Ubuntu          8.04    04/24/2008
+Ubuntu          8.10    10/30/2008
+```
+
+```
+$ sort --ke=1,1 --key=2n distros.txt
+Fedora          5       03/20/2006
+Fedora          6       10/24/2006
+Fedora          7       05/31/2007
+Fedora          8       11/08/2007
+Fedora          9       05/13/2008
+Fedora          10      11/25/2008
+SUSE            10.1    05/13/2008
+SUSE            10.2    12/07/2006
+SUSE            10.3    10/04/2007
+SUSE            11.0    06/19/2008
+Ubuntu          6.06    06/01/2006
+Ubuntu          6.10    10/26/2006
+Ubuntu          7.04    04/19/2007
+Ubuntu          7.10    10/18/2007
+Ubuntu          8.04    04/24/2008
+Ubuntu          8.10    10/30/2008
+```
+
+Because we wanted to limit the sort to just the first field, we specified 1,1 which means "start at field 1 and end at field 1".
+
+```
+$ sort -k 3.7nbr -k 3.1nbr -k 3.4nbr distros.txt
+Fedora          10      11/25/2008
+Ubuntu          8.10    10/30/2008
+SUSE            11.0    06/19/2008
+Fedora          9       05/13/2008
+SUSE            10.1    05/13/2008
+Ubuntu          8.04    04/24/2008
+Fedora          8       11/08/2007
+Ubuntu          7.10    10/18/2007
+SUSE            10.3    10/04/2007
+Fedora          7       05/31/2007
+Ubuntu          7.04    04/19/2007
+SUSE            10.2    12/07/2006
+Ubuntu          6.10    10/26/2006
+Fedora          6       10/24/2006
+Ubuntu          6.06    06/01/2006
+Fedora          5       03/20/2006
+```
+
+Sort by default shell:
+
+```
+$ sort -t ':' -k 7 /etc/passwd | head
+dstevenson:x:1000:1000:dstevenson,,,:/home/dstevenson:/bin/bash
+root:x:0:0:root:/root:/bin/bash
+gdm:x:120:125:Gnome Display Manager:/var/lib/gdm3:/bin/false
+gnome-initial-setup:x:119:65534::/run/gnome-initial-setup/:/bin/false
+hplip:x:117:7:HPLIP system user,,,:/var/run/hplip:/bin/false
+speech-dispatcher:x:110:29:Speech Dispatcher,,,:/var/run/speech-dispatcher:/bin/false
+tss:x:123:128:TPM software stack,,,:/var/lib/tpm:/bin/false
+whoopsie:x:111:117::/nonexistent:/bin/false
+sync:x:4:65534:sync:/bin:/bin/sync
+_apt:x:104:65534::/nonexistent:/usr/sbin/nologin
+```
