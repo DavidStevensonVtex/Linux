@@ -2,7 +2,6 @@ Fedora	10
 Ubuntu	8.10
 SUSE	11.0
 Fedora	9
-SUSE	10.1
 Ubuntu	8.04
 Fedora	8
 Ubuntu	7.10
@@ -13,4 +12,5 @@ SUSE	10.2
 Ubuntu	6.10
 Fedora	6
 Ubuntu	6.06
+SUSE	10.1
 Fedora	5

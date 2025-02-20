@@ -169,22 +169,23 @@ Because we wanted to limit the sort to just the first field, we specified 1,1 wh
 
 ```
 $ sort -k 3.7nbr -k 3.1nbr -k 3.4nbr distros.txt
-Fedora          10      11/25/2008
-Ubuntu          8.10    10/30/2008
-SUSE            11.0    06/19/2008
-Fedora          9       05/13/2008
-SUSE            10.1    05/13/2008
-Ubuntu          8.04    04/24/2008
-Fedora          8       11/08/2007
-Ubuntu          7.10    10/18/2007
-SUSE            10.3    10/04/2007
-Fedora          7       05/31/2007
-Ubuntu          7.04    04/19/2007
-SUSE            10.2    12/07/2006
-Ubuntu          6.10    10/26/2006
-Fedora          6       10/24/2006
-Ubuntu          6.06    06/01/2006
-Fedora          5       03/20/2006
+Fedora  10      11/25/2008
+Ubuntu  8.10    10/30/2008
+SUSE    11.0    06/19/2008
+Fedora  9       05/13/2008
+Ubuntu  8.04    04/24/2008
+Fedora  8       11/08/2007
+Ubuntu  7.10    10/18/2007
+SUSE    10.3    10/04/2007
+Fedora  7       05/31/2007
+Ubuntu  7.04    04/19/2007
+SUSE    10.2    12/07/2006
+Ubuntu  6.10    10/26/2006
+Fedora  6       10/24/2006
+Ubuntu  6.06    06/01/2006
+SUSE    10.1    05/11/2006
+Fedora  5       03/20/2006
+
 ```
 
 Sort by default shell:
@@ -273,7 +274,7 @@ Ubuntu^I6.10^I10/26/2006$
 Fedora^I7^I05/31/2007$
 Ubuntu^I7.10^I10/18/2007$
 Ubuntu^I7.04^I04/19/2007$
-SUSE^I10.1^I05/13/2008$
+SUSE^I10.1^I05/11/2006$
 Fedora^I6^I10/24/2006$
 Fedora^I9^I05/13/2008$
 Ubuntu^I6.06^I06/01/2006$
@@ -292,7 +293,7 @@ $ cut -f 3 distros.txt
 05/31/2007
 10/18/2007
 04/19/2007
-05/13/2008
+05/11/2006
 10/24/2006
 05/13/2008
 06/01/2006
@@ -312,7 +313,7 @@ $ cut -f 3 distros.txt | cut -c7-10
 2007
 2007
 2007
-2008
+2006
 2006
 2008
 2006
@@ -348,12 +349,12 @@ Fedora  10
 Ubuntu  8.10
 SUSE    11.0
 Fedora  9
-SUSE    10.1
 Ubuntu  8.04
 Fedora  8
 Ubuntu  7.10
 SUSE    10.3
 Fedora  7
+Ubuntu  7.04
 ```
 
 ```
@@ -363,12 +364,12 @@ $ head distros-dates.txt
 10/30/2008
 06/19/2008
 05/13/2008
-05/13/2008
 04/24/2008
 11/08/2007
 10/18/2007
 10/04/2007
 05/31/2007
+04/19/2007
 ```
 
 ```
@@ -377,7 +378,6 @@ $ paste distros-dates.txt distros-versions.txt
 10/30/2008      Ubuntu  8.10
 06/19/2008      SUSE    11.0
 05/13/2008      Fedora  9
-05/13/2008      SUSE    10.1
 04/24/2008      Ubuntu  8.04
 11/08/2007      Fedora  8
 10/18/2007      Ubuntu  7.10
@@ -388,6 +388,85 @@ $ paste distros-dates.txt distros-versions.txt
 10/26/2006      Ubuntu  6.10
 10/24/2006      Fedora  6
 06/01/2006      Ubuntu  6.06
+05/11/2006      SUSE    10.1
 03/20/2006      Fedora  5
 ```
 
+### join -- Join Lines of Two Files on a Common Field
+
+In some ways, join is like paste in that it adds columns to a file, but it uses a unique way to do it. A join is an operation usually associated with relational databases where data from multiple tables with a shared key field is combined to form a desired result.
+
+```
+First table: CUSTOMERS
+
+CUSTNUM FNAME LNAME
+======= ===== =====
+4681934 John  Smith
+
+Second table: ORDERS
+
+ORDERNUM    CUSTNUM   QUAN   ITEM
+========    =======   ====   ====
+3014953305  4681934   1      Blue Widget
+
+```
+
+Performing a join operation would allow us to combine the fields in the two tables to achieve a useful result, such as preparing an invoice.
+
+```
+FNAME LNAME QUAN  ITEM
+===== ===== ====  ====
+John  Smith 1     Blue Widget
+```
+One contains the release dates (which will be our shared key for this demonstration) and the release names.
+```
+$ cut -f 1,1 distros-by-date.txt > distros-names.txt
+$ paste distros-dates.txt distros-names.txt > distros-key-names.txt
+$ head distros-key-names.txt
+11/25/2008      Fedora
+10/30/2008      Ubuntu
+06/19/2008      SUSE
+05/13/2008      Fedora
+04/24/2008      Ubuntu
+11/08/2007      Fedora
+10/18/2007      Ubuntu
+10/04/2007      SUSE
+05/31/2007      Fedora
+04/19/2007      Ubuntu
+```
+
+The second file contains the release dates and the version numbers, as shown here.
+
+
+```
+$ cut -f 2,2 distros-by-date.txt > distros-vernums.txt
+$ paste distros-dates.txt distros-vernums.txt > distros-key-vernums.txt
+$ head distros-key-vernums.txt
+11/25/2008      10
+10/30/2008      8.10
+06/19/2008      11.0
+05/13/2008      9
+04/24/2008      8.04
+11/08/2007      8
+10/18/2007      7.10
+10/04/2007      10.3
+05/31/2007      7
+04/19/2007      7.04
+```
+
+We now have two files with a shared key (the "release date" field). It is important to point out that the files must be sorted on the key field for join to work properly.
+
+```
+$ join distros-key-names.txt distros-key-vernums.txt  | head
+$ join distros-key-names.txt distros-key-vernums.txt  | head
+11/25/2008 Fedora 10
+10/30/2008 Ubuntu 8.10
+06/19/2008 SUSE 11.0
+05/13/2008 Fedora 9
+04/24/2008 Ubuntu 8.04
+11/08/2007 Fedora 8
+10/18/2007 Ubuntu 7.10
+10/04/2007 SUSE 10.3
+05/31/2007 Fedora 7
+04/19/2007 Ubuntu 7.04
+```
