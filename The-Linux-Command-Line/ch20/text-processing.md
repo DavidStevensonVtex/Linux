@@ -202,3 +202,48 @@ whoopsie:x:111:117::/nonexistent:/bin/false
 sync:x:4:65534:sync:/bin:/bin/sync
 _apt:x:104:65534::/nonexistent:/usr/sbin/nologin
 ```
+
+#### uniq 
+
+`uniq` removes any duplicate lines and sends the results to standard output.
+It is often used in conjunction with sort to clean the output of duplicates.
+
+_While uniq isa traditional Unix tool often used with sort, the GNU version of sort supports a -u option, which removes duplicates from the sorted output._
+
+```
+$ cat > foo.txt
+a
+b
+c
+a
+b
+c
+$ uniq foo.txt
+a
+b
+c
+a
+b
+c
+$ sort foo.txt | uniq
+a
+b
+c
+```
+
+**Common uniq Options**
+
+* -c --count Output a list of duplicate lines preceded by the number of times the line occurs.
+* -d --repeated Output only repeated lines, rather than unique lines
+* -f n --skip-fields=n Ignore n leading fields in each line. Fields are separated by whitespace as they are in sort; however, unlike sort, uniq has no option for setting an alternate field separator.
+* -i --ignore case Ignore case during the line comparisions
+* -s n --skip-chars=n Skip (ignore) the leading n characters of each line
+* -u --unique Output only unique lines. Lines with duplicates are ignored.
+
+```
+$ sort foo.txt | uniq -c
+      2 a
+      2 b
+      2 c
+```
+
