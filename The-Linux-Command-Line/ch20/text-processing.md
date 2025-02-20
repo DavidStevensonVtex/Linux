@@ -333,3 +333,61 @@ lp
 mail
 news
 ```
+
+### paste -- Merge Lines of Files
+
+The _paste_ command does the opposite of _cut_. Rather than extracting a column of text from a file, it adds one or more columns of text to a file.
+
+It does this by reading multiple files and combining the fields found in each file into a single stream on standard input. Like _cut_, _paste_ accepts multiple file arguments and/or standard input.
+
+```
+$ sort -k 3.7nbr -k 3.1nbr -k 3.4nbr distros.txt > distros-by-date.txt
+$ cut -f 1,2 distros-by-date.txt > distros-versions.txt
+$ head distros-versions.txt
+Fedora  10
+Ubuntu  8.10
+SUSE    11.0
+Fedora  9
+SUSE    10.1
+Ubuntu  8.04
+Fedora  8
+Ubuntu  7.10
+SUSE    10.3
+Fedora  7
+```
+
+```
+$ cut -f 3 distros-by-date.txt > distros-dates.txt
+$ head distros-dates.txt
+11/25/2008
+10/30/2008
+06/19/2008
+05/13/2008
+05/13/2008
+04/24/2008
+11/08/2007
+10/18/2007
+10/04/2007
+05/31/2007
+```
+
+```
+$ paste distros-dates.txt distros-versions.txt
+11/25/2008      Fedora  10
+10/30/2008      Ubuntu  8.10
+06/19/2008      SUSE    11.0
+05/13/2008      Fedora  9
+05/13/2008      SUSE    10.1
+04/24/2008      Ubuntu  8.04
+11/08/2007      Fedora  8
+10/18/2007      Ubuntu  7.10
+10/04/2007      SUSE    10.3
+05/31/2007      Fedora  7
+04/19/2007      Ubuntu  7.04
+12/07/2006      SUSE    10.2
+10/26/2006      Ubuntu  6.10
+10/24/2006      Fedora  6
+06/01/2006      Ubuntu  6.06
+03/20/2006      Fedora  5
+```
+
