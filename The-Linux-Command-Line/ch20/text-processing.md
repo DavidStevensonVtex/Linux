@@ -617,3 +617,51 @@ c
 d
 e
 ```
+
+### Editing on the Fly
+
+#### tr -- Transliterate or Delete Characters
+
+The `tr` program is used to _transliterate_ characters.
+
+```
+$ echo "lowercase letters" | tr a-z A-Z
+LOWERCASE LETTERS
+```
+
+`tr` operates on standard input and outputs results to standard output.
+
+Character sets may be expressed in one of three ways.
+
+* An enumerated list. For example: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+* A character range. For example: A-Z. Subject to issues with locale collation order.
+* POSIX character classes. For example: [:upper:].
+
+```
+$ echo "lowercase letters" | tr [:lower:] A
+AAAAAAAAA AAAAAAA
+```
+
+`tr` allows characters to be deleted from the input stream.
+
+`tr -d '\r' < dos_file > unix_file`
+
+To see a complete list of the sequences and character classes `tr` supports, type the following:
+
+`tr --help`
+
+Using the `-s` option, tr can "squeeze" (delete) repeated instances of a character.
+
+```
+$ echo "aaabbbccc" | tr -s ab
+abccc
+```
+
+**Secret Decoder Ring**
+
+```
+$ echo "secret text" | tr a-zA-Z n-za-mN-ZA-M
+frperg grkg
+$ echo "frperg grkg" | tr n-za-mN-ZA-M a-zA-Z
+secret text
+```
