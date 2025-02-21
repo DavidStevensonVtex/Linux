@@ -583,3 +583,37 @@ The most notable difference between the context and unified formats is the elimi
 * - This line was removed from the first file.
 * + This line was added to the first file.
 
+#### patch -- Apply a diff to an Original
+
+The `patch` program is used to apply changes to text files. It accepts output from `diff` and is generally used to convert older-version files into newer versions.
+
+Using `diff/patch` offers two significant advantages.
+
+* The diff file is small, compared to the full size of the source tree.
+* The diff file concisely shows the change being made, allowing reviewers of the patch to quickly evaluate it.
+
+Of course, `diff/patch` will work on any text file, not just source code.
+
+To prepare a diff file for use with patch, the GNU documentation suggests using `diff` as follows:
+
+`diff -Naur old_file new_file > diff_file`
+
+where _old\_file_ and _new\_file_ are either single files or directories containing files.
+
+The `r` option supports recursion of a directory tree.
+
+Once the diff file has been created, we can apply it to patch the old file into the new file.
+
+`patch < diff_file`
+
+```
+$ diff -Naur file1.txt file2.txt > patchfile.txt
+$ patch < patchfile.txt
+patching file file1.txt
+$ diff file1.txt file2.txt
+$ cat file1.txt
+b
+c
+d
+e
+```
