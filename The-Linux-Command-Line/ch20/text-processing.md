@@ -506,3 +506,80 @@ b
 c
 d
 ```
+
+#### diff -- Compare Files Line by Line
+
+`diff` is used to detect the differences between files.
+
+```
+$ diff file1.txt file2.txt
+1d0
+< a
+4a4
+> e
+```
+
+`diff` provides a terse description of the differences between two files.
+In the default format, each group of changes is preceded by a _change command_ in the form of _range operation range` to describe the positions and types of c hanges required to convert the first file to the second file.
+
+`diff` Change Commands
+
+* r1ar2 Append the lines at position r2 in the second file to the position r1 in the first file.
+* r1cr2 Change (replace) the lines at position r1 with the lines at the position r2 in the second file.
+* r1dr2 Delete the lines in teh first file at position r1, which would have appeared at range r2 in the second file.
+
+In this format, a range is a comma-separated list of the starting line and ending line.
+
+Two of the more popular formats are the _context format_ and the _unified format_.
+
+When viewed using the context format (the `-c` option), we will see this:
+
+```
+$ diff -c file1.txt file2.txt
+*** file1.txt   2025-02-21 15:36:43.873271961 -0500
+--- file2.txt   2025-02-21 15:36:58.225266759 -0500
+***************
+*** 1,4 ****
+- a
+  b
+  c
+  d
+--- 1,4 ----
+  b
+  c
+  d
++ e
+```
+
+The first file is marked with asterisks, and the second file is marked with dashes. 
+Throughout the remainder of the listing, these markers will signify their respective files.
+
+`diff` Context Format Change Indicators
+
+* blank A line shown for context. It does not indicate a difference between the two files.
+* - A line deleted. This line will appear in the first file but not in the second file.
+* + A line added. This line will appear in the second file but not in the first file.
+* ! A line changed. The two versiosn of the line will be displayed each in its respective section of the change group.
+
+The unified format is similar to the context format but is more concise. It is specified with the `-u` option.
+
+```
+$ diff -u file1.txt file2.txt
+--- file1.txt   2025-02-21 15:36:43.873271961 -0500
++++ file2.txt   2025-02-21 15:36:58.225266759 -0500
+@@ -1,4 +1,4 @@
+-a
+ b
+ c
+ d
++e
+```
+
+The most notable difference between the context and unified formats is the elimination of the duplicated lines of context, making the results of the unified format shorter than those of the context format.
+
+`diff` Unified Format Change Indicators
+
+* blank This line is shared by both files.
+* - This line was removed from the first file.
+* + This line was added to the first file.
+
