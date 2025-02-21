@@ -335,7 +335,7 @@ mail
 news
 ```
 
-### paste -- Merge Lines of Files
+#### paste -- Merge Lines of Files
 
 The _paste_ command does the opposite of _cut_. Rather than extracting a column of text from a file, it adds one or more columns of text to a file.
 
@@ -392,7 +392,7 @@ $ paste distros-dates.txt distros-versions.txt
 03/20/2006      Fedora  5
 ```
 
-### join -- Join Lines of Two Files on a Common Field
+#### join -- Join Lines of Two Files on a Common Field
 
 In some ways, join is like paste in that it adds columns to a file, but it uses a unique way to do it. A join is an operation usually associated with relational databases where data from multiple tables with a shared key field is combined to form a desired result.
 
@@ -469,4 +469,40 @@ $ join distros-key-names.txt distros-key-vernums.txt  | head
 10/04/2007 SUSE 10.3
 05/31/2007 Fedora 7
 04/19/2007 Ubuntu 7.04
+```
+
+### Comparing Text
+
+It is often useful to compare versions of text files.
+
+#### comm -- Compare Two Sorted Files Line by Line
+
+```
+$ cat > file1.txt
+a
+b
+c
+d
+$ cat > file2.txt
+b
+c
+d
+e
+$ comm file1.txt file2.txt
+a
+                b
+                c
+                d
+        e
+```
+
+As we can see, comm produces three columns of output. The first column contains lines unique to the first file argument, the second column contains lines unique to the second file argument, and the third column contains the lines shared by both files.
+
+If we wanted to output only the lines shared by both files, we would suppress the output of the first and second columns.
+
+```
+$ comm -12 file1.txt file2.txt
+b
+c
+d
 ```
