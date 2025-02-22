@@ -853,3 +853,69 @@ _A line continuation character is formed by a backslash followed immediately by 
 
 Many users prefer other tools for larger tasks. The most popular of these are _awk_ and _perl_.
 
+#### aspell -- Interactive Spellchecker
+
+`aspell check textfile`
+
+**foo2.txt**
+
+```
+The quick brown fox jimped over the laxy dog.
+```
+
+`$ aspell check foo2.txt`
+
+```
+$ cat foo2.txt
+The quick brown fox jumped over the lazy dog.
+```
+
+```
+$ cat foo2.txt.bak
+The quick brown fox jimped over the laxy dog.
+```
+
+**foo.html**
+
+```
+<html>
+    <head>
+        <title>Misspelled HTML file</title>
+    </head>
+    <body>
+        <p>The quick brown fox jimped over the laxy dog.</p>
+    </body>
+</html>
+```
+
+`$ aspell check foo.html`
+
+```
+$ cat foo.html
+<html>
+    <head>
+        <title>Misspelled HTML file</title>
+    </head>
+    <body>
+        <p>The quick brown fox jumped over the lazy dog.</p>
+    </body>
+</html>
+```
+
+```
+$ cat foo.html.bak
+<html>
+    <head>
+        <title>Misspelled HTML file</title>
+    </head>
+    <body>
+        <p>The quick brown fox jimped over the laxy dog.</p>
+    </body>
+</html>
+```
+
+Check HTML tags for misspellings.
+
+`$ aspell -H check foo.txt`
+
+By default, aspell will ignore URLs and email addresses in text.
