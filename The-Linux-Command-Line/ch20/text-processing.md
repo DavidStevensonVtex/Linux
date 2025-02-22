@@ -919,3 +919,11 @@ Check HTML tags for misspellings.
 `$ aspell -H check foo.txt`
 
 By default, aspell will ignore URLs and email addresses in text.
+
+### Extra Credit
+
+More interesting text-manipulation commands:
+
+* split (split files into pieces)
+* csplit (split files into pieces based on context)
+* sdiff (side-by-side merge of file differences)
