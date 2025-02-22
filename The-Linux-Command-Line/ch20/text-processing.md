@@ -665,3 +665,38 @@ frperg grkg
 $ echo "frperg grkg" | tr n-za-mN-ZA-M a-zA-Z
 secret text
 ```
+
+#### sed - Stream Editor for Filtering and Transforming Text
+
+The name `sed` is short for _stream editor_.
+
+```
+$ echo "front" | sed 's/front/back/'
+back
+```
+
+Commands in `sed` begin with a single letter.
+
+The choice of delimiter character is arbitrary.
+
+```
+$ echo "front" | sed 's_front_back_'
+back
+```
+
+Most commands in sed may be preceded by an _address_, whjich specifies which line(s) of the input stream will be edited. If the address is omitted, then the editing command is carried out on every line in the input stream. The simplest form of an address is a line number.
+
+```
+$ echo "front" | sed '1s/front/back/'
+back
+```
+
+**sed Address Notation**
+
+* n A line number where n is a positive integer.
+* $ The last line
+* /regexp/ Lines matching a POSIX basic regular expression. Note that the regular expression is delimited by slash characters. May be delimited by an alternate character.
+* addr1,addr2 A range of lines from addr1 to addr, inclusive.
+* first~step Match the line represented by number first and then each subsequent lines at step intervals.
+* addr1,+n Match addr1 and the following n lines.
+* addr! Match all lines except addr, which may be any of the forms listed earlier.
