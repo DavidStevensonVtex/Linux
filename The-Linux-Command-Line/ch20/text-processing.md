@@ -700,3 +700,156 @@ back
 * first~step Match the line represented by number first and then each subsequent lines at step intervals.
 * addr1,+n Match addr1 and the following n lines.
 * addr! Match all lines except addr, which may be any of the forms listed earlier.
+
+```
+$ sed -n '1,5p' distros.txt
+SUSE    10.2    12/07/2006
+Fedora  10      11/25/2008
+SUSE    11.0    06/19/2008
+Ubuntu  8.04    04/24/2008
+Fedora  8       11/08/2007
+```
+```
+$ head -5 distros.txt
+SUSE    10.2    12/07/2006
+Fedora  10      11/25/2008
+SUSE    11.0    06/19/2008
+Ubuntu  8.04    04/24/2008
+Fedora  8       11/08/2007
+```
+
+```
+$ sed -n '/SUSE/p' distros.txt 
+SUSE    10.2    12/07/2006
+SUSE    11.0    06/19/2008
+SUSE    10.3    10/04/2007
+SUSE    10.1    05/11/2006
+```
+
+```
+$ sed -n '/SUSE/!p' distros.txt
+Fedora  10      11/25/2008
+Ubuntu  8.04    04/24/2008
+Fedora  8       11/08/2007
+Ubuntu  6.10    10/26/2006
+Fedora  7       05/31/2007
+Ubuntu  7.10    10/18/2007
+Ubuntu  7.04    04/19/2007
+Fedora  6       10/24/2006
+Fedora  9       05/13/2008
+Ubuntu  6.06    06/01/2006
+Ubuntu  8.10    10/30/2008
+Fedora  5       03/20/2006$ 
+```
+
+By adding an exclamation point, all the lines in the file except the ones matched by the regular expression are printed.
+
+**sed Basic Editing Commands**
+
+* = Output the current line number
+* a Append text after the current line
+* d Delete the current line
+* i Insert text in front of the current line.
+* p Print the current line. By default, sed prints every line and only edits the line that match a specified address within the file. The default behavior can be overridden by specifying the `-n` option.
+* q Exit sed without processing any more lines. If the `-n` option is not specified, output the current line.
+* Q Exit sed without processing any more lines.
+* s/regexp/replacement/ Substitute the contents of _replacement_ wherever _regexp_ is found. _replacement_ may include the special character \&, which is equivalent to the text matched by _regexp_. In addition, _replacement_ may include the sequences \\1 through \\9, which are the contents of the corresponding expressions in _regexp_.
+* y/set1/set2 Perform transliteration by converting characters from _set1_ to the corresponding characters in _set2_. Not that unlike _tr_, sed requires that both sets be of the same length.
+
+```
+$ sed 's/\([0-9]\{2\}\)\/\([0-9]\{2\}\)\/\([0-9]\{4\}\)/\3-\1-\2/' distros.txt
+SUSE    10.2    2006-12-07
+Fedora  10      2008-11-25
+SUSE    11.0    2008-06-19
+Ubuntu  8.04    2008-04-24
+Fedora  8       2007-11-08
+SUSE    10.3    2007-10-04
+Ubuntu  6.10    2006-10-26
+Fedora  7       2007-05-31
+Ubuntu  7.10    2007-10-18
+Ubuntu  7.04    2007-04-19
+SUSE    10.1    2006-05-11
+Fedora  6       2006-10-24
+Fedora  9       2008-05-13
+Ubuntu  6.06    2006-06-01
+Ubuntu  8.10    2008-10-30
+Fedora  5       2006-03-20
+```
+
+`sed 's/regexp/replacement/' distros.txt
+
+```
+$ echo "aaabbbccc" | sed 's/b/B/'
+aaaBbbccc
+```
+
+```
+$ echo "aaabbbccc" | sed 's/b/B/g'
+aaaBBBccc
+```
+
+It is possible to construct more complex commands in a script  file using the `-f` option.
+
+**distros.sed**
+
+```
+# sed script to produce Linux distributions report
+1i
+\
+Linux Distributions Report\
+
+s/\([0-9]\{2\}\)\/\([0-9]\{2\}\)\/\([0-9]\{4\}\)/\3-\1-\2/
+
+y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/
+```
+
+```
+$ sed -f distros.sed distros.txt
+
+Linux Distributions Report
+
+SUSE    10.2    2006-12-07
+FEDORA  10      2008-11-25
+SUSE    11.0    2008-06-19
+UBUNTU  8.04    2008-04-24
+FEDORA  8       2007-11-08
+SUSE    10.3    2007-10-04
+UBUNTU  6.10    2006-10-26
+FEDORA  7       2007-05-31
+UBUNTU  7.10    2007-10-18
+UBUNTU  7.04    2007-04-19
+SUSE    10.1    2006-05-11
+FEDORA  6       2006-10-24
+FEDORA  9       2008-05-13
+UBUNTU  6.06    2006-06-01
+UBUNTU  8.10    2008-10-30
+FEDORA  5       2006-03-20
+```
+
+```
+$ cat -n distros.sed
+     1  # sed script to produce Linux distributions report
+     2
+     3  1 i\
+     4  \
+     5  Linux Distributions Report\
+     6
+     7  s/\([0-9]\{2\}\)\/\([0-9]\{2\}\)\/\([0-9]\{4\}\)/\3-\1-\2/
+     8  y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/
+```
+
+Line 1 is a comment.
+
+Line 2  is a blank line. Like comments, blank lines may be added to improve readability.
+
+
+Lines 3-6 contain text to be inserted at address 1, thie first line of the input.
+
+The backslash is used to escape a carriage return, which is inserted.
+
+_A line continuation character is formed by a backslash followed immediately by a carriage return. No intermediary spaces are permitted._
+
+**People who like sed also like...**
+
+Many users prefer other tools for larger tasks. The most popular of these are _awk_ and _perl_.
+
