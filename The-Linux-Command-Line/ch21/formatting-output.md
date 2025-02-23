@@ -173,3 +173,28 @@ $ sort -k 1,1 -k 2n distros.txt | sed -f distros-nl.sed | nl -w 3 -s ' '
     
     End Of Report
 ```
+
+#### fold -- Wrap Each Line to a Specified Length
+
+_Folding_ is the process of breaking lines of text at a specified width.
+
+_fold_ accepts either one or more text files or standard input.
+
+```
+$ echo "The quick brown fox jumped over the lazy dog." | fold -w 12
+The quick br
+own fox jump
+ed over the 
+lazy dog.
+```
+
+The addition of the `-s` option will cause _fold_ to break the line at the last available space before the line width is reached.
+
+```
+$ echo "The quick brown fox jumped over the lazy dog." | fold -w 12 -s
+The quick 
+brown fox 
+jumped over 
+the lazy 
+dog.
+```
