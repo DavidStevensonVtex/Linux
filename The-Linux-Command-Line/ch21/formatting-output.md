@@ -341,3 +341,94 @@ Fedora  5       03/20/2006
 ```
 
 In this example, we employ the `-l` option (for page length) and the `-w` option (page width) to define a "page" that is 65 columns wide and 15 lines long.
+
+#### printf -- Format and Print Data
+
+_printf_ is not used for pipelines (it does not accept standard input).
+
+_printf_ (from the phrase _print formatted_) was originally developed for the C programming language.
+
+In _bash_, _printf_ is a builtin.
+
+`printf "format" arguments`
+
+```
+$ printf "I formatted the string: %s\n" foo
+I formatted the string: foo
+```
+
+The format string may contain literal text and sequences beginning with the \% character, which are called _conversion specifications_.
+
+```
+$ printf "I formatted '%s' as a string.\n" foo
+I formatted 'foo' as a string.
+```
+
+**Common printf Data Type Specifiers**
+
+* d Format a number as a signed decimal integer
+* f Format and output a floating-point number
+* o Format an integer as an octal number
+* s Format a string
+* x Format an integer as a hexadecimal number using lowercase a to f.
+* X Same as x but use uppercase letters
+* \% Print a literal \% symbol (i.e., specify \%\%)
+
+```
+$ printf "%d, %f, %o, %s, %x, %X\n" 380 380 380 380 380 380
+380, 380.000000, 574, 380, 17c, 17C
+```
+
+A complete conversion specification may consist of the following:
+
+`%[flags][width][.precision]conversion_specification`
+
+**printf Conversion Specification Components**
+
+* _flags_ There are five different flags:
+  * \# Use the alternate format for output. This varies by data type. For o (octal number) conversion, the output is prefixed with 0. For x and X (hexadecimal number) conversions, the output is prefixed with 0x or 0X, respectively.
+  * 0 (zero): Padd the output  with zeros. This means that the field with be filled with leading zeros, as in 000380.
+  * \- (dash) Left align the output. By default, printf right-aligns output.
+  * ' ' (space): Produce a leading space for positive numbers.
+  * \+ (plus sign) Sign positive numbers. By default, _printf_ only signs negative numbers.
+* _width_ A number specifying the minimum field width.
+* _.precision_ For floating point numbers, specify the number of digits of precision to be output after the decimal point. For string conversion, _precision_ specifies the number of characters to output.
+
+```
+$ printf "%d\n" 380
+380
+$ printf "%#x\n" 0x17c
+0x17c
+$ printf "%05d\n" 00380
+bash: printf: 00380: invalid octal number
+00003
+$ printf "%05d\n" 380
+00380
+$ printf "%05.5f\n" 380
+380.00000
+$ printf "%010.5f\n" 380
+0380.00000
+$ printf "%+d\n" 380
++380
+$ printf "%-d\n" 380
+380
+$ printf "%5s\n" abcdefghijk
+abcdefghijk
+$ printf "%.5s\n" abcdefghijk
+abcde
+```
+
+_printf_ is used mostly in scripts where it is employed to format tabular data, rather than on the command line directly.
+
+```
+$ printf "%s\t%s\t%s\n" str1 str2 str3
+str1    str2    str3
+```
+
+_\\t_ is the escape sequence for a tab.
+
+```
+$ printf "Line: %05d %15.3f Result: %+15d\n" 1071 3.14156295 32589
+Line: 01071           3.142 Result:          +32589
+```
+
