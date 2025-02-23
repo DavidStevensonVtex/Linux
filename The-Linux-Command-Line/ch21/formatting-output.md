@@ -270,3 +270,74 @@ This, on the other hand, is a line of code.
 And another line of code.
 And another.
 ```
+
+#### pr -- Format Text for Printing
+
+The _pr_ program is used to _paginate_ text. When printing text, it is often desirable to separate pages of output with several lines of whitespace to provide a top margin and a bottom margin for each page.
+
+```
+$ pr -l 15 -w 65 distros.txt
+
+
+2025-02-23 06:12                distros.txt                Page 1
+
+
+SUSE    10.2    12/07/2006
+Fedora  10      11/25/2008
+SUSE    11.0    06/19/2008
+Ubuntu  8.04    04/24/2008
+Fedora  8       11/08/2007
+
+
+
+
+
+
+
+2025-02-23 06:12                distros.txt                Page 2
+
+
+SUSE    10.3    10/04/2007
+Ubuntu  6.10    10/26/2006
+Fedora  7       05/31/2007
+Ubuntu  7.10    10/18/2007
+Ubuntu  7.04    04/19/2007
+
+
+
+
+
+
+
+2025-02-23 06:12                distros.txt                Page 3
+
+
+SUSE    10.1    05/11/2006
+Fedora  6       10/24/2006
+Fedora  9       05/13/2008
+Ubuntu  6.06    06/01/2006
+Ubuntu  8.10    10/30/2008
+
+
+
+
+
+
+
+2025-02-23 06:12                distros.txt                Page 4
+
+
+Fedora  5       03/20/2006
+
+
+
+
+
+
+
+
+
+
+```
+
+In this example, we employ the `-l` option (for page length) and the `-w` option (page width) to define a "page" that is 65 columns wide and 15 lines long.
