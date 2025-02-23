@@ -198,3 +198,75 @@ jumped over
 the lazy 
 dog.
 ```
+
+#### fmt -- A Simple Text Formatter
+
+```
+$ fmt -w 50 fmt-info.txt | head
+‘fmt’ fills and joins lines to produce output
+lines of (at most) a given number of characters
+(75 by default).  Synopsis:
+
+     fmt [OPTION]... [FILE]...
+
+   ‘fmt’ reads from the specified FILE
+   arguments (or standard input if
+none are given), and writes to standard output.
+
+```
+
+So, _fmt_ is preserving the indentation of the first line. Fortunately, _fmt_ provides an option to correct this.
+
+```
+$ fmt -cw 50 fmt-info.txt
+‘fmt’ fills and joins lines to produce output
+lines of (at most) a given number of characters
+(75 by default).  Synopsis:
+
+     fmt [OPTION]... [FILE]...
+
+   ‘fmt’ reads from the specified FILE
+arguments (or standard input if none are given),
+and writes to standard output.
+
+   By default, blank lines, spaces between words,
+and indentation are preserved in the output;
+successive input lines with different indentation
+are not joined; tabs are expanded on input and
+introduced on output.
+
+   ‘fmt’ prefers breaking lines at the end
+of a sentence, and tries to avoid line breaks
+after the first word of a sentence or before
+the last word of a sentence.  A “sentence
+break” is defined as either the end of a
+paragraph or a word ending in any of ‘.?!’,
+followed by two spaces or end of line, ignoring
+any intervening parentheses or quotes.  Like TeX,
+‘fmt’ reads entire “paragraphs” before
+choosing line breaks; the algorithm is a variant
+of that given by Donald E. Knuth and Michael F.
+Plass in “Breaking Paragraphs Into Lines”,
+‘Software—Practice & Experience’ 11, 11
+(November 1981), 1119–1184.
+```
+
+**fmt options**
+
+* -c Operate in _crown margin_ mode. This preserves the indentation of the first two lines of a paragraph. Subsequent lines are aligned with the indentation of the second line.
+* -p _string_ Format only those lines beginning with the prefix _string_. After formatting, the contents of _string_ are prefixed to each reformatted line. This option can be used to format text in source code comments.
+* -s Split-ony mode. In this mode, lines will only be split to fit the specified column width. Short lines will not be joined to fill lines. This mode is useful when formatting text such as code where joining is not desired.
+* -u Perform uniform spacing. This will apply traditional "typewriter-style" formatting to the text. This means a single space between words and two spaces between sentences. This mode is useful for removing _justification_.
+* -w _width_ Format text to fit within a column _width_ characters wide. The default is 75 characters. Note: _fmt_ actually formats lines slightly shorter than the specified width to allow for line balancing.
+
+```
+$ fmt -w 50 -p '# ' fmt-code.txt
+# This file contains code with comments.
+
+# This line is a comment.  Followed by another
+# comment line.  And another.
+
+This, on the other hand, is a line of code.
+And another line of code.
+And another.
+```
