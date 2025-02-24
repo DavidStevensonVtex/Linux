@@ -257,3 +257,12 @@ no entries
 $ ls *.txt | pr -3 | lp
 request id is PDF-7 (0 file(s))
 ```
+
+#### lprm/cancel -- Cancel Print Jobs
+
+CUPS supplies two programs used to terminate print jobs and remove them from the print queue. One is Berkeley style (_lprm_), and the other is System V (_cancel_).
+
+```
+cancel 603
+lpq
+```
