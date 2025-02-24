@@ -198,6 +198,49 @@ $ ls /usr/bin | pr -3 -t | a2ps -o ~/Desktop/ls.ps -L 66
 * -T _number_ Set tab stops to every _number_ characters.
 * -u _text_ Underlay (watermark) pages with _text_.
 
-Another optoin is called _enscript_.
+Another option is called _enscript_.
 
+### Monitoring and Controlling Print Jobs
 
+Each printer is given a _print queue_, where jobs are parked until they can be _spooled_ to the printer.
+
+#### lpstat - Display Print System Status
+
+```
+$ lpstat -a
+PDF accepting requests since Mon 24 Feb 2025 01:10:42 PM EST
+```
+
+```
+$ lpstat -s
+system default destination: PDF
+device for PDF: cups-pdf:/
+```
+
+```
+$ lpstat -d
+system default destination: PDF
+```
+
+```
+$ lpstat -r
+scheduler is running
+```
+
+```
+$ lpstat -t
+scheduler is running
+system default destination: PDF
+device for PDF: cups-pdf:/
+PDF accepting requests since Mon 24 Feb 2025 01:10:42 PM EST
+printer PDF is idle.  enabled since Mon 24 Feb 2025 01:10:42 PM EST
+```
+
+**Common _lpstat_ Options**
+
+* -a [_printer_...] Display the state of the printer queue for _printer_.
+* -d Display the name of the system's default printer.
+* -p [_printer_...] Display the status of the specified _printer_. If no printers are specified, all printers are shown.
+* -r Display the status of the print server
+* -s Display a status summary.
+* -t Display a complete status report.
