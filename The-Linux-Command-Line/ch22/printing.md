@@ -55,3 +55,36 @@ Modern Linux systems employ two software suites to perform and manage printing.
 
 * Common Unix Printing System (CUPS) - print drivers and print job management
 * GhostScript - A _PostScript_ interpreter, acts as a Raster Image Processor (RIP).
+
+### Preparing Files for Printing
+
+#### pr -- Convert Text Files for Printing
+
+**Common pr Options**
+
+* +_first_[:_last_] Output a range of pages
+* -_columns_ Organize the content of the page into the number of c olumns specified by _columns_.
+* -a By default, multicolumn output is listed vertically. By adding the \-a (across) option, content is listed horizontally.
+* -d Double-space output
+* -f Use form feeds rather than carriage returns to separate pages
+* -h _header_ In the center portion of the page header, use _header_ rather than the name of the file being processed
+* -l _length_ Set page length to _length_. The default is 66 (US letter at 6 lines per inch).
+* -n Number lines
+* -o _offset_ Create a left margin _offset_ characters wide
+* -w _width_ Set the page width to _width_. The default is 72
+
+_pr_ is often used in pipelines as a filter
+
+```
+$ ls /usr/bin | pr -3 -w 65 | head
+
+
+2025-02-24 12:43                                           Page 1
+
+
+[		          aseqdump		    boltctl
+411toppm	      aseqnet		    bootctl
+aa-enabled	      aspell		    brltty-ctb
+aa-exec		      aspell-import	    brltty-trtxt
+ac		          at		        brltty-ttb
+```
