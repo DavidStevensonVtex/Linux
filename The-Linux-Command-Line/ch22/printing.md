@@ -93,6 +93,8 @@ ac		          at		        brltty-ttb
 
 #### lpr -- Print Files (Berkeley Style)
 
+The _lpr_ program can be used to send files to the printer. It may also be used in pipelines, as it accepts standard input.
+
 `$ ls /usr/bin | pr -3 | lpr`
 
 The report would be sent to the system's default printer.
@@ -119,8 +121,32 @@ PDF accepting requests since Mon 24 Feb 2025 12:55:51 PM EST
 
 **Common _lpr_ Options**
 
-* # _number_ Set number of copies to _number_.
+* \-\# _number_ Set number of copies to _number_.
 * -p Print each page with a shaded header with the date, time, job name, and page number. This so-called pretting-print option can be used when printing text files.
 * -P printer Specify the name of the printer used for output. If no printer is specified, the system's default printer is used.
 * -r Delete files after printing. This would be useful for programs that produce temporary printer-output files.
+
+#### lp =-- Print Files (System V Style)
+
+Like _lpr_, _lp_ accepts either files or standard input for printing. It differs from _lpr_ in that it supports a different (and slightly more sophisticated) option set.
+
+**Common _lp_ Options**
+
+* -d _printer_ Set the destination (printer) to _printer_. If no -d option is specified, the system default printer is used.
+* -n _number_ Set the number of copies to _number_.
+* -o landscape Set output to landscape orientation.
+* -o fitplot Scale the file to fit the page. This is useful when printing images, such as JPEG files.
+* -o scaling=_number_ Scale file to _number_. The value of 100 fills the page. Values less than 100 are reduced, while values greater than 100 cause the file to printed across multiple pages.
+* -o cpi=_number_ Set the output characters per inch to _number_. The default is 6.
+* -o page-bottom=_points_ Set the page margins. Values are expressed in _points_, a unit of typographic measurement. There are  72 points to an inch.
+* -o page-left=_points_
+* -o page-right=_points_
+* -o page-top=_points_
+* -P _pages_ Specify the list of pages. _pages_ may be expressed as a comma-separated list and/or a range, for example, 1,3,5,7-10.
+
+
+
+`lp -d PDF fmt-info.txt`
+
+PDF file is placed in ~/PDF folder.
 
