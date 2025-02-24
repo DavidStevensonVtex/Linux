@@ -244,3 +244,16 @@ printer PDF is idle.  enabled since Mon 24 Feb 2025 01:10:42 PM EST
 * -r Display the status of the print server
 * -s Display a status summary.
 * -t Display a complete status report.
+* 
+#### lpq -- Display Printer Queue Status
+
+```
+$ lpq
+PDF is ready
+no entries
+```
+
+```
+$ ls *.txt | pr -3 | lp
+request id is PDF-7 (0 file(s))
+```
