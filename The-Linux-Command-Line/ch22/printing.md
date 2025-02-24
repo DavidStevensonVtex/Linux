@@ -88,3 +88,39 @@ aa-enabled	      aspell		    brltty-ctb
 aa-exec		      aspell-import	    brltty-trtxt
 ac		          at		        brltty-ttb
 ```
+
+### Sending a Print Job to a Printer
+
+#### lpr -- Print Files (Berkeley Style)
+
+`$ ls /usr/bin | pr -3 | lpr`
+
+The report would be sent to the system's default printer.
+To send the file to a different printer, the `-P` otion can be used like this:
+
+`lpr -P printer_name`
+
+To see a list of printers known to the system, use this:
+
+`lpstat -a`
+
+Many Linux distributions allow you to define a "printer" that outputs files to PDF, rather than printing on the physical printer. This is handy for experimenting with printing commands. Check your printer configuration program to see whether it supports this configuration. On some distributions, you may need to install additional packages (such as _cups-pdf) to enable this capability.
+
+`sudo apt install cups`
+
+Since Ubuntu 16:
+
+`sudo apt-get install printer-driver-cups-pdf`
+
+```
+$ lpstat -a
+PDF accepting requests since Mon 24 Feb 2025 12:55:51 PM EST
+```
+
+**Common _lpr_ Options**
+
+* # _number_ Set number of copies to _number_.
+* -p Print each page with a shaded header with the date, time, job name, and page number. This so-called pretting-print option can be used when printing text files.
+* -P printer Specify the name of the printer used for output. If no printer is specified, the system's default printer is used.
+* -r Delete files after printing. This would be useful for programs that produce temporary printer-output files.
+
