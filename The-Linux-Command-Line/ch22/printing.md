@@ -150,3 +150,54 @@ Like _lpr_, _lp_ accepts either files or standard input for printing. It differs
 
 PDF file is placed in ~/PDF folder.
 
+#### Another Option: a2ps
+
+a2ps originally meant "ASCII to PostScript", and it was used to prepare text files for pringint on PostScript printers.
+
+a2ps now means "Anything to PostScript".
+
+While its name suggests a format-conversion program, it is actually a printing program.
+
+`sudo apt install a2ps`
+
+The program's default behavior is that of a "pretty printer", meaning that it improves the appearance of output.
+
+We can use the program to create a PostScript file on our desktop.
+
+```
+$ ls /usr/bin | pr -3 -t | a2ps -o ~/Desktop/ls.ps -L 66
+[stdin (plain): 10 pages on 5 sheets]
+[Total: 10 pages on 5 sheets] saved into the file `/home/dstevenson/Desktop/ls.ps'
+```
+
+**a2ps Options**
+
+* --center-title=_text_ Set center page title to _text_.
+* --columns=_number_ Arrange pages into _number_ columns. The default is 2.
+* --footer=_text_ Set page footer to text
+* --guess Report the types of files given as arguments. Since _a2ps_ tries to convert and format all types of data, this option can be useful for predicting what _a2ps_ will do when given a particular file.
+* --left-footer=_text_ Set the left-page footer to _text_.
+* --left-title=_text_ Set the left-page title t- _text_.
+* --line-numbers=_interval_ Number lines of output every _interval_ lines.
+* --list=defaults Display default settings.
+* --pages=_range_ Print pages in range.
+* --right-footer=_text_ Set right-page footer to _text_.
+* --right-title=_text_ Set right-page title to _text_.
+* --rows=_number_ Arrange pages into number rows. The default is 1.
+* -B No page headers.
+* -b _text_ Set the page header to _text_.
+* -f _size_ Use _size_ point font.
+* -l _number_ Set characters per line to _number_. This and the -L option (see the next entry) can be used to make files paginated with other programs, such as _pr_, fit correctly on the page.
+* -L _number_ Set lines per page to _number_.
+* -M _name_ Output number copies of each page.
+* -n _number_ Set lines per page to _number_.
+* -o _file_ Send output to _file_. If _file_ is specified as -, use standard output.
+* -P _printer_ Use _printer_. If printer is not specified, the system default printer is used.
+* -R Portrait orientation.
+* -r Landscape orientation.
+* -T _number_ Set tab stops to every _number_ characters.
+* -u _text_ Underlay (watermark) pages with _text_.
+
+Another optoin is called _enscript_.
+
+
