@@ -70,3 +70,21 @@ $ ls --all --directory
 ```
 
 In the interests of reduced typing, short options are preferred when entering options on the command line, but when writing scripts, long options can provide improved readability.
+
+#### Indentation and Line Continuation
+
+When employing long commands, readability can be enhanced by spreading the command over several lines. 
+
+Line continuations are the backslash character at the end of a line.
+
+
+```
+find playground \( -type f -not -perm 0600 -exec chmod 600 '{}' \) -or \( -type d -not -perm 0700 -exec chmod 0700 '{}' ';' \)
+```
+
+```
+find playground \
+    \( -type f -not -perm 0600 -exec chmod 600 '{}' \) \
+    -or \
+    \( -type d -not -perm 0700 -exec chmod 0700 '{}' ';' \)
+```
