@@ -27,3 +27,17 @@ _libraries_
 
 _executable program file_
 
+#### Are All Programs Compiled?
+
+No.
+
+_Scripting or interpreted languages_
+
+Examples: Perl, Python, PHP, Ruby and many others. Bash
+
+Scripting languages are executed by a special program called an _interpreter_.
+
+In general, interpreted programs execute much more slowly than compiled languages.
+
+For many programming chores, the results are "fast enough", but the real advantage is that it is generally faster and easier to develop interpreted programs than compiled programs.
+
