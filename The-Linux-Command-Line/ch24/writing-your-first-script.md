@@ -59,3 +59,14 @@ Modifications to the PATH environment variable can be made in the .bashrc file.
 The ~/bin directory is a good place to put scripts intended for personal use.
 
 If we write a script that everyone on a system is allowed to use, the traditional location is _/usr/local/bin_.
+
+### More Formatting Tricks
+
+#### Long Option Names
+
+```
+$ ls -ad
+$ ls --all --directory
+```
+
+In the interests of reduced typing, short options are preferred when entering options on the command line, but when writing scripts, long options can provide improved readability.
