@@ -41,3 +41,11 @@ In general, interpreted programs execute much more slowly than compiled language
 
 For many programming chores, the results are "fast enough", but the real advantage is that it is generally faster and easier to develop interpreted programs than compiled programs.
 
+### Compiling a C Program
+
+The C compiler used almost universally in the Liux environment is called _gcc_ (GNU C Compiler).
+
+```
+$ which gcc
+/usr/bin/gcc
+```
