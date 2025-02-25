@@ -88,3 +88,27 @@ find playground \
     -or \
     \( -type d -not -perm 0700 -exec chmod 0700 '{}' ';' \)
 ```
+
+### Configuring vim for Script Writing
+
+The following turns on syntax highlighting:
+
+`:syntax on`
+
+`:set syntax=sh`
+
+This turns on the option to highlight search results:
+
+`set hlsearch`
+
+The following sets the number of columns occupied by a tab character:
+
+`:set tabstop=4`
+
+The default is 8 columns.
+
+The following turns on the "auto indent" feature:
+
+`:set autoindent`
+
+These changes can be made permanent by adding these commands (without the leading colon character) to your _~/.vimrc_ file.
