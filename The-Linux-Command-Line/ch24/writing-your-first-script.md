@@ -34,8 +34,23 @@ chmod 755 hello_world
 ls -l hello_world
 ```
 
+#### Script File Location
+
+With the permissions set, we can now execute our script.
+
+For the script to run, we must precede the script name with an explicit path.
+
 ```
 $ ./hello_world 
 Hello World!
 ```
+
+The list of searchable directories is held in an environment variable named PATH.
+
+```
+$ echo $PATH
+/usr/lib/jvm/java-11-oracle:/usr/lib/jvm/java-11-oracle:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+```
+
+Modifications to the PATH environment variable can be made in the .bashrc file.
 
