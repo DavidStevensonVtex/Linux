@@ -2,11 +2,13 @@
 
 # Program to output a system information page
 
+TITLE="System Information Page for $HOSTNAME"
+
 echo "<html>
    <head>
-       <title>System Information Report</title>
+       <title>$TITLE</title>
    </head>
    <body>
-        <h1>System Information Report</h1>
+        <h1>$TITLE</h1>
    </body>
  </html>"
