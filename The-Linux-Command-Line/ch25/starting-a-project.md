@@ -27,3 +27,20 @@ echo "<html>
 ./sys_info_page > sys_info_page.html
 google-chrome sys_info_page.html
 ```
+
+### Second Stage: Adding a Little Data
+
+```
+#!/bin/bash
+
+# Program to output a system information page
+
+echo "<html>
+   <head>
+       <title>System Information Report</title>
+   </head>
+   <body>
+        <h1>System Information Report</h1>
+   </body>
+ </html>"
+```
