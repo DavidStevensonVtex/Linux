@@ -146,3 +146,73 @@ echo "<html>
 $ ./sys_info_page > sys_info_page.html
 $ google-chrome sys_info_page.html &
 ```
+
+### Here Documents
+
+```
+command << token
+text
+token
+```
+
+**sys_info_page**
+
+```
+#!/bin/bash
+
+# Program to output a system information page
+
+TITLE="System Information Page for $HOSTNAME"
+CURRENT_TIME="$(date +"%x %r %Z")"
+TIMESTAMP="Generated $CURRENT_TIME, by $USER"
+
+cat << _EOF_
+<html>
+   <head>
+       <title>$TITLE</title>
+   </head>
+   <body>
+        <h1>$TITLE</h1>
+        <p>$TIMESTAMP</p>
+   </body>
+ </html>
+_EOF_
+```
+
+```
+foo="some text"
+cat << _EOF_ 
+$foo
+"$foo"
+'$foo'
+\$foo
+_EOF_
+some text
+"some text"
+'some text'
+$foo
+```
+
+As you can see, the shell pays no attention to quotation marks.
+
+If we change the direction from `<<` to `<<-`, the shell will ignore leading tab characters (but not spaces) in the here document. This allows a here document to be indented, which can improve readability.
+
+```
+#!/bin/bash
+
+# Script to retrieve a file via FTP
+FTP_SERVER=ftp.nl.debian.org
+FTP_PATH=/debian/dists/stable/main/installer-amd64/current/images/cdrom
+REMOTE_FILE=debian-cd_info.tar.gz
+
+ftp -n <<- _EOF_
+    open $FTP_SERVER
+    user anonymous anonymous
+    cd $FTP_PATH
+    hash
+    get $REMOTE_FILE
+    bye
+_EOF_
+
+ls -l "$REMOTE_FILE"
+```
