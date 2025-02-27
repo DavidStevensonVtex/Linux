@@ -166,3 +166,66 @@ global:  foo = 0
 funct_2: foo = 2
 global:  foo = 0
 ```
+
+### Keep Scripts Running
+
+```
+#!/bin/bash
+
+# Program to output a system information page
+
+TITLE="System Information Page for $HOSTNAME"
+CURRENT_TIME="$(date +"%x %r %Z")"
+TIMESTAMP="Generated $CURRENT_TIME, by $USER"
+
+report_uptime() {
+  echo "Function report_uptime executed."
+  return 
+}
+
+report_disk_space() {
+  echo "Function report_disk_space executed."
+  return
+}
+
+report_home_space() {
+  echo "Function report_home_space executed."
+  return
+}
+
+cat << _EOF_
+<html>
+   <head>
+       <title>$TITLE</title>
+   </head>
+   <body>
+        <h1>$TITLE</h1>
+        <p>$TIMESTAMP</p>
+        $(report_uptime)
+        $(report_disk_space)
+        $(report_home_space)
+   </body>
+ </html>
+_EOF_
+```
+
+```
+$ ./sys_info_page > sys_info_page.html
+```
+
+**sys_info_page.html**
+
+```
+<html>
+   <head>
+       <title>System Information Page for dstevensonlinux1</title>
+   </head>
+   <body>
+        <h1>System Information Page for dstevensonlinux1</h1>
+        <p>Generated 02/27/2025 02:14:09 PM EST, by dstevenson</p>
+        Function report_uptime executed.
+        Function report_disk_space executed.
+        Function report_home_space executed.
+   </body>
+ </html>
+```
