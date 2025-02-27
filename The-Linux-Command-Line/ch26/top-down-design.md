@@ -125,3 +125,44 @@ _EOF_
 
 Shell function names follow the same rules as variables. A function must contain at least one command.
 The return command (which is optional) satisfies the requirement.
+
+### Local Variables
+
+Global variables maintain their existence throughout the program.
+
+Local variables are acccessible only within the shell function in which they are defined and cease to exist once the shell function terminates.
+
+```
+#!/bin/bash
+
+# local-vars: script to demonstrate local variables
+
+foo=0       # global variable foo
+
+funct_1 () {
+    local foo       # variable foo local to funct_1
+    foo=1
+    echo "funct_1: foo = $foo"
+}
+
+funct_2() {
+    local foo       # variable foo local to funct_2
+    foo=2
+    echo "funct_2: foo = $foo"
+}
+
+echo "global:  foo = $foo"
+funct_1
+echo "global:  foo = $foo"
+funct_2
+echo "global:  foo = $foo"
+```
+
+```
+$ ./local-vars
+global:  foo = 0
+funct_1: foo = 1
+global:  foo = 0
+funct_2: foo = 2
+global:  foo = 0
+```
