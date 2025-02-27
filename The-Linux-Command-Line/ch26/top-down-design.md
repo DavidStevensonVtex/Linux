@@ -229,3 +229,9 @@ $ ./sys_info_page > sys_info_page.html
    </body>
  </html>
 ```
+
+### Shell Functions In Your .bashrc File
+
+Shell functiosn make excellent replacements for aliases and are actually the preferred method of creating small commands for personal use.
+
+Aliases are limited in the kind of commands and shell features they support, whereas shell functions allow anything that can be scripted.
