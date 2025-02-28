@@ -74,3 +74,16 @@ It's true.
 $ if true; false; then echo "It's true." ; else echo "It's false." ; fi
 It's false.
 ```
+
+### Using test
+
+By far, the command used most frequently with _if_ is _test_. The _test_ command performs a variety of checks and comparisons. It has two equivalent forms. The first, shown here:
+
+**test** _expression_
+
+And the second, more popular form, here:
+
+\[ _expression_ \]
+
+In _bash_, they are builtins, but they also exist as programs in _/usr/bin_ for use with other shells.
+
