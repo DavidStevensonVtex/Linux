@@ -460,3 +460,23 @@ With the || operator, command1 is executed and command2 is executed if, and only
 
 `[[ -d temp ]] || exit 1`
 
+### Summing Up
+
+```
+report_home_space() {
+	echo "id: $(id -u)"
+	# if (( $(id -u) == 0)); then
+	if [[ "$(id -u)" -eq 0 ]]; then
+		cat <<- _EOF_
+			<h2>Home Space Utilization (All Users)</h2>
+			<pre>$(du -sh /home/*)</pre>
+		_EOF_
+	else
+		cat <<- _EOF_
+			<h2>Home Space Utilization ($USER)</h2>
+			<pre>$(du -sh $HOME 2>/dev/null)</pre>
+		_EOF_
+	fi
+	return
+}
+```
