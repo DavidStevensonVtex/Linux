@@ -441,3 +441,22 @@ fi
 $ ./test-integer4
 50 is in range.
 ```
+
+### Control Operators: Another Way to Branch
+
+_bash_ provides two control operators that can perform branching. The && (AND) and || (OR) operators work like logical operators in the `[[ ]]` compound command.
+
+`command1 && command2`
+
+`command1 || command2`
+
+With the && operator, _command1_ is executed, and _command2_ is executed if, and only if, _command1_ is successful.
+
+With the || operator, command1 is executed and command2 is executed if, and only if, command1 is unsuccessful.
+
+`mkdir temp && cd temp`
+
+`[[ -d temp ]] || mkdir temp`
+
+`[[ -d temp ]] || exit 1`
+
