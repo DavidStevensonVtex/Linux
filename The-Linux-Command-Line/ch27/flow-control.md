@@ -347,3 +347,97 @@ $ ./test-integer2a
 INT is negative.
 INT is odd.
 ```
+
+### Combining Expressions
+
+**Logical Operators**
+
+```
+Operation   test   [[ ]] and (( ))
+
+AND         -a      &&
+OR          -o      ||
+NOT         !       !
+```
+
+```
+#!/bin/bash
+
+# test-integer3: evaluate the value of an integer
+
+MIN_VAL=1
+MAX_VAL=100
+
+INT=50
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+    if [[ "$INT" -ge "$MIN_VAL" && "$INT" -le "$MAX_VAL" ]]; then
+        echo "$INT is within $MIN_VAL to $MAX_VAL."
+    else
+        echo "$INT is out of range."
+    fi
+else
+    echo "INT is not an integer." >&2
+    exit 1
+fi
+```
+
+```
+$ ./test-integer3
+50 is within 1 to 100.
+```
+
+```
+#!/bin/bash
+
+# test-integer3a: evaluate the value of an integer
+
+MIN_VAL=1
+MAX_VAL=100
+
+INT=50
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+    if (( "$INT" >= "$MIN_VAL" && "$INT" <= "$MAX_VAL" )); then
+        echo "$INT is within $MIN_VAL to $MAX_VAL."
+    else
+        echo "$INT is out of range."
+    fi
+else
+    echo "INT is not an integer." >&2
+    exit 1
+fi
+```
+
+```
+$ chmod 744 test-integer3a
+$ ./test-integer3a
+50 is within 1 to 100.
+```
+
+```
+#!/bin/bash
+
+# test-integer3a: evaluate the value of an integer
+
+MIN_VAL=1
+MAX_VAL=100
+
+INT=50
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+    if (( ! ( "$INT" >= "$MIN_VAL" && "$INT" <= "$MAX_VAL") )); then
+        echo "$INT is outside $MIN_VAL to $MAX_VAL."
+    else
+        echo "$INT is in range."
+    fi
+else
+    echo "INT is not an integer." >&2
+    exit 1
+fi
+```
+
+```
+$ ./test-integer4
+50 is in range.
+```
