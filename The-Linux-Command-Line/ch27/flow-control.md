@@ -253,3 +253,57 @@ $ ./test-integer
 INT is negative.
 INT is odd.
 ```
+
+### A More Modern Version of test
+
+Modern versions of _bash_ include a compound command that acts as an enhanced replacement for test. It uses the following syntax:
+
+`[[ expression ]]`
+
+The `[[ ]]` command is similar to test (it supports all of its expressiosn) but adds an important new string expression.
+
+`string1 =~ regex`
+
+This returns true if string1 is matched by the extended regular expression _regex_.
+
+```
+#!/bin/bash
+
+# test-integer2: evaluate the value of an integer
+
+INT=-5
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+    if [ $INT -eq 0 ]; then
+        echo "INT is zero."
+    else
+        if [ "$INT" -lt 0 ]; then
+            echo "INT is negative."
+        else
+            echo "INT is positive."
+        fi
+        if [ $((INT % 2)) -eq 0 ]; then
+            echo "INT is even."
+        else
+            echo "INT is odd."
+        fi
+    fi
+else
+    echo "INT is not an integer." >&2
+    exit 1
+fi
+```
+
+```
+$ chmod 744 test-integer2 
+$ ./test-integer2
+INT is negative.
+INT is odd.
+```
+
+Another added feature of `[[ ]]` is that the == operator supports pattern matching the samme way pathname expansion does.
+
+```
+$ if [[ "$FILE" == foo.* ]]; then echo "$FILE matches pattern 'foo.*'"; fi
+foo.bar matches pattern 'foo.*'
+```
