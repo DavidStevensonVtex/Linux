@@ -307,3 +307,43 @@ Another added feature of `[[ ]]` is that the == operator supports pattern matchi
 $ if [[ "$FILE" == foo.* ]]; then echo "$FILE matches pattern 'foo.*'"; fi
 foo.bar matches pattern 'foo.*'
 ```
+
+### (( )) Designed for Integers
+
+(( )) is used to perform arithmetic truth tests. An _arithmetic truth test_ results in true of the result of the arithmetic evaluation is non-zero.
+
+Using (( )), we can slightly simplify the test-integer script like this:
+
+```
+#!/bin/bash
+
+# test-integer2a: evaluate the value of an integer
+
+INT=-5
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+    if (( INT == 0 )); then
+        echo "INT is zero."
+    else
+        if (( INT < 0 )); then
+            echo "INT is negative."
+        else
+            echo "INT is positive."
+        fi
+        if (( (( INT % 2 )) == 0 )); then
+            echo "INT is even."
+        else
+            echo "INT is odd."
+        fi
+    fi
+else
+    echo "INT is not an integer." >&2
+    exit 1
+fi
+```
+
+```
+$ ./test-integer2a
+INT is negative.
+INT is odd.
+```
