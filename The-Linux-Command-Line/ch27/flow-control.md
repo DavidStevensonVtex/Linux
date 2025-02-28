@@ -155,3 +155,51 @@ $ ./test-file
 ```
 
 The _exit_ command accepts a single, optional argument, which becomes the script's exit status. When no argument is passed, the exit status defaults to the exit status of the last command executed. Using exit in this way allows the script to indicate failure if $FILE erxpands to the name of a non-existent file.
+
+#### String Expressions
+
+**test String Functions**
+
+```
+Expression             Is true if:
+
+string                 string is not null
+-n string              The length of string is greater than zero
+-z string              The length of string is zero
+string1 = string2      string1 and string2 are equal
+string1 == string2     string1 and string2 are equal. The use of double equal signs is greatly preferred but is not POSIX compliant
+string1 != string2     string1 and string2 are not equal
+string1 > string2      string1 sorts after string2
+string1 < string2      string2 sorts before string2
+```
+
+The \> and \< expression operators must be quoted (or escaped with a backslash) when used with _test_. If not, they will be interpreted by the shll as redirection operators, with potentially destructive results.
+
+```
+#!/bin/bash
+
+# test-string: evaluate the value of a string
+
+ANSWER=maybe
+
+if [ -z "$ANSWER" ]; then
+    echo "There is no answer." >&2
+    exit 1
+fi
+
+if [ "$ANSWER" = "yes" ]; then
+    echo "The answer is YES."
+elif [ "$ANSWER" = "no" ]; then
+    echo "The answer is NO."
+elif [ "$ANSWER" = "maybe" ]; then
+    echo "The answer is MAYBE."
+else
+    echo "The answer is UNKNOWN."
+fi
+```
+
+```
+$ chmod 744 test-string 
+$ ./test-string
+The answer is MAYBE.
+```
