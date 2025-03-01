@@ -109,3 +109,67 @@ $ ./read-single
 Enter one or more values -> a b c d
 REPLY = 'a b c d'
 ```
+
+#### Options
+
+`read` supports the options described in the following table.
+
+```
+Option        Description
+-a array      Assign the input to array, starting with index zero. Will cover arrays in Chapter 35.
+-d delimiter  The first character in the string delimiter is used to indicate the end of input, rather than a newline character.
+-e            Use Readline to handle input. This permits input editing in the same manner as the command line.
+-i string     Use string as a default reply if the user simply presses ENTER. Requires the -e option.
+-n num        Read num characters of input, rather than the entire line.
+-p prompt     Display a prompt for input using the string prompt.
+-r            Raw mode. Do not interpret backslash characters as escapes.
+-s            Silent mode. Do not echo characters to the display as they are typed. This is useful when inputting passwords and other confidential information.
+-t seconds    Timeout. Terminate input after seconds. read returns a non-zero exit status if an input times out.
+-u fd         Use input from file descriptor fd, rather than standard input.
+```
+
+With the -t and -s options, we can write a script that reads "secret" input and times out if the input is not completed in a specified time.
+
+```
+#!/bin/bash
+
+# read-secret: input a secret passphrase
+
+if read -t 10 -sp "Enter secret passphrase -> " secret_pass ; then
+	echo -e "\nSecret passphrase = '$secret_pass'"
+else
+	echo -e "\nInput timed out" >&2
+	exit 1
+fi
+```
+
+```
+$ chmod 744 read-secret 
+$ ./read-secret
+Enter secret passphrase -> 
+Secret passphrase = 'TheRainInSpain'
+$ ./read-secret
+Enter secret passphrase -> 
+Input timed out
+$ 
+```
+
+```
+#!/bin/bash
+
+# read-default: supply a default value if user presses Enter key.
+
+read -e -p "What is your user name? " -i  $USER
+echo "You answered: '$REPLY'"
+```
+
+```
+$ chmod 744 read-default
+$ ./read-default
+What is your user name? abc
+You answered: 'abc'
+$ ./read-default
+What is your user name? dstevenson
+You answered: 'dstevenson'
+```
+
