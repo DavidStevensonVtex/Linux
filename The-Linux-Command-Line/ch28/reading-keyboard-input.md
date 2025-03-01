@@ -173,3 +173,63 @@ What is your user name? dstevenson
 You answered: 'dstevenson'
 ```
 
+### IFS (Internal Field Separator)
+
+```
+#!/bin/bash
+
+# read-ifs: read fields from a file
+
+FILE=/etc/passwd
+
+read -p "Enter username > " user_name
+
+file_info="$(grep "^$user_name:" $FILE)"
+
+if [ -n "$file_info" ]; then
+	IFS=":" read user pw uid gid name home shell <<< "$file_info"
+	echo "User =        '$user'"
+	echo "UID  =        '$uid'"
+	echo "GID  =        '$gid'"
+	echo "Full Name =   '$name'"
+	echo "Home Dir. =   '$home'"
+	echo "Shell =       '$shell'"
+else
+	echo "No such user '$user_name'"
+	exit 1
+fi
+```
+
+Note: "<<<" is a "here-string". "<<" is a here-document.
+
+```
+$ chmod 744 read-ifs
+$ ./read-ifs
+Enter username > dstevenson
+User =        'dstevenson'
+UID  =        '1000'
+GID  =        '1000'
+Full Name =   'dstevenson,,,'
+Home Dir. =   '/home/dstevenson'
+Shell =       '/bin/bash'
+$ ./read-ifs
+Enter username > root
+User =        'root'
+UID  =        '0'
+GID  =        '0'
+Full Name =   'root'
+Home Dir. =   '/root'
+Shell =       '/bin/bash'
+```
+
+### You Can't Pipe Read
+
+You cannot do this:
+
+`echo "foo" | read`
+
+In bash (and other shells such as sh), pipelines create _subshells_. These are copies of the shell and its environment that are used to execute the command. In the previous example, _read_ is executed in a subshell.
+
+Subshells in Unix-like systems create copies of the environment for the processes to use while they execute. When the processes finishes, the copy of the environment is destroyed. That means that a subshell can never alter the environment of its parent process. _read_ assigns variables, which then become part of the environment.
+
+Using here strings is one way to work around this behavior. Another method is discussed in Chapter 36.
