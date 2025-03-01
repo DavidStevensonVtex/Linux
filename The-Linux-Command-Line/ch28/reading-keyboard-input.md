@@ -175,6 +175,10 @@ You answered: 'dstevenson'
 
 ### IFS (Internal Field Separator)
 
+Multiple words separated by one or more spaces become separate items on the input line and are assigned to separate variables by _read_. The default value of IFS contains a space.
+
+We can adjust the value of IFS to control the separation of fields input to _read_. For example, the _/etc/passwd_ file contains lines of data that use the colon character as a field separator. By changing the value of IFS to a single colon we can use read to input the contents of _/etc/passw_d and successfully separate the fields into different variables.
+
 ```
 #!/bin/bash
 
