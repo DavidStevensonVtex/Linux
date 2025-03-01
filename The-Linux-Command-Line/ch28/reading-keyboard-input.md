@@ -233,3 +233,81 @@ In bash (and other shells such as sh), pipelines create _subshells_. These are c
 Subshells in Unix-like systems create copies of the environment for the processes to use while they execute. When the processes finishes, the copy of the environment is destroyed. That means that a subshell can never alter the environment of its parent process. _read_ assigns variables, which then become part of the environment.
 
 Using here strings is one way to work around this behavior. Another method is discussed in Chapter 36.
+
+### Validating Input
+
+Often the difference between a well-written program and a poorly written one lies in the program's ability to deal with the unexpected. Frequently, the unexpected appears in the form of bad input.
+
+```
+#!/bin/bash
+
+# read-validate: validate input
+
+invalid_input() {
+	echo "Invalid input '$REPLY'" >&2
+	exit 1
+}
+
+read -p "Enter a single item > "
+
+# input is empty (invalid)
+[[ -z "$REPLY" ]] && invalid_input
+
+# input is multiple items (invalid)
+(( "$(echo "$REPLY" | wc -w)" > 1 )) && invalid_input
+
+# is input a valid filename?
+
+if [[ "$REPLY" =~ ^[-[:alnum:]\._]+$ ]]; then
+	echo "'$REPLY' is a valid filename."
+	if [[ -e "$REPLY" ]]; then
+		echo "And file '$REPLY' exists."
+	else
+		echo "However, file '$REPLY' does not exist."
+	fi
+
+	# is input a floating point number?
+	if [[ "$REPLY" =~ ^-?[[:digit:]]*\.[[:digit:]]+$ ]]; then
+		echo "'$REPLY' is a floating point number."
+	else
+		echo "'$REPLY' is not a floating point number."
+	fi
+
+	# is input an integer?
+	if [[ "$REPLY" =~ ^-?[[:digit:]]+$ ]]; then
+		echo "'$REPLY' is an integer."
+	else
+		echo "'$REPLY' is not an integer."
+	fi
+else
+	echo "The string '$REPLY' is not a valid filename."
+fi
+```
+
+```
+$ chmod 744 read-validate 
+$ ./read-validate
+Enter a single item > bad-filename
+'bad-filename' is a valid filename.
+However, file 'bad-filename' does not exist.
+'bad-filename' is not a floating point number.
+'bad-filename' is not an integer.
+$ ./read-validate
+Enter a single item > read-default
+'read-default' is a valid filename.
+And file 'read-default' exists.
+'read-default' is not a floating point number.
+'read-default' is not an integer.
+$ ./read-validate
+Enter a single item > 123.45
+'123.45' is a valid filename.
+However, file '123.45' does not exist.
+'123.45' is a floating point number.
+'123.45' is not an integer.
+$ ./read-validate
+Enter a single item > 123
+'123' is a valid filename.
+However, file '123' does not exist.
+'123' is not a floating point number.
+'123' is an integer.
+```
