@@ -143,3 +143,32 @@ while true; do
 done
 echo "Program terminated.
 ```
+
+#### until
+
+The _until_ compound command is much like _while_, except instead of exiting a loop when a non-zero exit status is encountered, it does the opposite. An _until loop_ continues until it receives a zero exit status.
+
+```
+#!/bin/bash 
+
+# until-count: display a series of numbers
+
+count=1
+
+until [[ "$count" -gt 5 ]]; do
+	echo "$count"
+	count=$((count + 1))
+done
+echo "Finished."
+```
+
+```
+$ chmod 744 until-count
+$ ./until-count
+1
+2
+3
+4
+5
+Finished.
+```
