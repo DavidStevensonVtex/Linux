@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# read-menu: a menu driven system information program
+# while-menu2: a menu driven system information program
 
 DELAY=3		# Number of seconds to display results.
 
-while [[ "$REPLY" != 0 ]]; do
+while true; do
 	clear
 	echo "
 	Please Select:
@@ -25,9 +25,13 @@ while [[ "$REPLY" != 0 ]]; do
 		if [[ "$REPLY" == 1  ]]; then
 			echo "Hostname: $HOSTNAME"
 			uptime
+			sleep "$DELAY"
+			continue
 		fi
 		if [[ "$REPLY" == 2 ]]; then
 			df -h
+			sleep "$DELAY"
+			continue
 		fi
 		if [[ "$REPLY" == 3 ]]; then
 			if [[ "$(id -u)" -eq 0 ]]; then
@@ -37,11 +41,15 @@ while [[ "$REPLY" != 0 ]]; do
 				echo "Home Space Utilization ($USER)"
 				du -sh "$HOME" 2>/dev/null
 			fi
+			sleep "$DELAY"
+			continue
+		fi
+		if [[ "$REPLY" == 0 ]]; then
+			break
 		fi
 	else
 		echo "Invalid entry." >&2
 		exit 1
 	fi
-	sleep "$DELAY"
 done
 echo "Program terminated.
