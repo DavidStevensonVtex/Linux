@@ -172,3 +172,45 @@ $ ./until-count
 5
 Finished.
 ```
+
+#### for loop
+
+```
+#!/bin/bash
+
+# for-loop-1
+
+for fruit in apple banana cherry
+do
+  echo "I like $fruit"
+done
+```
+
+```
+$ chmod 744 for-loop-1 
+$ ./for-loop-1
+I like apple
+I like banana
+I like cherry
+```
+
+```
+#!/bin/bash
+
+# for-loop-2
+
+for i in {1..5}
+do
+  echo "Number: $i"
+done
+```
+
+```
+$ chmod 744 for-loop-2
+$ ./for-loop-2
+Number: 1
+Number: 2
+Number: 3
+Number: 4
+Number: 5
+```
