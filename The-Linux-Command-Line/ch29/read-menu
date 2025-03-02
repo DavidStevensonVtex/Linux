@@ -1,40 +1,3 @@
-# The Linux Command Line, 2nd Edition, © 2019
-
-## Chapter 29: Flow Control: Looping with While/Until
-
-### while
-
-```
-#!/bin/bash
-
-# while-count: display a series of numbers
-
-count=1
-
-while (( "$count" <= 5 )); do
-	echo "$count"
-	count=$((count + 1))
-done
-echo "Finished."
-```
-
-```
-$ chmod 744 while-count
-$ ./while-count
-1
-2
-3
-4
-5
-Finished.
-```
-`while commands; do commands; done`
-
-Like _if_, _while_ evaluates the exit status of a list of commands. As long as the exit status is zero, it performs the commands inside the loop.
-
-We can use a _while loop_ to improve the _read-menu _ program.
-
-```
 #!/bin/bash
 
 # read-menu: a menu driven system information program
@@ -82,4 +45,3 @@ while [[ "$REPLY" != 0 ]]; do
 	sleep "$DELAY"
 done
 echo "Program terminated.
-```
