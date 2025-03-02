@@ -214,3 +214,76 @@ Number: 3
 Number: 4
 Number: 5
 ```
+
+### Reading Files with Loops
+
+_while_ and _until_ can process standard input. This allows files to be processed with _while_ and _until_ loops.
+
+To redirect a file to a loop, we place the redirection operator after the _done_ statement. The loop will use _read_ to input the fields from the redirected file.
+
+```
+#!/bin/bash
+
+# while-read: read lines from a file
+
+while read distro version release; do
+	printf "Distro: %s\tVersion: %s\tReleased: %s\n" \
+		"$distro" \
+		"$version" \
+		"$release"
+done < distros.txt
+```
+
+```
+$ chmod 744 while-read
+$ ./while-read
+Distro: SUSE    Version: 10.2   Released: 12/07/2006
+Distro: Fedora  Version: 10     Released: 11/25/2008
+Distro: SUSE    Version: 11.0   Released: 06/19/2008
+Distro: Ubuntu  Version: 8.04   Released: 04/24/2008
+Distro: Fedora  Version: 8      Released: 11/08/2007
+Distro: SUSE    Version: 10.3   Released: 10/04/2007
+Distro: Ubuntu  Version: 6.10   Released: 10/26/2006
+Distro: Fedora  Version: 7      Released: 05/31/2007
+Distro: Ubuntu  Version: 7.10   Released: 10/18/2007
+Distro: Ubuntu  Version: 7.04   Released: 04/19/2007
+Distro: SUSE    Version: 10.1   Released: 05/11/2006
+Distro: Fedora  Version: 6      Released: 10/24/2006
+Distro: Fedora  Version: 9      Released: 05/13/2008
+Distro: Ubuntu  Version: 6.06   Released: 06/01/2006
+Distro: Ubuntu  Version: 8.10   Released: 10/30/2008
+```
+
+```
+#!/bin/bash
+
+# while-read2: read lines from a file
+
+sort -k 1,1 -k 2n distros.txt | while read distro version release; do
+	printf "Distro: %s\tVersion: %s\tRelease: %s\n" \
+		"$distro" \
+		"$version" \
+		"$release"
+done
+```
+
+```
+$ chmod 744 while-read2
+$ ./while-read2
+Distro: Fedora  Version: 5      Release: 03/20/2006
+Distro: Fedora  Version: 6      Release: 10/24/2006
+Distro: Fedora  Version: 7      Release: 05/31/2007
+Distro: Fedora  Version: 8      Release: 11/08/2007
+Distro: Fedora  Version: 9      Release: 05/13/2008
+Distro: Fedora  Version: 10     Release: 11/25/2008
+Distro: SUSE    Version: 10.1   Release: 05/11/2006
+Distro: SUSE    Version: 10.2   Release: 12/07/2006
+Distro: SUSE    Version: 10.3   Release: 10/04/2007
+Distro: SUSE    Version: 11.0   Release: 06/19/2008
+Distro: Ubuntu  Version: 6.06   Release: 06/01/2006
+Distro: Ubuntu  Version: 6.10   Release: 10/26/2006
+Distro: Ubuntu  Version: 7.04   Release: 04/19/2007
+Distro: Ubuntu  Version: 7.10   Release: 10/18/2007
+Distro: Ubuntu  Version: 8.04   Release: 04/24/2008
+Distro: Ubuntu  Version: 8.10   Release: 10/30/2008
+```
