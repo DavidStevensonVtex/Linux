@@ -161,3 +161,21 @@ if ! rm *; then
 	exit 1
 fi
 ```
+
+#### Watch Out for Filenames
+
+Unix is extremely permissive about file names.
+
+Everything except slash (/) and a null byte (a zero byte) is permissible in file names, including spaces, tabs, line feeds, leading hyphens, carriage returns, and so on.
+
+Change:
+
+`rm *`
+
+to:
+
+`rm ./*`
+
+This will prevent a filename starting with a hyphen from being interpreted as a command option.
+
+As a general rule, always precede wildcards (such as \* and \?) with `./` to prevent misinterpretation by commands.
