@@ -26,7 +26,7 @@ $ ./trouble
 Number is equal to 1.
 ```
 
-### Missing Quotes
+#### Missing Quotes
 
 ```
 #!/bin/bash
@@ -51,7 +51,7 @@ $ ./missing-quotes
 
 Text editors like vim (:syntax on) or Visual Studio Code can indicate text it believes to be a part of a quote, and if the quote doesn't end where expected, it can indicate a missing quote character.
 
-### Missing or Unexpected Tokens
+#### Missing or Unexpected Tokens
 
 ```
 #!/bin/bash
@@ -76,7 +76,7 @@ $ ./missing-or-unexpected-tokens
 
 The error message points to a line that occurs later than the syntax error, which is the missing semi-colon before the "then" keyword.
 
-### Unanticipated Expansions
+#### Unanticipated Expansions
 
 ```
 #!/bin/bash
@@ -111,3 +111,13 @@ Number is not equal to 1.
 ```
 
 Make it a rule to always enclose variables and command substitutions in double quotes unless word splitting is needed.
+
+### Logical Errors
+
+Unlike synactical errors, _logical errors_ do not prevent a script from running.
+The script will run, but will produce incorrect results.
+
+* Incorrect conditional expressions
+* "Off by one" errors.
+* Unanticipated situations.
+* 
