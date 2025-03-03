@@ -120,4 +120,44 @@ The script will run, but will produce incorrect results.
 * Incorrect conditional expressions
 * "Off by one" errors.
 * Unanticipated situations.
-* 
+
+#### Defensive Programming
+
+It is important to verify assumptions when programming.
+
+The following script works, as long as the directory named in the variable, _dir\_name_ exists.
+
+```
+cd $dir_name
+rm *
+```
+
+`cd "$_dir_name" && rm *`
+
+This way, if the _cd_ command fails, the _rm_ command is not carried out.
+This is better but still leaves open the possibility that the variable, _dir\_name_ is unset or empty, which would result in the files in the user's home directory being deleted. This could also be avoided by checking to see that _dir\_name_ actually contains the name of an existing directory.
+
+`[[ -d "$dir_name" ]] && cd "$dir_name" && rm *`
+
+Oten it is best to include logic to terminate the script and report an error when a situation such as the one show previously occurs.
+
+```
+#!/bin/bash
+
+# safely-delete-files
+
+# Delete files in directory $dir_name
+
+if [[ ! -d "$dir_name" ]]; then
+	echo "No such directory: '$dir_name'" >&2
+	exit 1
+fi
+if ! cd "$dir_name"; then
+	echo "Cannot cd to '$dir_name'" >&2
+	exit 1
+fi
+if ! rm *; then
+	echo "File deletion failed. Check results" >&2
+	exit 1
+fi
+```
