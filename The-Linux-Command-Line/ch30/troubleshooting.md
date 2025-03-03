@@ -51,3 +51,27 @@ $ ./missing-quotes
 
 Text editors like vim (:syntax on) or Visual Studio Code can indicate text it believes to be a part of a quote, and if the quote doesn't end where expected, it can indicate a missing quote character.
 
+### Missing or Unexpected Tokens
+
+```
+#!/bin/bash
+
+# missing-or-unexpected-tokens: script to demonstrate common errors
+
+number=1
+
+if [ $number = 1 ] then
+	echo "Number is equal to 1."
+else
+	echo "Number is not equal to 1."
+fi
+```
+
+```
+$ chmod 744 missing-or-unexpected-tokens 
+$ ./missing-or-unexpected-tokens 
+./missing-or-unexpected-tokens: line 9: syntax error near unexpected token `else'
+./missing-or-unexpected-tokens: line 9: `else'
+```
+
+The error message points to a line that occurs later than the syntax error, which is the missing semi-colon before the "then" keyword.
