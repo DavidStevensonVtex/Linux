@@ -75,3 +75,39 @@ $ ./missing-or-unexpected-tokens
 ```
 
 The error message points to a line that occurs later than the syntax error, which is the missing semi-colon before the "then" keyword.
+
+### Unanticipated Expansions
+
+```
+#!/bin/bash
+
+# unanticipated-expansions: script to demonstrate common errors
+
+number=
+
+if [ $number = 1 ]; then
+	echo "Number is equal to 1."
+else
+	echo "Number is not equal to 1."
+fi
+```
+
+```
+$ chmod 744 unanticipated-expansions 
+$ ./unanticipated-expansions 
+./unanticipated-expansions: line 7: [: =: unary operator expected
+Number is not equal to 1.
+```
+
+This problem can be corrected by adding quotes around the first argument in the _test_ command.
+
+`if [ "$number" = 1 ]; then`
+
+This corrects the syntax error, but the missing number assignment produces unuseful results.
+
+```
+$ ./unanticipated-expansions 
+Number is not equal to 1.
+```
+
+Make it a rule to always enclose variables and command substitutions in double quotes unless word splitting is needed.
