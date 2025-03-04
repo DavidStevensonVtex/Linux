@@ -238,3 +238,33 @@ no such directory: '../non-existent-directory'
 $ ./test-rm ""
 no such directory: ''
 ```
+
+### Debugging
+
+#### Finding the Problem Area
+
+In some scripts, particularly long ones, it is sometimes useful to isolate the area of the script that is related to the problem.
+
+One technique that can be used to isolate code is "commeting out" sectiosn of a script.
+
+```
+#!/bin/bash
+
+# test-rm: echo rm * to test before actually executing statement
+
+dir_name=$1
+if [[ -d "$dir_name" ]]; then
+	if cd "$dir_name"; then
+		echo rm *	# TESTING
+	else
+		echo "cannot cd to '$dir_name'" >&2
+		exit 1
+	fi
+# else
+# 	echo "no such directory: '$dir_name'" >&2
+# 	exit 1
+fi
+exit # TESTING
+```
+
+By placing comment symbols at the beginning of each line in a logical section of a script, we prevent that section from being executed. Testing can then be performed again to see whether the removal of the code has any impact on the behavior of the bug.
