@@ -188,3 +188,36 @@ One script contained the following test to verify a menu selection:
 
 `[[ $REPLY =~ ^[0-3]$ ]]`
 
+### Testing
+
+Testing is an important step in every kind of software development, including scripts. There is a saying in the open source world, "release early, release often," that reflects this fact.
+
+```
+#!/bin/bash
+
+# test-rm: echo rm * to test before actually executing statement
+
+dir_name=$1
+if [[ -d "$dir_name" ]]; then
+	if cd "$dir_name"; then
+		echo rm *	# TESTING
+	else
+		echo "cannot cd to '$dir_name'" >&2
+		exit 1
+	fi
+else
+	echo "no such directory: '$dir_name'" >&2
+	exit 1
+fi
+exit # TESTING
+```
+
+```
+$ chmod 744 test-rm
+$ ./test-rm ".."
+no such directory: ''
+$ ./test-rm ..
+no such directory: ''
+$ ./test-rm ".."
+rm ch01 ch02 ch03 ch04 ch05 ch06 ch07 ch08 ch09 ch10 ch11 ch12 ch13 ch14 ch15 ch16 ch17 ch18 ch19 ch20 ch21 ch22 ch23 ch24 ch25 ch26 ch27 ch28 ch29 ch30
+```
