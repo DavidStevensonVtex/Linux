@@ -1,0 +1,375 @@
+#!/bin/bash
+
+DEBUG=1		# false
+
+debug()
+{
+	return $DEBUG
+}
+
+while [[ $# -gt 0 ]]; do
+	if [[ "$1" == "-d" || "$1" == "--debug" ]]; then
+		DEBUG=0		# true
+	fi
+	if [[ "$1" == "-?" || "$1" == "-h" || "$1" == "--help" ]]; then
+		echo "hammurabi [-d] [-h] [--debug] [--help]"
+		exit 0
+	fi
+	shift
+done
+
+debug && echo "Debugging enabled."
+
+GameState()
+{
+
+	TotalDeaths=0
+	PercentPopulationStarvedPerYear=0
+	Population=95
+	BushelsInStore=2800
+	Harvest=3000
+	BushelsEatenByRats=$((Harvest - BushelsInStore))
+	BushelsHarvestedPerAcre=3
+	Acres=$(( $Harvest / $BushelsHarvestedPerAcre))
+	PeopleCameToCity=5
+	PlagueStruck=0		# Boolean: 0 => false, 1 => true
+	PeopleStarved=0
+	AcresToPlant=0
+	BushelsToFeedPeople=0
+	TotalPopulation=0
+	TotalStarved=0
+}
+
+RandomOneToFive()
+{
+	echo "$(( ( RANDOM % 5 )  + 1 ))"
+}
+
+BasicReport()
+{   
+	echo -e "\n" 
+	echo "Hammurabi: I beg to report to you, " 
+
+	echo $"in year $Year, $PeopleStarved people starved, $PeopleCameToCity came to the city." 
+	Population=$(( $Population + $PeopleCameToCity ))
+	TotalPopulation=$((TotalPopulation + Population))
+	debug && echo "TotalPopulation: $TotalPopulation, TotalStarved: $TotalStarved, PlagueStruck: $PlagueStruck"
+	if (( "$PlagueStruck" == 1 )); then
+		Population=$(( Population / 2 ))
+		echo "A horrible plague struck! Half the people died." 
+	fi
+
+	echo "Population is now $Population." 
+	echo "The city now owns $Acres acres." 
+	echo "You have harvested $BushelsHarvestedPerAcre bushels per acre." 
+	echo "Rats ate $BushelsEatenByRats bushels." 
+	echo "You now have $BushelsInStore bushels in store." 
+	echo  
+}
+
+GetInteger() 
+{
+	prompt="$1"
+	while true; do
+		read -p "$prompt" INT
+		if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+			break
+		else
+			continue
+		fi
+	done
+	echo "$INT"
+}
+
+YouOnlyHaveSoManyBushels()
+{
+	echo -e "\nHammurabi: Think again.\nYou have only $BushelsInStore bushels of grain. Now then...\n"
+}
+
+YouOnlyHaveSoManyAcres()
+{
+	echo -e "\nHammurabi: Think again.\nYou own only $Acres acres. Now then...\n"
+}
+
+NotAsYouWish()
+{
+	echo -e "\nHammurabi: I cannot do what you wish."
+	echo -e "Get yourself another steward!!!!!\n"
+}
+
+HowManyAcresDoYouWishToBuy()
+{
+	AcresToBuy="-1"
+	while (( (AcresToBuy * BushelCostPerAcre > BushelsInStore) || (AcresToBuy < 0) )); do
+		AcresToBuy=$(GetInteger "How many acres do you wish to buy? ")
+
+		debug && echo "AcresToBuy: $AcresToBuy, BushelCostPerAcre: $BushelCostPerAcre, BushelsInStore: $BushelsInStore"
+		debug && echo "Cost: $(( AcresToBuy * BushelCostPerAcre )) Amount Available: $BushelsInStore"
+
+		if (( AcresToBuy * BushelCostPerAcre > BushelsInStore )); then
+			YouOnlyHaveSoManyBushels
+		elif (( AcresToBuy < 0 )); then
+			NotAsYouWish
+		fi
+	done
+}
+
+HowManyAcresDoYouWishToSell()
+{
+	AcresToSell=-1
+	while (( (AcresToSell > Acres ) || (AcresToSell < 0) )); do
+		echo -e "\nLand is trading at $BushelCostPerAcre bushels per acre."
+		AcresToSell=$(GetInteger "How many acres do you wish to sell? ")
+
+		if (( AcresToSell > Acres)); then
+			echo -e "\nHammurabi: Think again. You own only $Acres acres. Now then..."
+		fi
+
+		if (( AcresToSell < 0 )); then
+			NotAsYouWish
+		fi
+	done
+
+	if (( AcresToSell > 0 )); then
+		debug && echo "Before selling: Acres: $Acres, AcresToSell: $AcresToSell, BushelsInStore: $BushelsInStore, BushelCostPerAcre: $BushelCostPerAcre"
+		Acres=$(( Acres - AcresToSell ))
+		BushelsInStore=$(( BushelsInStore + (BushelCostPerAcre * AcresToSell) ))
+		debug && echo "After selling: Acres: $Acres, AcresToSell: $AcresToSell, BushelsInStore: $BushelsInStore"
+	fi
+}
+
+BuyOrSellAcres()
+{
+	AcresToBuy=0
+	BushelCostPerAcre=$(( $(RandomOneToFive) + 17 ))
+	echo "Land is trading at $BushelCostPerAcre bushels per acre."
+
+	HowManyAcresDoYouWishToBuy
+
+	if (( $AcresToBuy != 0 )); then
+		Acres=$(( Acres + AcresToBuy ))
+		BushelsInStore=$(( BushelsInStore - ($AcresToBuy * $BushelCostPerAcre) ))
+	else
+		HowManyAcresDoYouWishToSell
+	fi
+}
+
+FeedYourPeople()
+{
+	echo
+	BushelsToFeedPeople="-1"
+	while (( (BushelsToFeedPeople > BushelsInStore) || (BushelsToFeedPeople < 0) )); do
+		BushelsToFeedPeople=$(GetInteger "How many bushels do you wish to feed your people? ")
+		debug && echo "BushelsToFeedPeople: $BushelsToFeedPeople"
+
+		if (( BushelsToFeedPeople < 0 )); then
+			NotAsYouWish
+		fi
+
+		if (( BushelsToFeedPeople > BushelsInStore )); then
+			YouOnlyHaveSoManyBushels
+		fi
+	done
+
+	debug && echo "Before: BushelsInStore: $BushelsInStore, BushelsToFeedPeople: $BushelsToFeedPeople"
+	BushelsInStore=$(( BushelsInStore - BushelsToFeedPeople ))
+	debug && echo "After: BushelsInStore: $BushelsInStore"
+	echo
+}
+
+PlantAcres()
+{
+	AcresToPlant=-1
+	while (( (AcresToPlant < 0) || (AcresToPlant > Acres) || (AcresToPlant > 10 * Population) )); do
+		AcresToPlant=$(GetInteger "How many acres do you wish to plant with seed? ");
+
+		debug && echo "AcresToPlant: $AcresToPlant, Acres: $Acres, BushelsInStore: $BushelsInStore"
+		if ((AcresToPlant < 0)); then
+			NotAsYouWish
+			continue
+		fi
+
+		# Trying to plant more acres than you own?
+		if ((AcresToPlant > Acres)); then
+			YouOnlyHaveSoManyAcres
+			continue
+		fi
+
+		# Enough grain for seed?
+		# It costs half a bushel to plant an acre.
+		if (( (AcresToPlant / 2) > BushelsInStore )); then
+			YouOnlyHaveSoManyBushels
+			continue
+		fi
+
+		# Enough people to tend the crops?
+		if ((AcresToPlant > 10 * Population)); then
+			echo -e "\nBut you only have $Population people to tend the fields. Now then,"
+		fi
+	done
+
+	#  It costs half a bushel to plant an acre.
+	BushelsInStore=$(( BushelsInStore - (AcresToPlant / 2) ))
+}
+
+SoLongForNow()
+{
+	echo -e "\n\n\n\nSo long for now.\n"
+	GameOver=true
+}
+
+YouStarvedTooManyPeople()
+{
+	echo -e "\nYou starved $PeopleStarved people in one year!!!"
+	echo "Due to this extreme mismanagement you have not only"
+	echo "been impeached and thrown out of office but you have"
+	echo "also been declared a 'National Fink' !!"
+	SoLongForNow
+}
+
+ABountifulHarvest()
+{
+	BushelsHarvestedPerAcre=$(RandomOneToFive)
+	Harvest=$(( AcresToPlant * BushelsHarvestedPerAcre ))
+	BushelsEatenByRats=0
+
+	val=$(RandomOneToFive)
+	debug && echo "val: $val"
+	if (( (val % 2) == 0 )); then
+		BushelsEatenByRats=$((BushelsInStore / val))		# The rats are running wild!
+	fi
+
+	debug && echo "BushelsHarvestedPerAcre: $BushelsHarvestedPerAcre, AcresToPlant: $AcresToPlant, Harvest: $Harvest"
+	debug && echo "BushelsInStore: $BushelsInStore, val: $val, BushelsEatenByRats: $BushelsEatenByRats"
+
+	BushelsInStore=$((BushelsInStore - BushelsEatenByRats))
+	BushelsInStore=$((BushelsInStore + Harvest));
+	debug && echo "BushelsInStore: $BushelsInStore"
+
+	c=$(RandomOneToFive)		# Let's have some babies!
+	PeopleCameToCity=$(( ((c * 20 * Acres) + BushelsInStore) / Population / 100 + 1 ))
+	# PeopleCameToCity=(( ((c * 20 * Acres) + BushelsInStore) / Population / 100 + 1 ))
+	debug && echo "c: $c, Acres: $Acres, BushelsInStore: $BushelsInStore, Population: $Population, PeopleCameToCity: $PeopleCameToCity"
+
+	# PeopleCameToCity = (int)((RandomOneToFive() *
+	# 	((20 * Acres) + BushelsInStore)) / Population / 100 + 1);
+
+	PeopleFed=$(( BushelsToFeedPeople / 20 ))	# How many people had full tummies?
+	val=$(( (RANDOM % 100) + 1 ))
+	PlagueStruck=$(( val <= 15 ))
+	debug && echo "PlagueStruck: $PlagueStruck, val: $val"
+	debug && echo "BushelsToFeedPeople: $BushelsToFeedPeople, PeopleFed: $PeopleFed, PlagueStruck=$PlagueStruck"
+	# //541 REM *** HORRORS, A 15% CHANCE OF PLAGUE
+	# //542 Q=INT(10*(2*RND(1)-.3))
+	# PlagueStruck = (rnd.NextDouble() <= 0.15);
+
+	# //550 IF P<C THEN 210
+	# //551 REM *** STARVE ENOUGH FOR IMPEACHMENT?
+	# //552 D=P-C:IF D>.45*P THEN 560
+	# //553 P1=((Z-1)*P1+D*100/P)/Z
+	# //555 P=C:D1=D1+D:GOTO 215
+
+	PeopleStarved=0				# Starve enough for impeachment?
+	if (( PeopleFed < Population )); then
+		PeopleStarved=$(( Population - PeopleFed ))
+		TotalStarved=$(( TotalStarved + PeopleStarved ))
+		if (( PeopleStarved > (Population * 45 / 100) )); then
+			YouStarvedTooManyPeople
+		fi
+	fi
+
+	if (( PeopleFed < Population )); then
+		debug && echo "Before: PeopleFed: $PeopleFed, Population: $Population"
+		Population=$PeopleFed
+		debug && echo "Before: PeopleFed: $PeopleFed, Population: $Population"
+	fi
+
+	debug && echo "Before: TotalDeaths: $TotalDeaths, PeopleStarved: $PeopleStarved"
+	TotalDeaths=$(( TotalDeaths + PeopleStarved ))
+	debug && echo "After: TotalDeaths: $TotalDeaths, PeopleStarved: $PeopleStarved"
+
+	PercentPopulationStarvedPerYear=$(( TotalDeaths * 100 / TotalPopulation ))
+	echo "PercentPopulationStarvedPerYear: $PercentPopulationStarvedPerYear, Year: $Year"
+}
+
+PerformanceEvaluation()
+{
+	echo -e "\n\n"
+	echo "In your 10-year term of office, $PercentPopulationStarvedPerYear percent of the"
+	echo "population starved per year on average, i.e. a total of"
+	echo -e "$TotalDeaths people died!!\n"
+	AcresPerPerson=$((Acres / Population))
+	echo "You started with 10 acres per person and ended with"
+	echo -e "$AcresPerPerson acres per person.\n"
+
+	if (( (PercentPopulationStarvedPerYear > 33) || (AcresPerPerson < 7) )); then
+		ExtremeMismanagement
+	elif (( (PercentPopulationStarvedPerYear > 10) || (AcresPerPerson < 9) )); then
+		HeavyHandedPerformance
+	elif (( (PercentPopulationStarvedPerYear > 3) || (AcresPerPerson < 10) )); then
+		TrivialProblems
+	else
+		FantasticPerformance
+	fi
+	SoLongForNow
+}
+
+ExtremeMismanagement()
+{
+	echo "Due to this extreme mismanagement you have not only"
+	echo "been impeached and thrown out of office but you have"
+	echo "also been declared 'National Fink' !!"
+}
+
+FantasticPerformance()
+{
+	echo "A fantastic performance!!  Charlemagne, Disraeli, and"
+	echo "Jefferson combined could not have done better!"
+}
+
+HeavyHandedPerformance()
+{
+	echo "Your heavy-handed performance smacks of Nero and Ivan IV."
+	echo "The people (remaining) find you an unpleasant ruler, and,"
+	echo "frankly, hate your guts!"
+}
+
+TrivialProblems()
+{
+	echo "Your performance could have been somewhat better, but"
+	echo -e "really wasn't too bad at all.\n"
+	r=$(( Population * 80 * ((RANDOM % 100) + 1) / 1000 ))
+	echo "$r people would dearly like to see you assassinated but we all have our"
+	echo "trivial problems."
+}
+
+clear
+GameOver="false"
+while [[ "$GameOver" == "false" ]]; do
+	GameState
+	debug && echo "Population = $Population, BushelsEatenByRats = $BushelsEatenByRats"
+	debug && echo "Harvest = $Harvest, BushelsHarvestedPerAcre = $BushelsHarvestedPerAcre, Acres = $Acres"
+
+	for Year in {1..10}; do
+		BasicReport
+		BuyOrSellAcres
+		FeedYourPeople
+		PlantAcres
+		ABountifulHarvest
+		
+		if [[ "$GameOver" == "true" ]]; then
+			break
+		fi
+	done
+
+	PerformanceEvaluation
+
+	echo -e "\n\n"
+	read -p "Do you want to play another game? (Y/N):  " AnotherGame
+	AnotherGame=$(echo "$AnotherGame" | tr "a-z" "A-Z" | cut -c1-1)
+	if [[ "$AnotherGame" == "Y" ]]; then
+		GameOver="false"
+	fi
+done
+
+echo "Goodbye"
