@@ -296,3 +296,82 @@ else
 fi
 echo "file deletion complete" >&2
 ```
+
+_bash_ also provides a method of tracing, implemented by the _-x_ option and the _set_ command with the _-x_ option. Using our earlier trouble script, we can activate tracing for the entire script by adding the _-x_ option to the first line.
+
+```
+#!/bin/bash -x
+
+# trouble: script to demonstrate common errors
+
+number=1
+
+if [ $number = 1 ]; then
+	echo "Number is equal to 1."
+else
+	echo "Number is not equal to 1."
+fi
+```
+
+```
+$ ./trouble
++ number=1
++ '[' 1 = 1 ']'
++ echo 'Number is equal to 1.'
+Number is equal to 1.
+```
+
+The plus sign is the default character for trace output. It is contained in the PS4 (prompt string 4) shell variable.
+
+```
+$ export PS4='$LINENO +'
+$ ./trouble
+5 +number=1
+7 +'[' 1 = 1 ']'
+8 +echo 'Number is equal to 1.'
+Number is equal to 1.
+```
+
+To perform a trace on a selected portion of a script, rather than the entire script, we can use the _set_ command with the _-x_ option.
+
+```
+#!/bin/bash
+
+# trouble: script to demonstrate common errors
+
+number=1
+set -x # Turn on tracing
+if [ $number = 1 ]; then
+	echo "Number is equal to 1."
+else
+	echo "Number is not equal to 1."
+fi
+set +x # Turn off tracing
+```
+
+```
+$ ./trouble
+7 +'[' 1 = 1 ']'
+8 +echo 'Number is equal to 1.'
+Number is equal to 1.
+12 +set +x
+```
+
+```
+$ bash -vx ./trouble
+#!/bin/bash
+
+# trouble: script to demonstrate common errors
+
+number=1
++ number=1
+
+if [ $number = 1 ]; then
+        echo "Number is equal to 1."
+else
+        echo "Number is not equal to 1."
+fi
++ '[' 1 = 1 ']'
++ echo 'Number is equal to 1.'
+Number is equal to 1.
+```
