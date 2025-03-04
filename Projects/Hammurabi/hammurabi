@@ -338,7 +338,7 @@ TrivialProblems()
 {
 	echo "Your performance could have been somewhat better, but"
 	echo -e "really wasn't too bad at all.\n"
-	r=$(( Population * 80 * ((RANDOM % 100) + 1) / 1000 ))
+	r=$(( Population * 8 * ((RANDOM % 100) + 1) / 1000 ))
 	echo "$r people would dearly like to see you assassinated but we all have our"
 	echo "trivial problems."
 }
