@@ -221,3 +221,20 @@ no such directory: ''
 $ ./test-rm ".."
 rm ch01 ch02 ch03 ch04 ch05 ch06 ch07 ch08 ch09 ch10 ch11 ch12 ch13 ch14 ch15 ch16 ch17 ch18 ch19 ch20 ch21 ch22 ch23 ch24 ch25 ch26 ch27 ch28 ch29 ch30
 ```
+
+#### Test Cases
+
+To perform useful testing, it's important to develop and apply good _test cases_. This is done by carefully choosing input data or operating conditions that reflect _edge_ and _corner_ cases.
+
+* dir\_name contains the name of an existing directory.
+* dir\_name contains the name of a non-existent directory.
+* dir\_name is empty.
+
+```
+$ ./test-rm "../ch30"
+rm missing-or-unexpected-tokens missing-quotes safely-delete-files test-rm trouble troubleshooting.md unanticipated-expansions
+$ ./test-rm "../non-existent-directory"
+no such directory: '../non-existent-directory'
+$ ./test-rm ""
+no such directory: ''
+```
