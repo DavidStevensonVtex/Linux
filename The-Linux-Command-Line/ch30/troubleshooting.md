@@ -268,3 +268,31 @@ exit # TESTING
 ```
 
 By placing comment symbols at the beginning of each line in a logical section of a script, we prevent that section from being executed. Testing can then be performed again to see whether the removal of the code has any impact on the behavior of the bug.
+
+#### Tracing
+
+To view the actual flow of the program, we use a technique called _tracing_.
+
+One tracing method involves placing informative messages in a script that display the location of execution.
+
+```
+#!/bin/bash
+
+# test-rm: echo rm * to test before actually executing statement
+
+dir_name=$1
+echo "preparing to delete files" >&2
+if [[ -d "$dir_name" ]]; then
+	if cd "$dir_name"; then
+		echo "deleting files" >&2
+		rm *
+	else
+		echo "cannot cd to '$dir_name'" >&2
+		exit 1
+	fi
+else
+	echo "no such directory: '$dir_name'" >&2
+	exit 1
+fi
+echo "file deletion complete" >&2
+```
