@@ -179,3 +179,12 @@ to:
 This will prevent a filename starting with a hyphen from being interpreted as a command option.
 
 As a general rule, always precede wildcards (such as \* and \?) with `./` to prevent misinterpretation by commands.
+
+#### Verifying Input
+
+A general rule of good programming is that if a program accepts input, it must be able to deal with anything it receives. This means input must be carefully screened to ensure that only valid input is accepted for further processing.
+
+One script contained the following test to verify a menu selection:
+
+`[[ $REPLY =~ ^[0-3]$ ]]`
+
