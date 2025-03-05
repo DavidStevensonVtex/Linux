@@ -137,3 +137,67 @@ case "$REPLY" in
 			;;
 esac
 ```
+
+### Performing Multiple Actions
+
+In versions of _bash_ prior to 4.0, _case_ allowed only one action to be performed on a successful match. After a successful match, the command would terminate.
+
+```
+#!/bin/bash
+
+# case-4-1: test a character
+
+read -n 1 -p "Type a character > "
+echo
+
+case "$REPLY" in 
+	[[:upper:]])		echo "'$REPLY' is upper case." ;;
+	[[:lower:]])		echo "'$REPLY' is lower case." ;;
+	[[:alpha:]])		echo "'$REPLY' is alphabetic." ;;
+	[[:digit:]])		echo "'$REPLY' is a digit." ;;
+	[[:graph:]])		echo "'$REPLY' is a visible character." ;;
+	[[:punct:]])		echo "'$REPLY' is a punctuation symbol." ;;
+	[[:space:]])		echo "'$REPLY' is whitespace character." ;;
+	[[:xdigit:]])		echo "'$REPLY' is hexadecimal digit." ;;
+esac
+```
+
+```
+$ chmod 744 case-4-1 
+$ ./case-4-1
+Type a character > a
+'a' is lower case.
+```
+
+
+Modern versions of _bash_ add the `;;&` notation to terminate each action, so now can do this:
+
+```
+#!/bin/bash
+
+# case-4-1: test a character
+
+read -n 1 -p "Type a character > "
+echo
+
+case "$REPLY" in 
+	[[:upper:]])		echo "'$REPLY' is upper case." ;;&
+	[[:lower:]])		echo "'$REPLY' is lower case." ;;&
+	[[:alpha:]])		echo "'$REPLY' is alphabetic." ;;&
+	[[:digit:]])		echo "'$REPLY' is a digit." ;;&
+	[[:graph:]])		echo "'$REPLY' is a visible character." ;;&
+	[[:punct:]])		echo "'$REPLY' is a punctuation symbol." ;;&
+	[[:space:]])		echo "'$REPLY' is whitespace character." ;;&
+	[[:xdigit:]])		echo "'$REPLY' is hexadecimal digit." ;;&
+esac
+```
+
+
+```
+$ ./case-4-1
+Type a character > a
+'a' is lower case.
+'a' is alphabetic.
+'a' is a visible character.
+'a' is hexadecimal digit.
+```
