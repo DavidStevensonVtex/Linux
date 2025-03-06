@@ -213,3 +213,68 @@ $ source file_info
 $ file_info
 file_info: usage: file_info file
 ```
+
+### Handling Positional Parameters en Masse
+
+It is sometimes useful to manage all the positional parameters as a group.
+
+**The \* and \& Special Parameters**
+
+```
+$*   Expands into the list of positional parameters, starting with 1. When surrounded by double quotes, it expands into a double-quoted string containing all of the positional parameters, each separated by the first character of the IFS shell variable (by default a space character).
+
+$@   Expands into the list of positional parameters, starting with 1. When surrounded by double quotes, it expands each positional parameter into a separate word as if it was surrounded by double quotes.
+```
+
+```
+#!/bin/bash
+
+# posit-param3: script to demonstrate $* and $@
+
+print_params() {
+    echo "\$1 = $1"
+    echo "\$2 = $2"
+    echo "\$3 = $3"
+    echo "\$4 = $4"
+}
+
+pass_params() {
+    echo -e "\n" '$* :';    print_params $*
+    echo -e "\n" '"$*" :';  print_params "$*"
+    echo -e "\n" '$@ :';    print_params $@
+    echo -e "\n" '"$@" :';  print_params "$@"
+}
+
+pass_params "word" "words with spaces"
+```
+
+```
+$ chmod 744 posit-param3
+$ ./posit-param3
+
+ $* :
+$1 = word
+$2 = words
+$3 = with
+$4 = spaces
+
+ "$*" :
+$1 = word words with spaces
+$2 = 
+$3 = 
+$4 = 
+
+ $@ :
+$1 = word
+$2 = words
+$3 = with
+$4 = spaces
+
+ "$@" :
+$1 = word
+$2 = words with spaces
+$3 = 
+$4 = 
+```
+
+The lesson to take from this is that even though the shell provides four different ways of getting the list of positional parameters, "$@" is by far the most useful for most situations because it preserves the integrity of each positional parameter. To ensure safety, it should always be used, unless we have a compelling reason not to use it.
