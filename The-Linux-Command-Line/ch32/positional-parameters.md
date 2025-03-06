@@ -292,5 +292,58 @@ After a long hiatus, we are going to resume work on our `sys_page_info` program,
     Here is the code to implement the command line processing:
 
 ```
+usage() {
+	echo "$PROGNAME: usage: $PROGNAME [-f file | -i]"
+	return
+}
 
+# process command line options
+
+interactive=
+filename=
+
+while [[ -n "$" ]]; do
+	case "$1" in
+		-f | --file)			shift
+								filename="$1"
+								;;
+		-i | --interactive)		interactive=1
+								;;
+		-h | --help)			usage
+								exit
+								;;
+		*)						usage
+								exit 1
+								;;
+	esac
+	shift
+done
+```
+
+
+Here is the code to implement interactive mode:
+
+```
+# interactive mode
+
+if [[ -n "$interactive" ]]; then
+	while true; do
+		read -p "Enter name of output file: " filename
+		if [[ -e "$filename" ]]; then
+			read -p "'$filename' exists. Overwrite? [y/n/q] > "
+			case "$REPLY" in
+				Y|y)	break
+						;;
+				Q|q)	echo "Program terminated."
+						exit
+				*)		continue
+						;;
+			esac
+		elif [[ -z "$filename" ]]; then
+			continue
+		else
+			break
+		fi
+	done
+fi
 ```
