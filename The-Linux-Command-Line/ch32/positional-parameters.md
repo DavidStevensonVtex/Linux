@@ -278,3 +278,19 @@ $4 =
 ```
 
 The lesson to take from this is that even though the shell provides four different ways of getting the list of positional parameters, "$@" is by far the most useful for most situations because it preserves the integrity of each positional parameter. To ensure safety, it should always be used, unless we have a compelling reason not to use it.
+
+### A More Complete Application
+
+After a long hiatus, we are going to resume work on our `sys_page_info` program, last seen in Chapter 27. Our next addition will add several command line options to the program as follows:
+
+    **Output file** We will add an option to specify a name for a file to contain the program's output. It will be specified as either `-f file` or `--file file`.
+
+    **Interactive mode** This option will prompt the user for an output file-name and will determine whether the specified file already exists. If it does, the user will be prompted before the existing file is overwritten. This option will be specified by either `-i` or `--interactive`.
+
+    **Help** Either `-h` or `--help` may be specified to cause the program to output an informative usage message.
+
+    Here is the code to implement the command line processing:
+
+```
+
+```
