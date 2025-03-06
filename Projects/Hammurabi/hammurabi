@@ -366,7 +366,7 @@ while [[ "$GameOver" == "false" ]]; do
 
 	echo -e "\n\n"
 	read -p "Do you want to play another game? (Y/N):  " AnotherGame
-	AnotherGame=$(echo "$AnotherGame" | tr "a-z" "A-Z" | cut -c1-1)
+	AnotherGame=$(echo "$AnotherGame" | tr "a-z " "A-Z" | cut -c1-1)
 	if [[ "$AnotherGame" == "Y" ]]; then
 		GameOver="false"
 	fi
