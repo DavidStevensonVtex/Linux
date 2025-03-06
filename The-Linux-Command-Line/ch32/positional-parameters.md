@@ -85,3 +85,46 @@ $9 = plain
 
 ```
 
+#### shift -- Getting Access to Many Arguments
+
+But what happens when we give the program a large number of arguments such as the following?
+
+```
+$ ./posit-param ~/*
+
+Number of arguments: 40
+$0 = ./posit-param
+$1 = /home/dstevenson/abd
+$2 = /home/dstevenson/AI
+$3 = /home/dstevenson/archive
+$4 = /home/dstevenson/bashtest
+$5 = /home/dstevenson/Derby
+$6 = /home/dstevenson/derby.log
+$7 = /home/dstevenson/Desktop
+$8 = /home/dstevenson/Discussion
+$9 = /home/dstevenson/Documents
+
+```
+
+```
+#!/bin/bash
+
+# posit-param2: script to display all arguments
+
+count=1
+
+while (( $# > 0 )); do
+    echo "Argument $count: $1"
+    count=$((count + 1))
+    shift
+done
+```
+
+```
+$ chmod 744 posit-param2
+$ ./posit-param2 a b c d
+Argument 1: a
+Argument 2: b
+Argument 3: c
+Argument 4: d
+```
