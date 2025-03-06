@@ -43,3 +43,45 @@ $9 = plain
 ```
 
 You can actually access more than nine parameters using parameter expansion. To specify a number greater than nine, surround the number in braces, as in ${10}, ${55}, ${211}, and so on.
+
+#### Determining the Number of Arguments
+
+The shell also provides a variable, $\#, that contains the number of arguments on the command line.
+
+```
+#!/bin/bash
+
+# posit-param: script to view command line parameters
+
+echo "
+Number of arguments: $#
+\$0 = $0
+\$1 = $1
+\$2 = $2
+\$3 = $3
+\$4 = $4
+\$5 = $5
+\$6 = $6
+\$7 = $7
+\$8 = $8
+\$9 = $9
+"
+```
+
+```
+$ ./posit-param The rain in Spain falls mainly in the plain generally speaking
+
+Number of arguments: 11
+$0 = ./posit-param
+$1 = The
+$2 = rain
+$3 = in
+$4 = Spain
+$5 = falls
+$6 = mainly
+$7 = in
+$8 = the
+$9 = plain
+
+```
+
