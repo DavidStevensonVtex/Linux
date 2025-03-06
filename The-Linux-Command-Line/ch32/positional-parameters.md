@@ -168,3 +168,48 @@ Modify: 2025-03-06 10:30:43.562002739 -0500
 Change: 2025-03-06 10:30:43.562002739 -0500
  Birth: -
 ```
+
+#### Using Positional Parameters with Shell Functions
+
+```
+#!/bin/bash
+
+# file-info: simple file information program
+
+PROGNAME="$(basename "$0")"
+
+if [[ -e "$1" ]]; then
+    echo -e "\nFile Type:"
+    file "$1"
+    echo -e "\nFile Status:"
+    stat "$1"
+else
+    echo "$FUNCNAME: usage: $FUNCNAME file" >&2
+    exit 1
+fi
+```
+
+```
+$ chmod 744 file_info
+$ source file_info
+$ file_info *.md
+
+File Type:
+positional-parameters.md: UTF-8 Unicode text
+
+File Status:
+  File: positional-parameters.md
+  Size: 3189            Blocks: 8          IO Block: 4096   regular file
+Device: 802h/2050d      Inode: 51380392    Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/dstevenson)   Gid: ( 1000/dstevenson)
+Access: 2025-03-06 10:39:20.243238527 -0500
+Modify: 2025-03-06 10:39:20.183238373 -0500
+Change: 2025-03-06 10:39:20.183238373 -0500
+ Birth: -
+```
+
+```
+$ source file_info
+$ file_info
+file_info: usage: file_info file
+```
