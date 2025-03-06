@@ -108,3 +108,16 @@ if [[ -n "$interactive" ]]; then
 		fi
 	done
 fi
+
+# output html page
+
+if [[ -n "$filename" ]]; then
+	if touch "$filename" && [[ -f "$filename" ]]; then
+		write_html_page > "$filename"
+	else
+		echo "$PROGNAME: Cannot write file '$filename'" >&2
+		exit 1
+	fi
+else
+	write_html_page
+fi
