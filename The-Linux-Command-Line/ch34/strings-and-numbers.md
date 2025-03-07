@@ -102,4 +102,139 @@ $ echo $foo
 bar
 ```
 
+#### String Operations
 
+The following expansion:
+
+`${#parameter}`
+
+expands into the length of the string contained by _parameter_. Normally, _parameter_ is a string; however, if _parameter_ is either \@ or \*, then the expansion results in the number of positional parameters.
+
+```
+$ foo="This string is long."
+$ echo "'$foo' is ${#foo} characters long."
+'This string is long.' is 20 characters long.
+```
+
+The following expansions are used to extract a portion of the string contained in _parameter_.
+
+```
+${parameter:offset}
+${parameter:offset:length}
+```
+
+The extraction begins at _offset_ characters from the beginning of the string and contnues to the end of the string, unless _length_ is specified.
+
+```
+$ foo="This string is long."
+$ echo ${foo:5}
+string is long.
+$ echo ${foo:5:6}
+string
+```
+
+If the value of _offset_ is negative, it is taken to mean it starts from the end of the string rather than the beginning. Note that negative values must be preceded by a space to prevent confusion with the `${parameter:-word}` expansion. _length_, if present, must not be less than zero.
+
+if _parameter_ is \@, the result of the expansion is _length_ positional parameters, starting _offset_.
+
+```
+$ foo="This string is long."
+$ echo ${foo: -5}
+long.
+$ echo $foo
+This string is long.
+$ echo ${foo: -5:2}
+lo
+```
+
+The following expansiosn remove a leading portion of the string contained in _parameter_ defined by _pattern_.
+
+```
+${parameter#pattern}
+${parameter##pattern}
+```
+
+_pattern_ is a wildcard pattern like those used in pathname expansion. The difference in the two forms is that the \# form removes the shortest match, while the \#\# form removes the longest match.
+
+```
+$ foo=file.txt.zip
+$ echo ${foo#*.}
+txt.zip
+$ echo ${foo##*.}
+zip
+```
+
+The following are the same as the previous \# and \#\# expansions, except they remove text from the end of the string contained in _parameter_ rather than from the beginning.
+
+```
+${parameter%pattern}
+${parameter%%pattern}
+```
+
+Here is an example:
+
+```
+$ foo=file.txt.zip
+$ echo ${foo%.*}
+file.txt
+$ echo ${foo%%.*}
+file
+```
+
+The following expansions perform a search-and-replace operation upon the contents of _parameter_.
+
+```
+${paramter/pattern/string}
+${parameter//pattern/string}
+${parameter/#pattern/string}
+${parameter/%pattern/string}
+```
+
+If text is found matching wildcard _pattern_, it is replaced with the contents of _string_.
+In the normal form, only the first occurrence of _pattern_ is replaced. In the // form, all occurrences are replace. The /\# form requires that the match occur at the beginning of the string, and the /% form requiers the match to occur at the end of the string. In every form _/string_ may be omitted, causing the text matched by _pattern_ to be deleted.
+
+```
+$ foo=JPG.JPG
+$ echo ${foo/JPG/jpg}
+jpg.JPG
+$ echo ${foo//JPG/jpg}
+jpg.jpg
+$ echo ${foo/#JPG/jpg}
+jpg.JPG
+$ echo ${foo/%JPG/jpg}
+JPG.jpg
+```
+
+Expansions can improve the efficiency of scripts by eliminating the use of external programs.
+
+```
+$ diff longest-word2 longest-word3
+3c3
+< # longest-word2: find longest string in a file
+---
+> # longest-word3: find longest string in a file
+10c10
+<             len="$(echo -n "$j" | wc -c)"
+---
+>             len="${#j}"
+```
+
+```
+$ time ./longest-word2 *
+longest-word2: 'longest-word2:' (14 characters)
+longest-word3: 'longest-word3:' (14 characters)
+strings-and-numbers.md: '${parameter//pattern/string}' (28 characters)
+
+real    0m2.203s
+user    0m2.145s
+sys     0m0.624s
+$ 
+$ time ./longest-word3 *
+longest-word2: 'longest-word2:' (14 characters)
+longest-word3: 'longest-word3:' (14 characters)
+strings-and-numbers.md: '${parameter//pattern/string}' (28 characters)
+
+real    0m0.021s
+user    0m0.017s
+sys     0m0.005s
+```
