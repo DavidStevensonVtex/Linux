@@ -2,7 +2,7 @@
 
 ## Chapter 34: Strings and Numbers
 
-### Parameter Expansion
+### [Parameter Expansion](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html)
 
 #### Basic Parameters
 
@@ -237,4 +237,69 @@ strings-and-numbers.md: '${parameter//pattern/string}' (28 characters)
 real    0m0.021s
 user    0m0.017s
 sys     0m0.005s
+```
+
+#### Case Conversion
+
+_bash_ has four parameter expansiosn and two _declare_ command options to support the uppercase/lowercase conversion of strings.
+
+A common approach is to _normalize_ the user's input. That is, convert it into a standardized form. We can do this by converting all the characters in the user's input to either lower or uppercase.
+
+```
+#!/bin/bash
+
+declare -u upper
+declare -l lower
+
+if [[ $1 ]]; then
+    upper="$1"
+    lower="$1"
+    echo "\$upper = $upper"
+    echo "\$lower = $lower"
+fi
+```
+
+```
+$ ./ul-declare aBcD
+$upper = ABCD
+$lower = abcd
+```
+
+**Case Conversion Parameter Expansions**
+
+```
+Format                   Result
+
+${parameter,,pattern}    Expand the value of paramter into all lowercase. pattern is an optional shell pattern that will limit which characters (for example, [A-F]) will be converted. See the bash man page for a full description of patterns.
+${parameter,pattern}     Expand the value of paramter, changing only the first character to lowercase.
+${parameter^^pattern}    Expand the value of parameter into all uppercase letters.
+${parameter^pattern}     Expand the value of parameter, changing only the first character to uppercase (capitalization).
+```
+
+Here is a script that demonstrates these expansions.
+
+```
+#!/bin/bash
+
+# ul-param: demonstrate case conversion via parameter expansion
+
+if [[ "$1" ]]; then
+    echo "${1,,}"
+    echo "${1,}"
+    echo "${1^^}"
+    echo "${1^}"
+fi
+```
+
+```
+$ ./ul-param aBc
+abc
+aBc
+ABC
+ABc
+$ ./ul-param AbC
+abc
+abC
+ABC
+AbC
 ```
