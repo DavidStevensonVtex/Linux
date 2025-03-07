@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# pathname-expansion
+
+# By default, if the expansion fails to match any fiels, the wildcards themselves 
+# (distros*.txt in this example) will be returned.
+
+# To guard against this, we would check for the existence of a file using a test expression.
+
+
+for i in distros*.txt; do
+    if [[ -e "$i" ]]; then
+        echo "$i"
+    fi
+done
