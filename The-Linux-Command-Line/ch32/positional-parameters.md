@@ -302,7 +302,7 @@ usage() {
 interactive=
 filename=
 
-while [[ -n "$" ]]; do
+while [[ -n "$1" ]]; do
 	case "$1" in
 		-f | --file)			shift
 								filename="$1"
@@ -336,6 +336,7 @@ if [[ -n "$interactive" ]]; then
 						;;
 				Q|q)	echo "Program terminated."
 						exit
+                        ;;
 				*)		continue
 						;;
 			esac
