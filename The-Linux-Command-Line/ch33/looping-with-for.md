@@ -125,3 +125,24 @@ longest-word: 'max_len="$len"' (14 characters)
 longest-word2: 'longest-word2:' (14 characters)
 pathname-expansion: 'pathname-expansion' (18 characters)
 ```
+
+### for: C Language Form
+
+Recent versions of _bash_ have added a second form of the for command syntax, one that resembles the form found in the C programming language.
+
+```
+for (( expression1; expression2 ; expresson3 )); do
+    commands
+done
+```
+
+```
+#!/bin/bash
+
+# simple-counter: demo of C style for command
+
+for (( i=0; i < 5; i=i+1 )); do
+    echo -n "$i "
+done
+echo
+```
