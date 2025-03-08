@@ -344,3 +344,48 @@ $ echo $((2#111111111111))
 #### Unary Operators
 
 There are two unary operators, + and -, which are used to indicate whether a number is positive or negative.
+
+#### Simple Arithmetic
+
+**Arithmetic Operators**
+
+```
+Operator   Description
+
++          Addition
+-          Subtraction
+*          Multiplication
+/          Integer division
+**         Exponentiation
+%          Modulo (Remainder)
+```
+
+Since the shell's arithmetic operates only on integers, the resuls of division are only whole numbers.
+
+```
+$ echo $(( 5 / 2 ))
+2
+$ echo $(( 5 % 2 ))
+1
+```
+
+```
+#!/bin/bash
+
+# modulo: demonstrate the modulo operator
+
+for (( i = 0; i <= 20 ; i = i + 1 )); do
+    remainder=$((i % 5))
+    if (( remainder == 0 )); then
+        printf "<%d> " "$i"
+    else
+        printf "%d " "$i"
+    fi
+done
+echo
+```
+
+```
+$ ./modulo
+<0> 1 2 3 4 <5> 6 7 8 9 <10> 11 12 13 14 <15> 16 17 18 19 <20> 
+```
