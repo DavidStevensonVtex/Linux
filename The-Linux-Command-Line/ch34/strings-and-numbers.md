@@ -570,3 +570,22 @@ a       a**2    a**3
 9       81      729
 10      100     1000
 ```
+
+### bc -- An Arbitrary Precision Calculator Language
+
+What if we need to perform higher math or even just use floating-point numbers?
+
+The answer is, we can't. At least no directly with the shell. To do this, we need to use an external program.
+Embedding Perl or AWK programs is one possible solution, but unfortunately, that's outside the scope of this book.
+
+Anoterh approach is to use a specialized calculator program. One such program found on many Linux systems is called _bc_.
+
+```
+$ bc << _EOF_
+> /* A very simple bc script */
+> 
+> 2 + 2
+> _EOF_
+4
+$ 
+```
