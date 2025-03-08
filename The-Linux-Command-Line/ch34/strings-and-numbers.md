@@ -589,3 +589,43 @@ $ bc << _EOF_
 4
 $ 
 ```
+
+#### Using bc
+
+**foo.bc**
+
+```
+/* A very simple bc script */
+
+2 + 2
+quit
+```
+
+```
+$ bc foo.bc
+bc 1.07.1
+Copyright 1991-1994, 1997, 1998, 2000, 2004, 2006, 2008, 2012-2017 Free Software Foundation, Inc.
+This is free software with ABSOLUTELY NO WARRANTY.
+For details type `warranty'. 
+4
+```
+
+**foo.bc**
+
+```
+/* A very simple bc script */
+
+2 + 2
+quit
+```
+```
+$ bc < foo.bc
+4
+```
+
+This is a here string example.
+
+```
+$ bc <<< "2+2"
+4
+```

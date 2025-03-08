@@ -1,0 +1,4 @@
+/* A very simple bc script */
+
+2 + 2
+quit
