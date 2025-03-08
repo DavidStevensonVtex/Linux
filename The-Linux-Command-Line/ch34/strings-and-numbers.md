@@ -482,3 +482,91 @@ $ for ((i=0;i<8;++i)); do echo $((1<<i)); done
 64
 128
 ```
+
+#### Logic
+
+As we discovered in Chapter 27, the (( )) compound command supports a variety of comparison operators.
+
+```
+Operator    Description
+
+<=                   Less than or equal to.
+>=                   Greater than or equal to.
+<                    Less than.
+>                    Greater than.
+==                   Equal to.
+!=                   Not equal to.
+&&                   Logical AND.
+||                   Logical OR.
+expr1?expr2:expr3    Comparison (ternary) operator. If expression expr1 evaluates to nonzero (arithmetic true), then expr2; else expr3.
+```
+
+```
+$ if ((1)); then echo "true"; else echo "false"; fi
+true
+$ if ((0)); then echo "true"; else echo "false"; fi
+false
+```
+
+```
+$ a=0
+$ ((a<1?++a:--a))
+$ echo $a
+1
+$ ((a<1?++a:--a))
+$ echo $a
+0
+```
+
+Please note that assignment within the expression is not straightforward. When attempted, _bash_ will display an error.
+
+```
+$ a=0
+$ ((a<1?a+=1:a-=1))
+bash: a<1?a+=1:a-=1: attempted assignment to non-variable (error token is "-=1")
+```
+
+The problem can be mitigated by surrounding the assignment expression with parentheses.
+
+```
+$ a=0
+$ ((a<1?(a+=1):(a-=1)))
+$ echo $a
+1
+```
+
+```
+#!/bin/bash
+
+# arith-loop: script to demonstrate arithmetic operators
+
+finished=0
+a=0
+printf "a\ta**2\ta**3\n"
+printf "=\t====\t====\n"
+
+until ((finished)); do
+    b=$((a**2))
+    c=$((a**3))
+    printf "%d\t%d\t%d\n" "$a" "$b" "$c"
+    ((a<10?++a:(finished=1)))
+done
+```
+
+```
+$ chmod 744 arith-loop 
+$ ./arith-loop 
+a       a**2    a**3
+=       ====    ====
+0       0       0
+1       1       1
+2       4       8
+3       9       27
+4       16      64
+5       25      125
+6       36      216
+7       49      343
+8       64      512
+9       81      729
+10      100     1000
+```
