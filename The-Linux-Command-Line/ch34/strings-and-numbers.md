@@ -303,3 +303,13 @@ abC
 ABC
 AbC
 ```
+
+### Arithmetic Evaluation and Expansion
+
+The basic form for arithmetic expansion is:
+
+`$((expression))`
+
+where _expression_ is a valid arithmetic expression.
+
+This is related to the compound command (( )) used for arithmetic evaluation (truth tests).
