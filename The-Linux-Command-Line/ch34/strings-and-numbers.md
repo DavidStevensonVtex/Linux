@@ -306,6 +306,8 @@ AbC
 
 ### Arithmetic Evaluation and Expansion
 
+We looked at arithmetic expansion in Chapter 7.
+
 The basic form for arithmetic expansion is:
 
 `$((expression))`
@@ -313,3 +315,28 @@ The basic form for arithmetic expansion is:
 where _expression_ is a valid arithmetic expression.
 
 This is related to the compound command (( )) used for arithmetic evaluation (truth tests).
+
+#### Number Bases
+
+In Chapter 9, we got a look at octal (base 8) and hexadecimal (base 16) numbers.
+In arithmetic expressions, the shell supports integer constants in any base.
+
+**Specifying Different Number Bases**
+
+```
+Notation      Description
+
+number        By default, numbers without any notation are treated as decimal (base 10) integers.
+0number       In arithmetic expressions, numbers with a leading zero are considered octal.
+0xnumber      Hexadecimal notation.
+base#number   number is in base.
+```
+
+```
+$ echo $((0xff))
+255
+$ echo $((2#11111111))
+255
+$ echo $((2#111111111111))
+4095
+```
