@@ -629,3 +629,61 @@ This is a here string example.
 $ bc <<< "2+2"
 4
 ```
+
+#### An Example Script
+
+```
+#!/bin/bash
+
+# loan-calc: script to calculate monthly loan payments
+
+PROGNAME="${0##*/}"      # Use parameter expansion to get basename
+
+usage() {
+	cat <<- EOF
+	Usage: $PROGNAME PRINCIPAL INTEREST MONTHS
+
+	Where:
+
+	PRINCIPAL is the amount of the loan.
+	INTEREST is the APR as a number (7% = 0.07).
+	MONTHS is the length of the loan's term.
+
+	EOF
+}
+
+if (( $# != 3)); then
+	usage
+    exit 1
+fi 
+
+principal=$1
+interest=$2
+months=$3 
+bc << EOF
+	scale = 10
+	i = $interest / 12
+	p = $principal
+	n = $months
+	a = p * ((i * ((1 + i) ^ n)) / (((1 + i) ^ n) - 1))
+	print a, "\n"
+EOF
+```
+
+```
+$ ./loan-calc 
+Usage: loan-calc PRINCIPAL INTEREST MONTHS
+
+Where:
+
+PRINCIPAL is the amount of the loan.
+INTEREST is the APR as a number (7% = 0.07).
+MONTHS is the length of the loan's term.
+
+$ ./loan-calc 135000 0.0775 180
+1270.7222490000
+```
+
+This example calculates the monthly payment for a $135,000 loan at 7.75 percent APR for 180 months (15 years). Notice the precision of the answer. This is determined by the the value given to the special _scale_ variable in the _bc_ script. 
+
+A full desription of the _bc_ scripting language is provided by the _bc_ man page.
