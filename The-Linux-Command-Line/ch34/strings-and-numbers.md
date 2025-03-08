@@ -340,3 +340,7 @@ $ echo $((2#11111111))
 $ echo $((2#111111111111))
 4095
 ```
+
+#### Unary Operators
+
+There are two unary operators, + and -, which are used to indicate whether a number is positive or negative.
