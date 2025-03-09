@@ -174,3 +174,16 @@ $ for i in "${!foo[@]}"; do echo $i ; done
 4
 6
 ```
+
+#### Adding Elements to the End of an Array
+
+By using the += assignment operator, we can automatically append values to the end of an array.
+
+```
+$ foo=(a b c)
+$ echo ${foo[@]}
+a b c
+$ foo+=(d e f)
+$ echo ${foo[@]}
+a b c d e f
+```
