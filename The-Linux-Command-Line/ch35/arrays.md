@@ -207,3 +207,52 @@ $ ./array-sort
 Original array: f e d c b a
 Sorted array: a b c d e f
 ```
+
+#### Deleting an Array
+
+To delete an array, use the _unset_ command.
+
+```
+$ foo=(a b c d e f)
+$ echo ${foo[@]}
+a b c d e f
+$ unset foo
+$ echo ${foo[@]}
+
+```
+
+_unset_ may also be used to delete single array elements.
+
+```
+$ foo=(a b c d e f)
+$ echo ${foo[@]}
+a b c d e f
+$ unset 'foo[2]'
+$ echo ${foo[@]}
+a b d e f
+```
+
+In this example, we delete the third element of the array, subscript 2.
+Remember, arrays start with subscript zero, not one!
+Notice also that the array element must be quoted to prevent the shell from
+performing pathname expansion.
+
+Interestingly, the assignment of an empty value to an array does not empty its contents.
+
+```
+$ foo=(a b c d e f)
+$ foo=
+$ echo ${foo[@]}
+b c d e f
+```
+
+Any reference to an array variable without a subscript refers to element zero of the array.
+
+```
+$ foo=(a b c d e f)
+$ echo ${foo[@]}
+a b c d e f
+$ foo=A
+$ echo ${foo[@]}
+A b c d e f
+```
