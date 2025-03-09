@@ -16,3 +16,17 @@ Most programming languages support _multidimensional arrays_.
 
 Arrays in _bash_ are limited to a single dimension.
 Array support first appeared in _bash_ version 2.
+
+### Creating an Array
+
+Array variables are named just like other _bash_ variables and are created automatically when they are accessed.
+
+```
+$ a[1]=foo
+$ echo ${a[1]}
+foo
+```
+
+An array can also be created with the _declare_ command.
+
+`$ declare -a a`
