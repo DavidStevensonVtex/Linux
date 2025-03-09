@@ -256,3 +256,22 @@ $ foo=A
 $ echo ${foo[@]}
 A b c d e f
 ```
+
+### Associative Arrays
+
+_bash_ versions 4.0 and greater support _associative arrays_. Associative arrays use strings rather than integers as array indexes.
+
+For example, we can create an array called _colors_ and use color names as indices.
+
+Associative array elements are accessed in much the same way as integer-indexed arays.
+
+```
+$ declare -A colors
+$ colors["red"]="#ff0000"
+$ colors["green"]="#00ff00"
+$ colors["blue"]="#0000ff"
+$ echo ${colors["blue"]}
+#0000ff
+$ echo ${colors[@]}
+#ff0000 #00ff00 #0000ff
+```
