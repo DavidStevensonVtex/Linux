@@ -43,12 +43,11 @@ Multiple values may be assigned using the following syntax:
 
 `name=(value1 value2 ...)`
 
-```
-$ days=(Sun Mon Tue Wed Thu Fri Sat)
-$ echo $days
-```
+`$ days=(Sun Mon Tue Wed Thu Fri Sat)`
 
 It is also possible to assign values to a specific element by specifying the subscript for each value.
 
 `$ days=([0]=Sun [1]=Mon [2]=Tue [3]=Wed [4]=Thur [5]=Fri [6]=Sat)`
+
+### Accessing Array Elements
 
