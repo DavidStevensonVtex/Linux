@@ -89,3 +89,43 @@ for i in {0..11}; do
 done
 printf "\nTotal files = %d\n" $count
 ```
+
+### Array Operations
+
+#### Outputting the Entire Contents of an Array
+
+The subscripts \* and \@ can be used to access every element in an array.
+As with positional parameters, the \@ notation is the more useful of the two.
+
+
+```
+$ animals=("a dog" "a cat" "a fish")
+$ for i in ${animals[*]}; do echo $i; done
+a
+dog
+a
+cat
+a
+fish
+$ for i in ${animals[@]}; do echo $i; done
+a
+dog
+a
+cat
+a
+fish
+$ echo "${animals[*]}"
+a dog a cat a fish
+$ echo "${animals[@]}"
+a dog a cat a fish
+$ for i in "${animals[*]}"; do echo $i ; done
+a dog a cat a fish
+$ for i in "${animals[@]}"; do echo $i ; done
+a dog
+a cat
+a fish
+```
+
+We use four loops to see the effect of word splitting on the array contents.
+
+The \* notation results in a single word containing the array's contents, while the \@ notation results in three two-word strings, which matches the array's "real" contents.
