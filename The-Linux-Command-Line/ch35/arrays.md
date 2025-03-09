@@ -146,3 +146,31 @@ foo
 $ echo ${a[1]}, ${a[100]}
 foo, foo
 ```
+
+#### Finding the Subscripts Used by an Array
+
+As _bash_ allows arrays to contain "gaps" in the assignment of subscripts, it is sometimes useful to determine which elements actually exist. This can be done with a parameter expansion using the following forms:
+
+```
+${!array[*]}
+${!array[@]}
+```
+
+```
+$ echo ${!a[*]}
+1 100
+$ echo ${!a[@]}
+1 100
+```
+
+```
+$ foo=([2]=a [4]=b [6]=c)
+$ for i in "${foo[@]}"; do echo $i ; done
+a
+b
+c
+$ for i in "${!foo[@]}"; do echo $i ; done
+2
+4
+6
+```
