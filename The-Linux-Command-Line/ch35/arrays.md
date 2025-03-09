@@ -129,3 +129,20 @@ a fish
 We use four loops to see the effect of word splitting on the array contents.
 
 The \* notation results in a single word containing the array's contents, while the \@ notation results in three two-word strings, which matches the array's "real" contents.
+
+#### Determining the Number of Array Elements
+
+Using parameter expansion, we can determine the number of elements in an array in much the same way as finding the length of a string.
+
+```
+$ a[100]=foo
+$ echo ${#a[@]}  # number of array elements
+2
+$ echo ${#a[100]}  # length of element 100
+3
+$ for i in "${a[@]}"; do echo $i ; done
+foo
+foo
+$ echo ${a[1]}, ${a[100]}
+foo, foo
+```
