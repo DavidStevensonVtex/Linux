@@ -316,3 +316,44 @@ echo "Child: child is running..."
 sleep 5
 echo "Child: child is done. Exiting."
 ```
+
+### Named Pipes
+
+In most Unix-like systems, it is possible to create a special type of file called a _named pipe_.
+Named pipes are used to create a connection between two processes and can be used just like other types of files. They are not that popular, but they're good to know about.
+
+`process1 > named_pipe`
+
+`process2 < named_pipe`
+
+and it will behave like this:
+
+`process1 | process2`
+
+#### Setting Up a Named Pipe
+
+```
+$ mkfifo pipe1
+$ ls -l pipe1
+prw-rw-r-- 1 dstevenson dstevenson 0 Mar 10 15:11 pipe1
+```
+
+#### Using Named Pipes
+
+```
+$ ls -l > pipe1 &
+[1] 23067
+$ cat < pipe1
+total 36
+-rwxr--r-- 1 dstevenson dstevenson   885 Mar 10 14:02 array-2
+-rwxr--r-- 1 dstevenson dstevenson   144 Mar 10 15:04 async-child
+-rwxr--r-- 1 dstevenson dstevenson   365 Mar 10 15:04 async-parent
+-rw-rw-r-- 1 dstevenson dstevenson 10707 Mar 10 15:11 exotica.md
+prw-rw-r-- 1 dstevenson dstevenson     0 Mar 10 15:13 pipe1
+-rwxr--r-- 1 dstevenson dstevenson   385 Mar 10 14:21 pro-sub
+-rwxr--r-- 1 dstevenson dstevenson   170 Mar 10 14:32 trap-demo
+-rwxr--r-- 1 dstevenson dstevenson   347 Mar 10 14:37 trap-demo2
+[1]+  Done                    ls --color=auto -l > pipe1
+```
+
+The _ls_ command successfully completes once it is no longer blocked.
