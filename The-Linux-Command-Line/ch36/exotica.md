@@ -91,3 +91,85 @@ dstevenson:     3 file(s)
 File group owners:
 dstevenson:     3 file(s)
 ```
+
+#### Process Substitution
+
+While they look similar and can both be used to combine streams for redirection, there is an important difference between group commands and subshells. Whereas a group command executes all of its commands in the current shell, a subshell (as the name suggests) executes its command in a child copy of the current shell. This means the environment is copied and given to a new instance of the current shell.  When the subshell exits, the copy of the enviornment is lost, so any changes made to the subshell's environment (including variable assignment) are lost as well. Therefore, in most cases, unless a script requires a subshell, group commands are preferable to subshells. Group commands are both faster and require less memory.
+
+Process substitution is expressed in two ways.
+
+For processes that produce standard output, it looks like this:
+
+`<(list)`
+
+For processes that intake standard input, it looks like this:
+
+`>(list)`
+
+where _list_ is a list of commands.
+
+To solve our problem with _read_, we can employ process substitution like this.
+
+```
+$ read< <(echo "foo")
+$ echo $REPLY
+foo
+```
+Process substitution allows us to treat the outptu of a subshell as an ordinary file for purposes of redirection. In fact, since it is a form of expansion, we can examine its real value.
+
+```
+$ echo <(echo "foo")
+/dev/fd/63
+```
+
+By using echo to view the result of the expansion, we see that the output of the subshell is being provided by a file named _/dev/fd/63_.
+
+Process substitution is often used with loops containing _read_. 
+
+```
+#!/bin/bash
+
+# pro-sub: demo of process substitution
+
+while read attr links owner group size date time filename; do 
+    cat << EOF
+        Filename:   $filename
+        Size:       $size
+        Owner:      $owner
+        Group:      $group
+        Modified:   $date $time
+        Links:      $links
+        Attributes: $attr
+
+EOF
+done < <(ls -l --time-style="+%F %H:%m" | tail -n +2)
+```
+
+```
+$ ./pro-sub
+        Filename:   array-2
+        Size:       885
+        Owner:      dstevenson
+        Group:      dstevenson
+        Modified:   2025-03-10 14:03
+        Links:      1
+        Attributes: -rwxr--r--
+
+        Filename:   exotica.md
+        Size:       3837
+        Owner:      dstevenson
+        Group:      dstevenson
+        Modified:   2025-03-10 14:03
+        Links:      1
+        Attributes: -rw-rw-r--
+
+        Filename:   pro-sub
+        Size:       385
+        Owner:      dstevenson
+        Group:      dstevenson
+        Modified:   2025-03-10 14:03
+        Links:      1
+        Attributes: -rwxr--r--
+
+```
+
