@@ -173,3 +173,76 @@ $ ./pro-sub
 
 ```
 
+### Traps
+
+In Chapter 10, we saw how programs can respond to signals. We can add this capability to our scripts, too.
+Larger and more complicated scripts may benefit from having a singla handling routine.
+
+When we design a large, complicated script, it is important to consider what happens if the user logs off or shuts down the computer while the script is running. When such an event occurs, a signal will be sent to all affected processes. In turn, the programs representing those processes can perform actions to ensure a proper and orderly termination of the program.
+
+We could have the script delete the file when the script finishes its work. It would also be smart to have the script delete the file if a signal is received indicating that the program was going to be terminated prematurely.
+
+`trap argument signal [signal...]`
+
+where _argument_ is a string that will be read and treated as a command and _signal_ is the specification of a signal that will trigger the execution of the interpreted command.
+
+Here is a simple example:
+
+```
+#!/bin/bash
+
+# trap-demo: simple signal handling demo
+
+trap "echo 'I am ignoring you.'" SIGINT SIGTERM
+
+for i in {1..5}; do 
+    echo "Iteration $i of 5"
+    sleep 5
+done
+```
+
+```
+$ ./trap-demo
+Iteration 1 of 5
+^CI am ignoring you.
+Iteration 2 of 5
+^CI am ignoring you.
+Iteration 3 of 5
+^CI am ignoring you.
+Iteration 4 of 5
+^CI am ignoring you.
+Iteration 5 of 5
+^CI am ignoring you.
+```
+
+Constructing a string to form a useful sequence of c ommands can be awkward, so it it is common practice to specify a shell function as the command.
+
+```
+#!/bin/bash
+
+# trap-demo2: simple signal handling demo
+
+exit_on_signal_SIGINT () {
+    echo "Script interrupted." 2>&1
+    exit 0
+}
+
+exit_on_signal_SIGTERM () {
+    echo "Script terminated." 2>&1
+    exit 0
+}
+
+trap exit_on_signal_SIGINT SIGINT
+trap exit_on_signal_SIGTERM SIGTERM
+
+for i in {1..5}; do 
+    echo "Iteration $i of 5"
+    sleep 5
+done
+```
+
+```
+$ ./trap-demo2
+Iteration 1 of 5
+^CScript interrupted.
+```
