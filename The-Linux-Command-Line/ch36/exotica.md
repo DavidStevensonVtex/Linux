@@ -246,3 +246,31 @@ $ ./trap-demo2
 Iteration 1 of 5
 ^CScript interrupted.
 ```
+
+#### Temporary Files
+
+Traditionally, programs on Unix-likesystems create their temporary files in the /tmp/directory, a shared directory intended for such files. However, since the directory is shared, this poses certain security concerns, particularly for programs running with superuser privileges.
+
+Aside fromt he obvious step of setting proper permissiosn for files exposed to all users of the system, it is important to give temporary files non-predictable file names. This avoids an exploit known as a _temp race attack_. One way tocreate a non-predictable (but still descriptive) file name is to do something like this:
+
+`tempfile=/tmp/$(basename $0).$$.$RANDOM`
+
+where \$\$ is the current process id, and basename \$0 is the filename of the currently executing program.
+
+Note, however that the \$RANDOM shell variable returns a value only in the range 1-32767, which is not a large range in computer terms, so a single instance of the variable is not sufficient to overcome a determined cracker.
+
+A bettter way is to use the _mktemp_ program (not to be confused with the _mktemp_ standard library function) to both name and create the temporary file.
+
+The template should include a series of X characters, which are replaced by a correspodning number of random letters and numbers. The longer the series of X characters, the longer the series of random characters. Here is an example:
+
+`tempfile=$(mktemp /tmp/foobar.$$.XXXXXXXXXXX)`
+
+```
+$ tempfile=$(mktemp /tmp/foobar.$$.XXXXXXXXXXX)
+$ echo $tempfile
+/tmp/foobar.14541.xYrWrWTqt0N
+```
+
+For scripts that are executed by regular users, it may be wise to avoid the use of the _/tmp_ directory and create a directory for temporary files within the user's home directory, with a line of code such as this:
+
+`[[ -d $HOME/tmp ]] || mkdir $HOME/tmp
