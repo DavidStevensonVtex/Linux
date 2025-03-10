@@ -274,3 +274,45 @@ $ echo $tempfile
 For scripts that are executed by regular users, it may be wise to avoid the use of the _/tmp_ directory and create a directory for temporary files within the user's home directory, with a line of code such as this:
 
 `[[ -d $HOME/tmp ]] || mkdir $HOME/tmp
+
+### Asynchronous Execution with Wait
+
+It is sometimes desirable to perform more than one task at the same time.
+We have seen how all modern operating systems are at least multi-tasking if not multi-user as well.
+Scripts can be constructed to behave in a multi-tasking fashion.
+
+Usually this involves launching a script that, in turn, launches one or more child scripts to perform an additional task while the parent script continues to run. However, when a series of scripts runs this way, there can be problems keeping the parent and child coordinated.
+
+_bash_ has a builtin command to help manage _asynchronous execution_ such as this. The _wait_ command causes a parent script to pause until a specified process (i.e. the child script) finishes.
+
+`export PATH=$PATH:.`
+
+```
+#!/bin/bash
+
+# async-parent: Asynchronous execution demo (parent)
+
+echo "Parent: launching child script..."
+async-child &
+pid=$!
+echo "Parent: child (PID=$pid) launched."
+
+echo "Parent: continuing..."
+sleep 2
+
+echo "Parent: pausing to wait for chiild to finish..."
+wait "$pid"
+
+echo "Parent: child is finished. Continuing..."
+echo "Parent: parent is done. Exiting."
+```
+
+```
+#!/bin/bash
+
+# async-child: Asynchronous execution demo (child)
+
+echo "Child: child is running..."
+sleep 5
+echo "Child: child is done. Exiting."
+```
