@@ -32,3 +32,24 @@ Awk, named after its developers, Aho, Weinberger, and Kernighan, is a programmin
 What is the modern alternative to awk?
 
 "The Pyed Piper", or pyp, is a linux command line text manipulation tool similar to awk or sed, but which uses standard python string and list methods as well as custom functions evolved to generate fast results in an intense production environment.
+
+```
+$ ll /usr/bin/*awk
+lrwxrwxrwx 1 root root     21 Dec  5 12:48 /usr/bin/awk -> /etc/alternatives/awk*
+-rwxr-xr-x 1 root root 702944 Aug 17  2023 /usr/bin/gawk*
+-rwxr-xr-x 1 root root 162552 Feb 16  2020 /usr/bin/mawk*
+lrwxrwxrwx 1 root root     22 Dec  5 12:48 /usr/bin/nawk -> /etc/alternatives/nawk*
+$ ll /etc/alternatives/*awk
+lrwxrwxrwx 1 root root 13 Dec 13 11:31 /etc/alternatives/awk -> /usr/bin/gawk*
+lrwxrwxrwx 1 root root 13 Dec 13 11:31 /etc/alternatives/nawk -> /usr/bin/gawk*
+```
+
+### Other Sources of Information About sed and awk
+
+* Volume 2 of the UNIX Programmer's Guide
+* UNIX Power Tools
+* The AWK Programming Language
+* UNIX Programming Environment???
+* The GNU Awk User's Guide
+* Effective AWK Programming
+* UNIX Text Processing
