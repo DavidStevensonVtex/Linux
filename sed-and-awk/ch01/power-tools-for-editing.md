@@ -31,3 +31,32 @@ In summary, use _sed_:
 1. To automate editing actions to be performed on one or more files.
 2. To simplify the task of performing the same edits on multiple files.
 3. To write conversion programs.
+
+### A Pattern-Matching Programming Language
+
+Identifying _awk_ as a programming language scares some people away from it. If you are one of them, consider awk a different approach to problem solving.
+
+_Sed_ is easily seen as the flip side of interactive editing.
+
+A typical example of an _awk_ program is one that transforms data into a formatted report. Data retrieval is the process of extracting data from a file and generating a report.
+
+The key to all of these operations is that the data has some kind of structure. 
+Thus, the benefits of _awk_ are best realized when the data has some kind of structure.
+A text file can be loosely or tightly structured.
+
+Like _sed_ scripts, awk scripts are typically invoked by means of a shell wrapper.
+
+Simple one-line awk scripts c an be entered from the command line.
+
+Some of the things _awk_ allows you to do are:
+
+* View a text file as a textual database made up of records and fields.
+* Use variables to manipulate the database.
+* Use arithmetic and string operators.
+* Use common programming constructs such as loops and conditionals.
+* Generate formatted reports.
+* Define funcdtions.
+* Execute UNIX commands from a script.
+* Process the result of UNIX commands.
+* Process command-line arguments more gracefully.
+* Work more easily with multiple input streams.
