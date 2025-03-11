@@ -60,3 +60,12 @@ Some of the things _awk_ allows you to do are:
 * Process the result of UNIX commands.
 * Process command-line arguments more gracefully.
 * Work more easily with multiple input streams.
+
+### Four Hurdles to Mastering sed and awk
+
+You must learn:
+
+1. _How to use sed and awk._
+2. _To apply UNIX regular expression syntax._
+3. _How to interact with the shell._
+4. _The knack of script writing._
