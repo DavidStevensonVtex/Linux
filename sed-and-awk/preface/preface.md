@@ -26,3 +26,9 @@ Awk, named after its developers, Aho, Weinberger, and Kernighan, is a programmin
 * Appendix A: _Quick Reference for sed_
 * Appendix B: _Quick Reference for awk_
 * Appendix C: _Supplement for Chapter 12_
+
+### Availability of sed and awk
+
+What is the modern alternative to awk?
+
+"The Pyed Piper", or pyp, is a linux command line text manipulation tool similar to awk or sed, but which uses standard python string and list methods as well as custom functions evolved to generate fast results in an intense production environment.
