@@ -289,7 +289,7 @@ ABountifulHarvest()
 	debug && echo "After: TotalDeaths: $TotalDeaths, PeopleStarved: $PeopleStarved"
 
 	PercentPopulationStarvedPerYear=$(( TotalDeaths * 100 / TotalPopulation ))
-	echo "PercentPopulationStarvedPerYear: $PercentPopulationStarvedPerYear, Year: $Year"
+	debug && echo "PercentPopulationStarvedPerYear: $PercentPopulationStarvedPerYear, Year: $Year"
 }
 
 PerformanceEvaluation()
@@ -298,9 +298,11 @@ PerformanceEvaluation()
 	echo "In your 10-year term of office, $PercentPopulationStarvedPerYear percent of the"
 	echo "population starved per year on average, i.e. a total of"
 	echo -e "$TotalDeaths people died!!\n"
-	AcresPerPerson=$((Acres / Population))
-	echo "You started with 10 acres per person and ended with"
-	echo -e "$AcresPerPerson acres per person.\n"
+	if (( Population != 0 )); then
+		AcresPerPerson=$((Acres / Population))
+		echo "You started with 10 acres per person and ended with"
+		echo -e "$AcresPerPerson acres per person.\n"
+	fi
 
 	if (( (PercentPopulationStarvedPerYear > 33) || (AcresPerPerson < 7) )); then
 		ExtremeMismanagement
@@ -343,6 +345,17 @@ TrivialProblems()
 	echo "trivial problems."
 }
 
+AnotherGame()
+{
+	echo -e "\n\n"
+	read -p "Do you want to play another game? (Y/N):  " anothergame
+	anothergame=${anothergame^^}    # Convert to upper case
+    anothergame=${anothergame:0:1}	# Get only first character
+	if [[ "$anothergame" == "Y" ]]; then
+		GameOver="false"
+	fi
+}
+
 clear
 GameOver="false"
 while [[ "$GameOver" == "false" ]]; do
@@ -364,12 +377,7 @@ while [[ "$GameOver" == "false" ]]; do
 
 	PerformanceEvaluation
 
-	echo -e "\n\n"
-	read -p "Do you want to play another game? (Y/N):  " AnotherGame
-	AnotherGame=$(echo "$AnotherGame" | tr "a-z " "A-Z" | cut -c1-1)
-	if [[ "$AnotherGame" == "Y" ]]; then
-		GameOver="false"
-	fi
+	AnotherGame
 done
 
 echo "Goodbye"
