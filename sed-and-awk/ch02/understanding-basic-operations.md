@@ -70,3 +70,8 @@ Hubert Sims, 328A Brook Road, Roanoke VA
 Amy Wilde, 334 Bayshore Pkwy, Mountain View CA
 Sal Carpenter, 73 6th Street, Boston MA
 ```
+
+### Using sed
+
+There are two ways to invoke sed: either you specify your editing instructiosn on the command line or you put them in a file and supply the name of the file.
+
