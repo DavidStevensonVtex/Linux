@@ -33,3 +33,17 @@ One of the most distinctive features of awk is that it _parses_, or breaks up, e
 
 The authors of awk never imagined it would be used to write large programs. But, recognizing that awk was being used in this way, the authors revised the language, creating **nawk** to offer more support for writing larger programs and tackling general-purpose programming problems.
 
+### Command-Line Syntax
+
+You invoke sed and awk in much the same way. The command-line syntax is:
+
+`command [options] script filename`
+
+Like almost all UNIX programs, sed and awk can take input from standard input and send the output to standard output. If _filename_ is specified, input is taken from that file. The output contains the processed information.
+
+The _options_ for each command are different. The complete list of command-line options can be found in Appendix A, _Quick Reference for sed_; the complete list of options for awk is in Appendix B, _Quick Reference for awk_.
+
+One option common to both sed and awk is the _-f_ option that allows you to specify the name of a script file.
+
+`sed -f scriptfile inputfile`
+
