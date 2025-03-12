@@ -129,3 +129,10 @@ There are three ways to specify multiple instructions on the command line.
     ```
 
 This technique will not work in the C shell (but should work with shells compatible with Bourne shell, such as ksh, bash, pdksh, and zsh).
+
+#### Command garbled
+
+```
+$ sed -e 's/MA/Massachusetts' list
+sed: -e expression #1, char 18: unterminated `s' command
+```
