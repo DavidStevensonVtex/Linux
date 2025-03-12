@@ -75,3 +75,57 @@ Sal Carpenter, 73 6th Street, Boston MA
 
 There are two ways to invoke sed: either you specify your editing instructiosn on the command line or you put them in a file and supply the name of the file.
 
+### Specifying Simple Instructions
+
+You can specify simple editing commands on the command line.
+
+`sed [-e] 'instruction' file`
+
+The _-e_ option is necessary only when you supply more than one instruction on the command line.
+
+```
+$ sed 's/MA/Massachusetts/' list
+John Daggett, 341 King Road, Plymouth Massachusetts
+Alice Ford, 22 East Broadway, Richmond VA
+Orville Thomas, 11345 Oak Bridge Road, Tulsa OK
+Terry Kalkas, 402 Lans Road, Beaver Falls PA
+Eric Adams, 20 Post Road, Sudbury Massachusetts
+Hubert Sims, 328A Brook Road, Roanoke VA
+Amy Wilde, 334 Bayshore Pkwy, Mountain View CA
+Sal Carpenter, 73 6th Street, Boston Massachusetts
+```
+
+Enclosing the instruction in single quotes is not required in all cases but you should get in the habit of always doing it. The enclosing single quotes prevent the shell from interpreting special characters or spaces found in the editing instruction. (The shell usees spaces to determine individual arguments submitted to a program; characters that are special to the shell are expanded before the command is invoked.)
+
+```
+$ sed 's/ MA/, Massachusetts/' list
+John Daggett, 341 King Road, Plymouth, Massachusetts
+Alice Ford, 22 East Broadway, Richmond VA
+Orville Thomas, 11345 Oak Bridge Road, Tulsa OK
+Terry Kalkas, 402 Lans Road, Beaver Falls PA
+Eric Adams, 20 Post Road, Sudbury, Massachusetts
+Hubert Sims, 328A Brook Road, Roanoke VA
+Amy Wilde, 334 Bayshore Pkwy, Mountain View CA
+Sal Carpenter, 73 6th Street, Boston, Massachusetts
+```
+
+There are three ways to specify multiple instructions on the command line.
+
+1. Separate instructions with a semicolon.
+
+    `sed 's/ MA/, Massachusets/; s/ PA, Pennsylvania/' list`
+
+2.  Precede each instruction by _-e_.
+
+    `sed -e 's/ MA/, Massachusetts/' -e 's/ PA/, Pennsylvania/' list`
+
+3.  Use the multiline entry capability of the Bourne shell.
+
+    ```
+    $ sed '
+    > s/ MA/, Massachusetts/
+    > s/ PA/, Pennsylvania/
+    > s/ CA/, California/' list
+    ```
+
+This technique will not work in the C shell (but should work with shells compatible with Bourne shell, such as ksh, bash, pdksh, and zsh).
