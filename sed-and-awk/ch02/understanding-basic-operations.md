@@ -57,3 +57,16 @@ The pattern is a regular expression delimited with slashes (/). A procedure spec
 As each line of input is read, the program reads the first instruction in the script and checks the _pattern_ against the current line. if there is no match, the _procedure_ is ignored and the next instruction is read. If there is a match, then action or actions specified in the _procedure_ are followed. All of the instructions are read, not just the first instruction that matches the input line.
 
 When all the applicable instructions have been interpreted and applied for a single line, sed outputs the line and repeats the cycle for each input line. Awk, on the other hand, does not _automatically_ output the line; the instructions in your script control what is finally done with it.
+
+### Sample Mailing List
+
+```
+John Daggett, 341 King Road, Plymouth MA
+Alice Ford, 22 East Broadway, Richmond VA
+Orville Thomas, 11345 Oak Bridge Road, Tulsa OK
+Terry Kalkas, 402 Lans Road, Beaver Falls PA
+Eric Adams, 20 Post Road, Sudbury MA
+Hubert Sims, 328A Brook Road, Roanoke VA
+Amy Wilde, 334 Bayshore Pkwy, Mountain View CA
+Sal Carpenter, 73 6th Street, Boston MA
+```
