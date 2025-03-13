@@ -298,7 +298,7 @@ Messages can be caused by any of the following:
 * Not surrounding the instructions with single quotes('')
 * Not enclosing regular expressions within slashes(//)
 
-### Summary of Options
+#### Summary of Options
 
 ```
 Option   Description
@@ -309,3 +309,84 @@ Option   Description
 ```
 
 The _-v_ option for specifying parameters on the command line is discussed in Chapter 7, _Writing Scripts for awk_.
+
+### Using sed and awk Together
+
+```
+$ cat nameState
+s/ CA/, California/
+s/ MA/, Massachusetts/
+s/ OK/, Oklahoma/
+s/ PA/, Pennsylvania/
+s/ VA/, Virginia/
+```
+
+```
+$ sed -f nameState list | awk -F, '{ print $4 }'
+ Massachusetts
+ Virginia
+ Oklahoma
+ Pennsylvania
+ Massachusetts
+ Virginia
+ California
+ Massachusetts
+```
+
+While the result of this program is not very useful, it could be passed to **sort | uniq -c**, which would sort the states into an alphabetical list with a count of the occurrences of each state.
+
+```
+$ sed -f nameState list | awk -F, '{ print $4 }' | sort | uniq -c
+      1  California
+      3  Massachusetts
+      1  Oklahoma
+      1  Pennsylvania
+      2  Virginia
+```
+
+```
+#!/bin/bash
+
+awk -F, '{
+    print $4 ", " $0
+}' $@ | 
+sort |
+awk -F, '
+$1 == LastState {
+    print "\t" $2 
+}
+$1 != LastState {
+    LastState = $1
+    print $1
+    print "\t" $2
+}'
+```
+
+```
+$ sed -f nameState list | ./byState
+ California
+         Amy Wilde
+ Massachusetts
+         Eric Adams
+         John Daggett
+         Sal Carpenter
+ Oklahoma
+         Orville Thomas
+ Pennsylvania
+         Terry Kalkas
+ Virginia
+         Alice Ford
+         Hubert Sims
+```
+
+```
+$ sed -f nameState list | awk -F, '{ print $4 ", " $0 }'
+ Massachusetts, John Daggett, 341 King Road, Plymouth, Massachusetts
+ Virginia, Alice Ford, 22 East Broadway, Richmond, Virginia
+ Oklahoma, Orville Thomas, 11345 Oak Bridge Road, Tulsa, Oklahoma
+ Pennsylvania, Terry Kalkas, 402 Lans Road, Beaver Falls, Pennsylvania
+ Massachusetts, Eric Adams, 20 Post Road, Sudbury, Massachusetts
+ Virginia, Hubert Sims, 328A Brook Road, Roanoke, Virginia
+ California, Amy Wilde, 334 Bayshore Pkwy, Mountain View, California
+ Massachusetts, Sal Carpenter, 73 6th Street, Boston, Massachusetts
+```
