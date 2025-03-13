@@ -184,3 +184,15 @@ John Daggett, 341 King Road, Plymouth Massachusetts
 Eric Adams, 20 Post Road, Sudbury Massachusetts
 Sal Carpenter, 73 6th Street, Boston Massachusetts
 ```
+
+#### Mixing Options (POSIX)
+
+You can build up a script by combining both the _-e_ and _-f_ options on the command line. The script is the combination of all the commands in the order given.
+
+```
+Option   Description
+
+-e       Editing instruction follows.
+-f       Filename of script follows.
+-n       Suppress automatic output of input lines.
+```
