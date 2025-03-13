@@ -173,3 +173,14 @@ Do not redirect the output to the file you are editing or you will clobber it.
 (The ">" redirection operator truncates the file before the shell does anything else.)
 
 If you want the output file to replace the input file, you can do that as a separate step, using the **mv** command. But first make very sure your editing script has worked properly.
+
+#### Suppressing automatic display of input lines
+
+The default operation of sed is to output every input line. The _-n_ option suppresses the automatic output. When specifying this option, each instructino intended to produce output must contain a print command, p. 
+
+```
+$ sed -n -e 's/MA/Massachusetts/p' list
+John Daggett, 341 King Road, Plymouth Massachusetts
+Eric Adams, 20 Post Road, Sudbury Massachusetts
+Sal Carpenter, 73 6th Street, Boston Massachusetts
+```
