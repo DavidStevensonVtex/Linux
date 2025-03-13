@@ -289,3 +289,11 @@ Sal Carpenter
  73 6th Street
  Boston MA
 ```
+
+### Error Messages
+
+Messages can be caused by any of the following:
+
+* Not enclosing a procedure with braces ({})
+* Not surrounding the instructions with single quotes('')
+* Not enclosing regular expressions within slashes(//)
