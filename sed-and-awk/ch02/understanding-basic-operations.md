@@ -196,3 +196,9 @@ Option   Description
 -f       Filename of script follows.
 -n       Suppress automatic output of input lines.
 ```
+
+### Using awk
+
+_awk_ executes a set of instructions for each line of input.
+You can specify instructions on the command line or create a script file.
+
