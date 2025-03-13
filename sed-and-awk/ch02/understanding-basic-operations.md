@@ -136,3 +136,40 @@ This technique will not work in the C shell (but should work with shells compati
 $ sed -e 's/MA/Massachusetts' list
 sed: -e expression #1, char 18: unterminated `s' command
 ```
+
+### Script Files
+
+It is not practical to enter longer editing scripts on the command line.
+That is why it is usually best to create a script file that contains the editing instructions.
+
+`sed -f scriptfile file`
+
+```
+$ cat sedscr 
+s/ MA/, Massachusetts/
+s/ PA/, Pennsylvania/
+s/ CA/, California/
+s/ VA/, Virginia/
+s/ OK/, Oklahoma/
+```
+
+```
+$ sed -f sedscr list
+John Daggett, 341 King Road, Plymouth, Massachusetts
+Alice Ford, 22 East Broadway, Richmond, Virginia
+Orville Thomas, 11345 Oak Bridge Road, Tulsa, Oklahoma
+Terry Kalkas, 402 Lans Road, Beaver Falls, Pennsylvania
+Eric Adams, 20 Post Road, Sudbury, Massachusetts
+Hubert Sims, 328A Brook Road, Roanoke, Virginia
+Amy Wilde, 334 Bayshore Pkwy, Mountain View, California
+Sal Carpenter, 73 6th Street, Boston, Massachusetts
+```
+
+#### Saving Output
+
+`$ sed -f sedscr list > newlist`
+
+Do not redirect the output to the file you are editing or you will clobber it.
+(The ">" redirection operator truncates the file before the shell does anything else.)
+
+If you want the output file to replace the input file, you can do that as a separate step, using the **mv** command. But first make very sure your editing script has worked properly.
