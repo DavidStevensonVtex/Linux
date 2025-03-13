@@ -297,3 +297,15 @@ Messages can be caused by any of the following:
 * Not enclosing a procedure with braces ({})
 * Not surrounding the instructions with single quotes('')
 * Not enclosing regular expressions within slashes(//)
+
+### Summary of Options
+
+```
+Option   Description
+
+-f       Filename of script follows.
+-F       Change field separator
+-v       var=value follows.
+```
+
+The _-v_ option for specifying parameters on the command line is discussed in Chapter 7, _Writing Scripts for awk_.
