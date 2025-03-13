@@ -202,3 +202,90 @@ Option   Description
 _awk_ executes a set of instructions for each line of input.
 You can specify instructions on the command line or create a script file.
 
+#### Running awk
+
+`awk 'instructions' files`
+
+_Instructions+_ must be enclosed in single quotes to protect them from the shell.
+Instructions almost always contain curly braces and/or dollar signs, which are interpreted as special characters by the shell. Multiple command lines can be entered in the same way as show for sed: separating commands with semicolons or using the multiline input capability of the Bourne shell.
+
+`awk -f script files`
+
+While awk instructions have the same structure as sed, consisting of _pattern_ and _procedure_ sections, the procedures themselves are quite different. 
+
+There are statements and functions instead of one- or tw-character command sequences.
+For instance, you use the **print** statement to print the value of an expression or to print the contents of the current input line.
+
+Awk, in the usual case, interprets each input line as a record and each word on that line, delimited by spaces or tabs, as a field. (These defaults can be changed).
+One or more consecutive spaces or tabs count as a single delimiter. Awk allows you to reference these fields, in either patterns or procedures. $0 represents the entire input line. $1, $2, ... refer to the individual fields on the input line.
+
+```
+$ awk '{ print $1 }' list
+John
+Alice
+Orville
+Terry
+Eric
+Hubert
+Amy
+Sal
+```
+
+The default action is to match each line that matches the pattern.
+
+```
+$ awk '/MA/' list
+John Daggett, 341 King Road, Plymouth MA
+Eric Adams, 20 Post Road, Sudbury MA
+Sal Carpenter, 73 6th Street, Boston MA
+```
+
+```
+$ awk '/MA/ { print $1 }' list
+John
+Eric
+Sal
+```
+
+By default awk separates the input into fields using either spaces or tabs as the field separator.
+
+In the next example, we use the _-F_ option to change the field separator to a comma.
+
+```
+$ awk -F,  '/MA/ { print $1 }' list
+John Daggett
+Eric Adams
+Sal Carpenter
+```
+
+Do not confuse the -F option to change the field separator with the -f option to specify the name of a script file.
+
+In the next example, we print each field on its own line. Multiple commands are separated by semicolons.
+
+```
+$ awk -F,  '{ print $1; print $2; print $3 }' list
+John Daggett
+ 341 King Road
+ Plymouth MA
+Alice Ford
+ 22 East Broadway
+ Richmond VA
+Orville Thomas
+ 11345 Oak Bridge Road
+ Tulsa OK
+Terry Kalkas
+ 402 Lans Road
+ Beaver Falls PA
+Eric Adams
+ 20 Post Road
+ Sudbury MA
+Hubert Sims
+ 328A Brook Road
+ Roanoke VA
+Amy Wilde
+ 334 Bayshore Pkwy
+ Mountain View CA
+Sal Carpenter
+ 73 6th Street
+ Boston MA
+```
