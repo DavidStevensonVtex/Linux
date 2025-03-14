@@ -179,3 +179,18 @@ The following regular expression indicates the possible range of values for each
 `[0-1][0-9][-/][0-3][0-9][-/][0-9][0-9]`
 
 Either "-" or "/" could be the delimiter. Putting the hyphen in the first position ensures that it will be interpreted in a character class literally, as a hyphen, and not as indicating a range.
+
+#### Excluding a class of characters
+
+Normally, a character class includes all the characters that you want to match in that position. The circumflex (^) as the first character in the class excludes all of the characters in the class from being matched. Instead any character except newline that is not listed in the square brackets will be matched. The following will match any non-numeric character:
+
+`[^0-9]`
+
+It matches all uppercase and lowercase letters of the alphabet and all special characters such as punctuation marks.
+
+Excluding specific characters is sometimes more convenient that explicitly listing all the characters you want to match. For instance, if you wanted to match any consonant, you could simply exclude vowels:
+
+`[^aeiou]`
+
+The expression would match any consonant, any vowel in uppercase, and any punctuation mark or special character.
+
