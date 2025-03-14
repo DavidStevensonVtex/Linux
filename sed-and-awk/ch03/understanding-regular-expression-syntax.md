@@ -69,3 +69,19 @@ Characters      Usage
                 {n,} will match at least n occurrences.
                 {n,m} will match any number of occurrences between n and m.
 ```
+
+### The Ubiquitous Backslash
+
+The backslash (\\) character transforms metacharacters into ordinary characters, and ordinary characters into metacharacters. It forces the literal interpretation of any metacharacter such that it will match itslef. For instance, the dot (.) is a metacharacter that needs to be escaped with a backslash if you want to match a period.
+
+`\.   `
+
+The backslash is typically used to match **troff* requests or macros that begin with a dot.
+
+`\.nf`
+
+In addition, sed uses the backslash to cause of group of ordinary characters to be interpreted as metacharacters.
+
+`\( \) \{ \} \n`
+
+The _n_ in the "\n" construct represents a digit from 1 to 9; its use will be explained in Chapter 5, _Basic sed Commands_.
