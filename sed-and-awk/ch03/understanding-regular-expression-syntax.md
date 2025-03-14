@@ -85,3 +85,9 @@ In addition, sed uses the backslash to cause of group of ordinary characters to 
 `\( \) \{ \} \n`
 
 The _n_ in the "\n" construct represents a digit from 1 to 9; its use will be explained in Chapter 5, _Basic sed Commands_.
+
+### A Wildcard
+
+The _wildcard_ metacharacter, or dot (.), might be considered equivalent to a variable. A variable represents any value in an arithmetic expression. In a regular expression, a dot (.) is a wildcard that represents any character except the newline. (In awk, dot can even match an embedded newline character.)
+
+`80.86' matches "80286", "80386" or "80486".
