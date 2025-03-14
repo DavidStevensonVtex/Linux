@@ -141,3 +141,41 @@ Character   Function
 ^           Indicates a reverse match only when in the first position.
 ```
 
+#### A range of characters
+
+The hypen character (-) allows you to specify a range of characters.
+
+`[A-Z]`
+
+`[0-9]`
+
+`[cC]hapter [1-9]`
+
+Multiple ranges can be specified as well as intermixed with literal characters.
+
+`[0-9a-z?,.;:'"]`
+
+This expression will match any single character that is numeric, lowercase alphbetic, or question mark, comma, period, semicolon, colon, single quote, or quotation mark."
+
+If you specify multiple classes, you are describing multiple consecutive characters such as:
+
+`[a-zA-Z][.?!]`
+
+This expression will match "any lowercase or uppercase letter folowed by either a period, question mark or an exclamation mark."
+
+The close bracket (]) is interpreted as a member of the class if it occurs as the first character in the class (or as the first character after a circumflex). The hypne loses its pecial meaning with a class if it is the first or last character. Therefore, to match arithmetic operators, we put the hyphen (-) first in the following example:
+
+`[-+*/]`
+
+In awk, you could also use the backslash to escape the hyphen or close bracket wherever either one occurs in the range, but the syntax is messier.
+
+Trying to match dates with a regular expression is an interesting problem. Here are two possible formats:
+
+* MM-DD-YY
+* MM/DD/YY
+
+The following regular expression indicates the possible range of values for each character position:
+
+`[0-1][0-9][-/][0-3][0-9][-/][0-9][0-9]`
+
+Either "-" or "/" could be the delimiter. Putting the hyphen in the first position ensures that it will be interpreted in a character class literally, as a hyphen, and not as indicating a range.
