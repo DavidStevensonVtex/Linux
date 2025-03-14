@@ -229,5 +229,82 @@ These features are slowing making their way into commercial versiosn of **sed** 
 
 GNU awk and GNU sed support the character class notation, but not the other two bracket notations.
 
+#### Repeated Occurrences of a Character
 
+The asterisk (\*) metacharacter indicates tha the preceding regular expression may occur zero or more times. That is, if it modifies a single character, the character may be there or not, and if it is, there may be more than one of them.
 
+` "*hypertext"* `
+
+The word "hypertext" will be matched regardless of whether it appears in quotes or not.
+
+Consider a series of number:
+
+```
+1
+5
+10
+50
+100
+500
+1000
+5000
+```
+
+The regular expression
+
+`[15]0*`
+
+would match all lines, whereas the regular expression
+
+`[15]00*`
+
+would match all but the first two lines. The first zero is a literal, but the second is modified by the asterisk, meaning it might or might not be present. A similar technique is used to match consecutive spaces because you usually want to match one or more, not zero or more, spaces. You can use the following to do that:
+
+`  *`
+
+If you wanted to match any string inside of quotation marks, you could specify:
+
+`".*"`
+
+The span matched by ".*" is always the longest possible.
+
+As another example, a pair of angle brackets is a common notation for enclosing formatting instructions used in markup languages, such as SGML, HTML, and Ventura Publisher.
+
+You could print all ines with these marks by specifying:
+
+`$ grep '<.*>' sample`
+
+**sample** (file)
+
+```
+I can do it
+I cannot do it
+I can not do it
+I can't do it
+I cant do it
+```
+
+If we wanted to match each form of the negative statement, but not the positive statement, the following regular expression would do it:
+
+`can[ no']*t`
+
+```
+$ grep "can[ no']*t" sample
+I cannot do it
+I can not do it
+I can't do it
+I cant do it
+```
+
+The ability to match "zero or more" of something is known by the technical term "closure".
+The _extended set of metacharacters_ used by **egrep** and **awk** provides several variations of closure that can be quite useful.
+
+The plus sign (+) matches one or more occurrences of the preceding regular expression.
+
+The question mark (?) matches zero or one occurrences.
+
+`80[234]?86`
+
+Matches: 80286, 80386, 80486, and 8086.
+
+Don't confuse the ? in a regular expression with the ? wildcard character in the shell. The shell's ? represents a single character, equivalent to . in a regular expression.
