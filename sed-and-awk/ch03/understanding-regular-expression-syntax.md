@@ -194,3 +194,40 @@ Excluding specific characters is sometimes more convenient that explicitly listi
 
 The expression would match any consonant, any vowel in uppercase, and any punctuation mark or special character.
 
+#### POSIX character class additions
+
+The standard defines two classes of regular expressiosn: Basic Regular Expressiosn (BREs), which are the kind used by **grep** and **sed**, and Extended Regular Expressions, which are the kind used by **egrep** and **awk**.
+
+In order to accommodate non-English environments, the POSIX standard enhanced the ability of character classes to match characters not in the English alphabet.
+
+POSIX also changed what had been common terminology.
+
+* _Character classes_. A POSIX character class consists of keywords bracketed by `[:` and `:]`.
+* _Collating symbols_. 
+* _Equivalence classes_. An equivalence class lists a set of characters that should be considered equivalent, such as **e** and **è**. In consists of a named element from the locale, bracketed by `[=` and `=]`.
+
+**POSIX Character Classes**
+
+```
+Class       Matching Characters
+
+[:alnum:]   Printable characters (includes whitespace)
+[:alpha:]   Alphabetic characters
+[:blank:]   Space and tab characters
+[:cntrl:]   Control characters
+[:digit:]   Numeric characters
+[:graph:]   Printable and visible (non-space) characters
+[:lower:]   Lowercase characters
+[:print:]   Printable characters (includes whitespace)
+[:punct:]   Punctuation characters
+[:space:]   Whitespace characters
+[:upper:]   Uppercase characters
+[:xdigit:]  Hexadecimal digits
+```
+
+These features are slowing making their way into commercial versiosn of **sed** and **awk**, as vendors fully implement the POSIX standard.
+
+GNU awk and GNU sed support the character class notation, but not the other two bracket notations.
+
+
+
