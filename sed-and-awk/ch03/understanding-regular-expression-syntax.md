@@ -110,3 +110,34 @@ False alarms    The lines that I matched but didn't want to match
 ```
 
 Using metacharacters in patterns provides greater flexibility in extending or narrowing the range of matches.
+
+### Character Classes
+
+A character class is a refinement of the wildcard concept. Instead of matching _any_ character at a specific position, we can list the characters to be matched. The square bracket metacharacters ([]) enclose the list of characters, any of which can occupy a single position.
+
+Character classes are useful for dealing with uppercase and lowercase letters, for instance.
+
+`[Ww]hat`
+
+This regular expression can match "what" or "What".
+
+`grep '\.H[123]' ch0[12]`
+
+Note that you have to quote the pattern so that it is passed on to **grep** rather than be interpreted by the shell.
+
+As another example of a character class, assume you want to specify the different punctuation marks that end a sentence:
+
+`.[!?;:,".]  .`
+
+This expression matches "any character followed by an exclamation mark, question mark, semicolon, colon, comma, quotation mark or period, and followed by two spaces and any character. The dot inside the square brackets is interpreted literally.
+
+**Special Characters in Character Classes**
+
+```
+Character   Function
+
+\           Escapes any special character (awk only)
+-           Indicates a range when not in the first or last position
+^           Indicates a reverse match only when in the first position.
+```
+
