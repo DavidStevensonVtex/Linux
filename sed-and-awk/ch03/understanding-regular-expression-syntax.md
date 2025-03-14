@@ -91,3 +91,22 @@ The _n_ in the "\n" construct represents a digit from 1 to 9; its use will be ex
 The _wildcard_ metacharacter, or dot (.), might be considered equivalent to a variable. A variable represents any value in an arithmetic expression. In a regular expression, a dot (.) is a wildcard that represents any character except the newline. (In awk, dot can even match an embedded newline character.)
 
 `80.86' matches "80286", "80386" or "80486".
+
+### Writing Regular Expressions
+
+The process of writing a regular expression involves three steps:
+
+1. Knowing what it is you want to match and how it might appear in the text.
+2. Writing a pattern to describe what you want to match.
+3. Testing the pattern to see what it matches.
+
+You might consider evaluating the results of a pattern matching-operation as follows:
+
+```
+Hits            The lines that I wanted to match
+Misses          The lines that I didn't want to match.
+Omissions       The lines that I didn't match but wanted to match.
+False alarms    The lines that I matched but didn't want to match
+```
+
+Using metacharacters in patterns provides greater flexibility in extending or narrowing the range of matches.
