@@ -559,3 +559,24 @@ All of us, including 00ippy, our dog
 Some of us, including 00ippy, our dog
 00elda
 ```
+
+### Limiting the Extent
+
+Earlier we said that a regular expression tries to match the lognest string possible and that can cause unexpected problems. For isntance, look at the regular expression to match any number of characters inside the quotation marks.
+
+`".*"`
+
+A troff macro:
+
+.Se "Appendix" "Full Program Listings"
+
+Here's a different regular expression that matches the shortest possible extent between two quotation marks.
+
+`"[^"]*"`
+
+```
+$ cat sampleLine 
+.Se "Appendix" "Full Program Listings"
+$ gres '"[^"]*"' '00' sampleLine
+.Se 00 "Full Program Listings"
+```
