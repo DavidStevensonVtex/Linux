@@ -410,3 +410,24 @@ More thanone alternative can be specified:
 `UNIX|LINUX|NETBSD`
 
 In sed, lacking the union metacharacter, you would specify each pattern separately.
+
+### Grouping Operations
+
+Parentheses, () are used to group regular expressions and establish precedence.
+They are aprt of the extended set of metacharacters. Let's say that a company's name in a text file is referred to as "BigOne" or "BigOne Computer":
+
+`BigOne( Computer)?`
+
+`([0-9]\{3\}-)?[0-9]\{3\}-[0-9]\{4\}`
+
+```
+$ egrep "Lab (oratorie)?s" mail.list
+
+Bell Laboratories, Lucent Technologies
+Bell Labs
+```
+
+You can use parentheses with a vertical bar to group alternative operations.
+
+`company(y|ies)`
+
