@@ -354,3 +354,48 @@ Almond$
 ```
 
 This is not perfect as the second regular expression will match "Almond" at the end of al line, regardless of whther or not the next line begins with "Joy". A similar problem exists with the third regular expression.
+
+### A Span of Characters
+
+The metacharacters that allow you to specify repeated occurrences of a character (*+?) indicate a span of undetermined length. Consider the following expression:
+
+`11*0`
+
+It will match each of the following line:
+
+```
+10
+110
+111110
+111111111111111111111110
+```
+
+\\\{ and \\\} are available in **grep** and **sed**.
+POSIX **egrep** and POSIX awk use { and }. In any case, the braces enclose one or two arguments.
+
+`\{n,m\}`
+
+_n_ and _m_ are integers between 0 and 255. If you specify `\{n\}` by itself, then exactly _n_ occurrences of the preceding character or regular expression will be matched. If you specify `\{n,\}`, then at least _n_ occurrences will be matched. If you specify `\{n,m\}`, then any number of occurrences between _n_ and _m_ will be matched.
+
+For example, the following expression will match "1001", "10001" and "100001", but not "101" or "1000001".
+
+`10\{2,4\}1`
+
+This metacharacter pair can be useful for matching data in fixed-length fields, data that perhaps was extracted from a database. It can also be used to match formatted data such as phone numbers, U.S. social security numbers, inventory part IDS, etc.
+
+For isntance, the format of a social security number is three digits, a hypnen, followed by two digits, a hyphen, and then four digits. That pattern could be described as follows:
+
+`[0-9]\{3\}-[0-9]\{2\}-[0-9]\{4\}`
+
+Note that "?" is equivalent to "\{0,1\}" and "+" is equivalent to "\{1,\}".
+
+Similarly, a North American local phone number could be described with the following regular expression:
+
+`[0-9]\{3\}-[0-9]\{4\}`
+
+or 
+
+`[0-9]\{3\}-[0-9]\{3\}-[0-9]\{4\}`
+
+(Probably would want a combined regular expression that makes the area code optional.)
+
