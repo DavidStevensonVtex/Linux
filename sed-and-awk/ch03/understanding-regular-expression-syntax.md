@@ -308,3 +308,14 @@ The question mark (?) matches zero or one occurrences.
 Matches: 80286, 80386, 80486, and 8086.
 
 Don't confuse the ? in a regular expression with the ? wildcard character in the shell. The shell's ? represents a single character, equivalent to . in a regular expression.
+
+### What's the Word? Part I
+
+It is sometimes difficult to match a complete word.
+
+` book ` misses books.
+
+` books*` matches book and books (and bookkeeper, bookworm, and bookish?)
+
+` book.? ` would match book, books, booky
+
