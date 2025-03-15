@@ -507,3 +507,55 @@ once you get to the end of the book, you can't believe
 ```
 
 As a further note, the **ex** and **vi** text editors have a special metacharacter for matching a string at the beginning of a word, \\\<, and one for matching the end of a word, \\\>. Used as a pair, they can match a string only when it is a complete word.
+
+### Your Replacement Is Here
+
+When using **grep**, it seldom matters how you match the line as long as you match it. When you want to make a replacement, however, you have to consider the extent of the match. So, what characters on the line did you actually match?
+
+#### The extent of the match
+
+Let's loook at the following regular expression:
+
+`A*Z`
+
+This matches "zero or more occurrences of the A followed by Z." It would produce the same result as simply specifying "Z". The letetr "A" could be there or not; in fact, the letter "Z" is the only character matched.
+
+```
+All of us, including Zippy, our dog
+Some of us, including Zippy, our dog
+```
+
+Both lines would match the regular expression.
+
+We can use the *gres* command (see the sidebar, "A Program for Making Single Replacements") to demonstrate the extent of the match.
+
+```
+cat gres
+if [ $# -lt "3" ]; then
+    echo Usage: gres pattern replacement file
+    exit 1
+fi
+
+pattern=$1
+replacement=$2
+if [ -f $3 ];
+then
+    file=$3
+else
+    echo $3 is not a file
+    exit 1
+fi
+# A complicated but portable way to generate a Cotnrol-A character to use as the 
+# separator for the sed substitute command. Doing this greatly decreases the chance 
+# of having the separator character appear in the pattern or replacement tests.
+A=$(echo | tr '\012' '\001') # See footnote
+
+sed -e "s$A$pattern$A$replacement$A" $file
+```
+
+```
+$ gres "A*Z" "00" test
+All of us, including 00ippy, our dog
+Some of us, including 00ippy, our dog
+00elda
+```
