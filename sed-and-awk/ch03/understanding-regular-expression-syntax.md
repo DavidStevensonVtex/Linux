@@ -431,3 +431,79 @@ You can use parentheses with a vertical bar to group alternative operations.
 
 `company(y|ies)`
 
+### What's the Word? Part II
+
+```
+$ cat bookwords
+This file tests for book in various places, such as
+book at the beginning of a line or
+at the end of a line book
+as well as the plural books and
+handbooks.  Here are some
+phrases that use the word in different ways:
+"book of the year award"
+to look for a line with the word "book"
+A GREAT book!
+A great book? No.
+told them about (the books) until it
+Here are the books that you requested
+Yes, it is a good book for children
+amazing that it was called a "harmful book" when
+once you get to the end of the book, you can't believe
+A well-written regular expression should
+avoid matching unrelated words,
+such as booky (is that a word?)
+and bookish and
+bookworm and so on.
+```
+
+```
+$ grep ' book.* ' bookwords
+This file tests for book in various places, such as
+as well as the plural books and
+A great book? No.
+told them about (the books) until it
+Here are the books that you requested
+Yes, it is a good book for children
+amazing that it was called a "harmful book" when
+once you get to the end of the book, you can't believe
+such as booky (is that a word?)
+and bookish and
+```
+
+```
+$ grep book bookwords | wc -l
+17
+$ grep ' book.* ' bookwords | wc -l
+10
+```
+
+All (some) of these problems are caused by the string appearing at the beginning or end of a line.
+
+```
+$ egrep "^book|book$|\"book" bookwords 
+book at the beginning of a line or
+at the end of a line book
+"book of the year award"
+to look for a line with the word "book"
+bookworm and so on.
+```
+
+```
+$ egrep "(^| )[\"[{(]*book[]})\"?\!.,;:'s]*( |$)" bookwords
+This file tests for book in various places, such as
+book at the beginning of a line or
+at the end of a line book
+as well as the plural books and
+"book of the year award"
+to look for a line with the word "book"
+A GREAT book!
+A great book? No.
+told them about (the books) until it
+Here are the books that you requested
+Yes, it is a good book for children
+amazing that it was called a "harmful book" when
+once you get to the end of the book, you can't believe
+```
+
+As a further note, the **ex** and **vi** text editors have a special metacharacter for matching a string at the beginning of a word, \\\<, and one for matching the end of a word, \\\>. Used as a pair, they can match a string only when it is a complete word.
