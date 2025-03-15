@@ -319,3 +319,25 @@ It is sometimes difficult to match a complete word.
 
 ` book.? ` would match book, books, booky
 
+### Positional Metacharacters
+
+There are two metacharacters that allow you to specify the context in which a string appears, either at the beginning of a line or at the end of a line. The circumflex (^) metacharacter is a single character regular rexpression indicating the beginning of a line. The dollar sign ($) metacharacter is a single cahracter regular expression indicating  the end of a line. These are often referred to as "anchors," since they anchor, or restrict, the match to a specific position.
+
+You could print lines that begin with a tab.
+
+Using vi, you could remove blanks at the end of lines using the following regular expression:
+
+`  *$`
+
+troff macros must be input at the beginning of the line, and begin with a period. They can be matched with the following regular expression:
+
+`^\...`
+
+You can use both positional metacharacters together to match blank lines.
+
+`^$` or `^ *$`
+
+`$ grep -c '^$' ch04` counts the number of blank lines in the ch04 file.
+
+In **sed** and **grep**, "^" and "$" are only special when they occur at the beginning or end of a regular expression respectively.
+
