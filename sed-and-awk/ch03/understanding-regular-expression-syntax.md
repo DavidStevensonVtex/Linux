@@ -399,3 +399,14 @@ or
 
 (Probably would want a combined regular expression that makes the area code optional.)
 
+### Alternative Operations
+
+The vertical bar (|)metacharacter, part of the extended set of metacharacters, allows you to specify a union of regular expressions. For instance, this regular expression:
+
+`UNIX|LINUX`
+
+More thanone alternative can be specified:
+
+`UNIX|LINUX|NETBSD`
+
+In sed, lacking the union metacharacter, you would specify each pattern separately.
