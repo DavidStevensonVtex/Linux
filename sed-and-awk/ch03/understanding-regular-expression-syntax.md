@@ -341,3 +341,16 @@ You can use both positional metacharacters together to match blank lines.
 
 In **sed** and **grep**, "^" and "$" are only special when they occur at the beginning or end of a regular expression respectively.
 
+### Phrases
+
+A pattern-matching program such as **grep** does not match a string if it extends over two lines. For all practical purposes, it is difficult to match phrases with assurance. Remember that text files are basically unstructured and line breaks are quite random. If you are looking for any sequence of words, it is possible that they might appear on one line but they may be split up over two.
+
+You can write a series of regular expressions to capture a phrase:
+
+```
+Almond Joy
+Almond$
+^Joy
+```
+
+This is not perfect as the second regular expression will match "Almond" at the end of al line, regardless of whther or not the next line begins with "Joy". A similar problem exists with the third regular expression.
