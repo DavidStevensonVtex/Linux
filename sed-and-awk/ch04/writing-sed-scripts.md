@@ -129,3 +129,29 @@ You can apply multiple commands to the same range of lines by enclosing the edit
 ```
 
 This example not only deletes blank lines in **tbl** input but it also uses the substitute command, **s**, to change several **troff** requests. These commands are applied only to lines within the .TS/.TE block.
+
+### Testing and Saving Output
+
+In our previous discussion of the pattern space, you saw that sed:
+
+1. Makes a copy of the input line.
+2. Modifies that copy in the pattern space.
+3. Outputs the copy to standard output.
+
+What this means is that sed has a built-in safeguard so that you don't make changes to the original file. Thus the following line:
+
+`$ sed -f sedscr testfile`
+
+does not make the change in _testfile_. It sends all lines to standard output (typically the screen) -- the lines that were modified as well as the lines that are unchanged. You have to captuer this output in a new file if you want to save it.
+
+`$ sed -f sedscr testfile > newfile`
+
+The redirection symbol ">" redirects the output from sed to the file _newfile_. Don't rediret the output from the c ommand back to the input file or you will overwrite the input file. This will happen _before_ sed even gets a chance to process the file, effectively destroying your data.
+
+One important reason to redirect the output to a file is to verify your results.
+
+`$ diff testfile newfile`
+
+When you have verified your results, make a backup copy of the original input file and then use the **mv** command to overwrite the original with the new version. Be sure that the editing script is working properly before abandoning the original version.
+
+The following two shell scripts are useful for testing sed scripts and then making the changes permanently in a file. They are particularly useful when the same script needs to be run on multiple files.
