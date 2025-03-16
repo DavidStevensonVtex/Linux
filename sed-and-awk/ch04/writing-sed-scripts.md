@@ -33,3 +33,26 @@ $ sed -e 's/pig/cow/g;s/cow/horse/g' sample
 The horse is pink.
 The horse is not a horse.
 ```
+
+### The Pattern Space
+
+Sed maintains a _pattern space_, a workspace or temporary buffer where a single line of input is held while the editing commands are applied. \*
+
+\* One advantage of the one line at a time design is that sed can read very large files without any problems. Screen editors that have to read the entire file into memory, or some large portion of it, can run out of memory or be extremely slow to use in dealing with large files.
+
+Initially, the patetrn space contains a copy of a single input line. The normal flow through the s cript is to execute each command on that line until the end of the script is reached. The first command int he script is applied to that line. Then the second command is applied.
+
+When all the instructinso have been applied, the current line is output and the next line of input is read into the pattern space. Then all the commands in the script are applied to that line.
+
+As a consequence, any sed command might change the contents of the pattern space for the next command. The contents of the pattern space are dynamic and do not always match the original input line.
+
+Changing the order of the script example:
+
+```
+$ sed -e 's/cow/horse/g;s/pig/cow/g' sample
+The cow is pink.
+The horse is not a horse.
+```
+
+Some _sed_ commands change the flow through the script, as we will see in subsequent chapters. For example, the **N** command reads another line into the pattern space without removing the current line, so you can test for patterns across multiple lines. Other commands tell _sed_ to exit before reaching the bottom of the script or go to a labeled command. Sed also maintains a second temporary buffer called the _hold space_. You can copy the contents of the pattern space to the hold space and retrieve them later. The commands that make use of the hold space are discussed in Chapter 6.
+
