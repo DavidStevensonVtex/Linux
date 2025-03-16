@@ -106,3 +106,26 @@ An exclamation mark (!) following an address reverses the sense of the match. Fo
 
 This script, in effect, extracts **tbl** input from a source file.
 
+### Grouping Commands
+
+Braces ({}) are used in _sed_ to nest one address inside another to or to apply multiple commands at the same address. You can nest addressies if you want to specify a range of lines and then, within that range, specify another address. For example, to delete blank lines only inside blocks of **tbl** input, use the following command:
+
+```
+/^\.TS/,/^\.TE/ {
+    /^$/d
+}
+```
+
+The opening curly brace must end a line and the closing curly brace must be on a line by itself. Be sure there are no spaces after the braces.
+
+You can apply multiple commands to the same range of lines by enclosing the editing commands within braces, as shown below:
+
+```
+/^\.TS/,/^\.TE/ {
+    /^$/d
+    s/^\.ps 10/.ps 8/
+    s/^\.vs 12/.vs 10/
+}
+```
+
+This example not only deletes blank lines in **tbl** input but it also uses the substitute command, **s**, to change several **troff** requests. These commands are applied only to lines within the .TS/.TE block.
