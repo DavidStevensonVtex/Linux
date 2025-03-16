@@ -208,3 +208,20 @@ echo "all done"
 **runsed** simply invokes **sed -f sedscr** on the named files, one at a time, and redirects the  output to a temporary file. **runsed** then tests this temporary file to make sure that output was produced before copying it over the original.
 
 **runsed** does not protect you from imperfect editing scripts. You should run **testsed** first to verify your c hanges before actually making them permanent with **runsed**.
+
+### Four Types of sed Scripts
+
+#### Multiple Edits to the Same File
+
+Here is a list of the obvious edits that need to be made to the Horsefeathers Software bulletin.
+
+1. Replace all blank lines with a paragraph macro (.LP)
+2. Remove all leading spaces from each line.
+3. Remove th printer underscore line, the one that begins with a "+".
+4. Remove multiple blank spaces that were added between words.
+
+```
+s/^$/.LP/
+```
+
+`$ sed -f sedscr horsefeathers`
