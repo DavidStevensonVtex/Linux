@@ -56,3 +56,53 @@ The horse is not a horse.
 
 Some _sed_ commands change the flow through the script, as we will see in subsequent chapters. For example, the **N** command reads another line into the pattern space without removing the current line, so you can test for patterns across multiple lines. Other commands tell _sed_ to exit before reaching the bottom of the script or go to a labeled command. Sed also maintains a second temporary buffer called the _hold space_. You can copy the contents of the pattern space to the hold space and retrieve them later. The commands that make use of the hold space are discussed in Chapter 6.
 
+### A Global Perspective on Addressing
+
+One of the first things you'll notice about _sed_ commands is that _sed_ will apply them to every input line. _Sed_ is implicitly global, unlike **ed**, **ex**, or **vi**.
+
+In _sed_, it is as though each line has a turn at becoming the current line and so the command is applied to every line. Line addresses are used to supply context for, or _restrict_, and operation.
+
+A _sed_ command can specify zero, one, or two addresses. Anaddress can be a regular expression describing a pattern, a line number, or a line addressing symbol.
+
+* If no address is specified, then the command is applied to each line.
+* If there is only one address, thecommand is applied to any line matching the address.
+* If two comma-separated addresses are specified, the command is performed on the first line matching the first address and all succeeding lines up to and including a line matching the second address.
+* If an address is followed by an exclamation mark (!), the command is applied to all lines that do *not* match the address.
+
+To illustrate how addressing works, let's lok at examples using the delete command, **d**. A script consisting of simply the **d** command and no address produces no output since it deletes _all_ lines.
+
+`d`
+
+When a line number is supplied as an address, the command affects only that line.
+Forinstance, the following example deletes only the first line:
+
+`1d`
+
+The line number refers to an internal line count maintained by sed. This counter is not reset for multiple input files.
+
+Similarly, the input stream has only one last line. It can be specified using the addressing symbol \$. The following example deletes the last line of input:
+
+`$d`
+
+The following commqnd shows how to delete all line blocked by a partern of macros, in this cas, .TS and .TE, that mark **tbl** input.
+
+`/^\.TS/,/^\.TE/d`
+
+The following command deletes from line 50 to the last line in the file:
+
+`50,$d`
+
+You can mix a line address and a pattern addres:
+
+`1,/^$/d`
+
+This example deletes fromt he first line up to the first blank line, which for instance, will delete a mailer header from an Internet mail message that you have saved in a file.
+
+You can think of the first address as enabling the action and the second address as disabling it. _Sed_ has no way of looking ahead to determine if the second match will be made. The action will be applied to lines once the first match is made. The command will be applied to _all_ subsequent lines until the second match is made. In the previous example, if the file did not contain a blank line, then all lines would be deleted.
+
+An exclamation mark (!) following an address reverses the sense of the match. For instance, the following script deletes all lines _except_ those inside **tbl** input:
+
+`/^\.TS/,/^\.TE/!d`
+
+This script, in effect, extracts **tbl** input from a source file.
+
