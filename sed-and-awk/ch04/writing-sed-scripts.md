@@ -169,3 +169,42 @@ done
 
 You might also incorporate the **diff** command into the shell script. Add `diff $x tmp.$x` after the sed command.
 
+### runsed
+
+The shell script **runsed** was developed to make changes to an input file permanently. In other words, it is used in cases where you want the input file and the output file to be the same. Like **testsed**, it creates a temporary file, but then it takes the next step: copy the file over the original.
+
+```
+#!/bin/bash
+
+for x
+do  
+    echo "editing $x: \c"
+    if [[ "$x" = "sedscr" ]]; then
+        echo "not editing sedscr!"
+    elif [ -s "$s" ]; then  # file exists and has a length greater than zero
+        sed -f sedscr "$x" > /tmp/$x$$
+        if [ -s "/tmp/$x$$" ]
+        then 
+            if cmp -s "$x" "/tmp/$x$$"
+            then
+                echo "file not changed: \c"
+            else
+                mv "$x" "$x.bak"    # save original, just in case
+                cp "/tmp/$x$$" "$x"
+            file
+            echo "done"
+        else
+            echo "Sed produced an empty file\c"
+            echo " - check your sedscript."
+        fi
+        rm -f "/tmp/$$$"
+    else
+        echo "original file is empty."
+    fi
+done
+echo "all done"
+```
+
+**runsed** simply invokes **sed -f sedscr** on the named files, one at a time, and redirects the  output to a temporary file. **runsed** then tests this temporary file to make sure that output was produced before copying it over the original.
+
+**runsed** does not protect you from imperfect editing scripts. You should run **testsed** first to verify your c hanges before actually making them permanent with **runsed**.
