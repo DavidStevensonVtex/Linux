@@ -580,3 +580,17 @@ $ cat sampleLine
 $ gres '"[^"]*"' '00' sampleLine
 .Se 00 "Full Program Listings"
 ```
+
+### I Never Metacharacter I Didn't Like
+
+**Useful Regular Expressions**
+
+The □ character is a visible representation for the space character.
+
+```
+Item                                Regular Expression
+
+Postal Abbreviation for State       □[A-Z][A-Z]□
+City, State                         ^.*,□[A-Z][A-Z]
+City, State, Zip (POSIX egrep)
+```
