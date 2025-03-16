@@ -1,0 +1,4 @@
+for x   # for each script argument, $1 .. $9 ...
+do
+    sed -f sedscr $x > tmp.$x
+done

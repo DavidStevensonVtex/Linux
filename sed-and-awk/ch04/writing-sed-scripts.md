@@ -155,3 +155,17 @@ One important reason to redirect the output to a file is to verify your results.
 When you have verified your results, make a backup copy of the original input file and then use the **mv** command to overwrite the original with the new version. Be sure that the editing script is working properly before abandoning the original version.
 
 The following two shell scripts are useful for testing sed scripts and then making the changes permanently in a file. They are particularly useful when the same script needs to be run on multiple files.
+
+### testsed
+
+The shell script **testsed** automates the process of saving the output of sed in a temporary file. It excpects to find the script file, _sedscr_, in the current directory and applies these instructions to the input file named on the command line. The output is placed in a temporary file.
+
+```
+for x   # for each script argument, $1 .. $9 ...
+do
+    sed -f sedscr $x > tmp.$x
+done
+```
+
+You might also incorporate the **diff** command into the shell script. Add `diff $x tmp.$x` after the sed command.
+
