@@ -242,3 +242,18 @@ $ awk '{ printf("%6.2f  %s\n", $2 * $3, $0) }' emp.data | sort
 495.00  Mary        22.50   22
 500.00  Mark        25      20
 ```
+
+### 1.4 Selection
+
+Awk patterns are good for selecting interesting lines from the input for further processing. Since a pattern without an action prints all lines matching the pattern, many Awk programs consist of nothing more than a single pattern.
+
+#### Selection by Comparison
+
+`$2 >= 20`
+
+```
+$ awk '$2 >= 20 { print $0 }' emp.data
+Beth        21      0
+Mark        25      20
+Mary        22.50   22
+```
