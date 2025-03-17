@@ -189,3 +189,6 @@ total pay for Mary is 495
 total pay for Susie is 306
 ```
 
+### 1.3 Formatted Output 
+
+The `print` statement is meant for quick and easy output. To format the output exacly the way you want it, you may have to use the `printf` statement. As well wee in many subsequent examples, `printf` can produce almost any kind of output, but in this section we'll only show a few of its capabilities. Section A.4.3 gives the details.
