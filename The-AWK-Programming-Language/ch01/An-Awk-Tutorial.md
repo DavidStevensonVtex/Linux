@@ -268,3 +268,12 @@ $500.00 for Mark
 $495.00 for Mary
 $306.00 for Susie
 ```
+
+#### Selection by Text Content
+
+`$1 == "Susie"`
+
+```
+$ awk '$1 == "Susie" { print }' emp.data
+Susie       17      18
+```
