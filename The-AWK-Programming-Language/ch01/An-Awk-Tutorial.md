@@ -156,3 +156,19 @@ Mark 500
 Mary 495
 Susie 306
 ```
+
+#### Printing Line Numbers
+
+Awk provides another built-in variable, called NR, that counts the number of lines (records) read so far. We can use NR and \$0 to prefix each line of emp.data with its line number, like this:
+
+`{ print NR, $0 }`
+
+```
+$ awk '{ print NR, $0 }' emp.data 
+1 Beth        21      0
+2 Dan         19      0
+3 Kathy       15.50   10
+4 Mark        25      20
+5 Mary        22.50   22
+6 Susie       17      18
+```
