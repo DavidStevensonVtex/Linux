@@ -104,3 +104,17 @@ prints all of its input on the standard output. Since $0 is the whole line,
 `{ print $0 }`
 
 does the same thing.
+
+#### Printing Specific Fields
+
+`{ print $1, $3 }`
+
+```
+$ awk '{ print $1, $3 }' emp.data
+Beth 0
+Dan 0
+Kathy 10
+Mark 20
+Mary 22
+Susie 18
+```
