@@ -192,3 +192,37 @@ total pay for Susie is 306
 ### 1.3 Formatted Output 
 
 The `print` statement is meant for quick and easy output. To format the output exacly the way you want it, you may have to use the `printf` statement. As well wee in many subsequent examples, `printf` can produce almost any kind of output, but in this section we'll only show a few of its capabilities. Section A.4.3 gives the details.
+
+#### Lining Up Fields
+
+The `printf` statement has the form:
+
+`printf(format, value-1, value-2, ..., value-n)
+
+Where `format` is a string that contains text to be printed verbatim, interspersed with specifications of how each of the values is to be printed.
+
+`{ printf("total pay for %s is $%.2f\n", $1, $2 * $3) }`
+
+```
+$ awk '{ printf("total pay for %s is $%.2f\n", $1, $2 * $3) }' emp.data
+total pay for Beth is $0.00
+total pay for Dan is $0.00
+total pay for Kathy is $155.00
+total pay for Mark is $500.00
+total pay for Mary is $495.00
+total pay for Susie is $306.00
+```
+
+Here is another program that prints each employee's name and pay:
+
+`{ printf("%-8s $%6.2f\n", $1, $2 * $3) }`
+
+```
+$ awk '{ printf("%-8s $%6.2f\n", $1, $2 * $3) }' emp.data
+Beth     $  0.00
+Dan      $  0.00
+Kathy    $155.00
+Mark     $500.00
+Mary     $495.00
+Susie    $306.00
+```
