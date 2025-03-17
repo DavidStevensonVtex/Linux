@@ -2,7 +2,7 @@
 
 ## Chapter 1: An Awk Tutorial
 
-### 1.1. Getting Started
+### 1.1 Getting Started
 
 The file `emp.data` contains three fields of information about your employees: name, pay rate in dollars per hour, and number of hours worked.
 
@@ -84,3 +84,12 @@ awk: cmd. line:1:                             ^ syntax error
 ```
 
 Because of the syntax error, Awk did not try to execute this program.
+
+### 1.2 Simple Output
+
+The rest of this chapter contains a collection of short, typical Awk programs based on manipulation of the `emp.data` file above.
+
+There are only two types of data in Awk: numbers and strings of characters.
+
+Awk reads its input one line at a time and splits each line into fields, where, by default, afield is a sequence of characters that doesn't contain any spaces or tabs. The first field in the current line is called `$1`, the second `$2`, and so forth. The entire line is called `$0`.
+
