@@ -226,3 +226,19 @@ Mark     $500.00
 Mary     $495.00
 Susie    $306.00
 ```
+
+#### Sorting the Output
+
+We can sort awk output using the `sort` command.
+
+`awk '{ printf("%6.2f  %s\n", $2 * $3, $0) }' emp.data | sort`
+
+```
+$ awk '{ printf("%6.2f  %s\n", $2 * $3, $0) }' emp.data | sort
+  0.00  Beth        21      0
+  0.00  Dan         19      0
+155.00  Kathy       15.50   10
+306.00  Susie       17      18
+495.00  Mary        22.50   22
+500.00  Mark        25      20
+```
