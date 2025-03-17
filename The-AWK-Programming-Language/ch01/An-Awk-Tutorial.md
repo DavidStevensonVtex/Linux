@@ -274,6 +274,45 @@ $306.00 for Susie
 `$1 == "Susie"`
 
 ```
-$ awk '$1 == "Susie" { print }' emp.data
+$ awk '$1 == "Susie"' emp.data
 Susie       17      18
+```
+
+#### Combination of Patterns
+
+Patterns can be combined with parentheses and the logical opeators &&, ||, and !, which stand for AND, OR, and NOT. The program
+
+`$2 >= 20 || $3 >= 20`
+
+prints those lines where $2 is at least 20 or \$3 is at least 20:
+
+```
+$ awk '$2 >= 20 || $3 >= 20' emp.data
+Beth        21      0
+Mark        25      20
+Mary        22.50   22
+```
+
+Contrast this with the following program, which consts of two patterns:
+
+```
+$2 >= 20
+$3 >= 20
+```
+
+```
+$ awk '$2 >= 20; $3 >= 20' emp.data
+Beth        21      0
+Mark        25      20
+Mark        25      20
+Mary        22.50   22
+Mary        22.50   22
+
+$ awk '$2 >= 20
+> $3 >= 20' emp.data
+Beth        21      0
+Mark        25      20
+Mark        25      20
+Mary        22.50   22
+Mary        22.50   22
 ```
