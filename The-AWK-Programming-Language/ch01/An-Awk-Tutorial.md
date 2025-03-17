@@ -52,3 +52,24 @@ $ awk '$3 == 0' emp.data
 Beth        21      0
 Dan         19      0
 ```
+
+#### Running an Awk Program
+
+Command line:
+
+`awk 'program' input files`
+
+Example:
+
+`$ awk '$3 == 0 { print $1 }' file1 file2`
+
+You can omit the input files from the command line and just type
+
+`awk 'program'`
+
+In this case, Awk will apply the _program_ to whatever you type next on your terminal until you type an end-of-file signal (Control-D on Unix systems).
+
+It may be easier to put the program into a program file:
+
+`awk -f profile optional list of input files`
+
