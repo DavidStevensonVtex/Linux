@@ -73,3 +73,14 @@ It may be easier to put the program into a program file:
 
 `awk -f profile optional list of input files`
 
+#### Errors
+
+```
+$ awk '$3 == 0 [ print $1, $2 * $3 }' emp.data
+awk: cmd. line:1: $3 == 0 [ print $1, $2 * $3 }
+awk: cmd. line:1:         ^ syntax error
+awk: cmd. line:1: $3 == 0 [ print $1, $2 * $3 }
+awk: cmd. line:1:                             ^ syntax error
+```
+
+Because of the syntax error, Awk did not try to execute this program.
