@@ -93,3 +93,14 @@ There are only two types of data in Awk: numbers and strings of characters.
 
 Awk reads its input one line at a time and splits each line into fields, where, by default, afield is a sequence of characters that doesn't contain any spaces or tabs. The first field in the current line is called `$1`, the second `$2`, and so forth. The entire line is called `$0`.
 
+#### Printing Every Line
+
+The statement by itself prints the current line, so the program
+
+`{ print }`
+
+prints all of its input on the standard output. Since $0 is the whole line, 
+
+`{ print $0 }`
+
+does the same thing.
