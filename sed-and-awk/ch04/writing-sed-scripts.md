@@ -232,3 +232,10 @@ The most common use of _sed_ is in making a set of search-and-replacement edits 
 
 Using **grep** to examine large amounts of input can be very helpful. 
 Note the **phrase** script in Chapter 6 to look for occurrences of multipel words over consecutive lines.
+
+#### Extracting Contents of a File
+
+One type of application is used for extracting relevant material from a file.
+
+Here are two examplse: extracting a macro definition from a macro package and displaying the outline of a document.
+
