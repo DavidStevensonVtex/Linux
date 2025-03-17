@@ -136,3 +136,23 @@ $ awk '{ print NF, $1, $NF }' emp.data
 3 Susie 18
 ```
 The above program prints the number of fields and the first and last fields of each input line.
+
+#### Computing and Printing
+
+You can also do computations on field values and include the results in what is printed.
+
+The progeram
+
+`{ print $1, $2 * $3 }`
+
+is a typical example.
+
+```
+$ awk '{ print $1, $2 * $3 }' emp.data
+Beth 0
+Dan 0
+Kathy 155
+Mark 500
+Mary 495
+Susie 306
+```
