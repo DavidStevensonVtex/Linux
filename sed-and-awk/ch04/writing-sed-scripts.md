@@ -225,3 +225,10 @@ s/^$/.LP/
 ```
 
 `$ sed -f sedscr horsefeathers`
+
+#### Making Changes Across a Set of Files
+
+The most common use of _sed_ is in making a set of search-and-replacement edits across a set of files. Many times these scripts aren't very unusual or interesting, just a list of substitute commands that change one word or phrase to another. Of course, scripts don't need to be interesting as long as they are useful and save doing the work manually.
+
+Using **grep** to examine large amounts of input can be very helpful. 
+Note the **phrase** script in Chapter 6 to look for occurrences of multipel words over consecutive lines.
