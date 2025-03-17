@@ -118,3 +118,21 @@ Mark 20
 Mary 22
 Susie 18
 ```
+
+Expressions separated by a comma in a `print` statement are, by default, separated by a single space when they are printed.
+Each line produced by `print` ends witha newline character.
+
+#### NF, the Number of Fields
+
+It might appear that you must always refer to fields as `$1`, `$2`, and so on, but any expression can be used after \$ to denote a field number; the expression is evaluated and its numeric value is used as a field number. Awk counts the number of fields in the current input line and stores the count in a built-in variable called `NF`.
+
+```
+$ awk '{ print NF, $1, $NF }' emp.data
+3 Beth 0
+3 Dan 0
+3 Kathy 10
+3 Mark 20
+3 Mary 22
+3 Susie 18
+```
+The above program prints the number of fields and the first and last fields of each input line.
