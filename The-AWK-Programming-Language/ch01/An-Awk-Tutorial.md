@@ -257,3 +257,14 @@ Beth        21      0
 Mark        25      20
 Mary        22.50   22
 ```
+
+#### Selection by Computation
+
+`$2 * $3 > 200 { printf("$%.2f for %s\n", $2 * $3, $1 ) }`
+
+```
+$ awk '$2 * $3 > 200 { printf("$%.2f for %s\n", $2 * $3, $1 ) }' emp.data
+$500.00 for Mark
+$495.00 for Mary
+$306.00 for Susie
+```
