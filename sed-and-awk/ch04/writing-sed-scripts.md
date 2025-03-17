@@ -256,3 +256,9 @@ We can refine this command to exclude lines containing three or more consecutive
 
 `/---/~s/--/\\(em/g`
 
+### Getting to the PromiSed Land
+
+1. Know thy input!
+2. Sample Before Buying.
+3. Think Before Doing.
+4. Be Pragmatic!
