@@ -239,3 +239,20 @@ One type of application is used for extracting relevant material from a file.
 
 Here are two examplse: extracting a macro definition from a macro package and displaying the outline of a document.
 
+##### Extracting a macro definition
+
+##### Generating an outline
+
+##### Edits To Go
+
+The following command changes two consecutive dashes into an em-dash.
+
+`s/--/\\(em/g`
+
+We souble the backslashes in the replacement string for `\(em`, since the backslash has a special meaning to _sed_.
+
+
+We can refine this command to exclude lines containing three or more consecutive hyphens. To do this, we use the !address modifier.
+
+`/---/~s/--/\\(em/g`
+
