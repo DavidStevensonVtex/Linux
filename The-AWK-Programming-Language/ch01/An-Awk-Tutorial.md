@@ -316,3 +316,27 @@ Mark        25      20
 Mary        22.50   22
 Mary        22.50   22
 ```
+
+#### Data Validation
+
+Real data always contains errors. Awk is an excellent tool for checking that data in in the right format and has reasonable values, a task called _data validation_.
+
+Data validation is essentially negative: instead of printing lines with desirable properties, one prints lines that are suspicious.
+
+The following program uses comparison patterns to apply five plausibility tests to each line of `emp.data`.
+
+**emp.validate**
+
+```
+NF != 3     { print $0, "number of fields is not equal to 3" }
+$2 < 15     { print $0, "rate is too low" }
+$2 > 25     { print $0, "rate exceeds $25 per hour" }
+$3 < 0      { print $0, "negative hours worked" }
+$3 > 60     { print $0, "too many hours worked" }
+```
+
+If there are no errors, there's no output.
+
+```
+$ awk -f emp.validate emp.data
+```
