@@ -172,3 +172,20 @@ $ awk '{ print NR, $0 }' emp.data
 5 Mary        22.50   22
 6 Susie       17      18
 ```
+
+#### Putting Text in the Output
+
+You can also print words in the mids of fields and computed values, by including quoted strings of characters in the list:
+
+`{ print "total pay for", $1, "is", $2 * $3 }`
+
+```
+$ awk '{ print "total pay for", $1, "is", $2 * $3 }' emp.data
+total pay for Beth is 0
+total pay for Dan is 0
+total pay for Kathy is 155
+total pay for Mark is 500
+total pay for Mary is 495
+total pay for Susie is 306
+```
+
