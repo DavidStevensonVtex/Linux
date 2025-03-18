@@ -34,3 +34,15 @@ Whe sed is unable to understand a command, it prints the message "Command garble
 Multiple sed commands can be placed on the same line if each one is separated by a semicolon.
 
 Placing multiple commands on the same line is highly discouraged because sed scripts are difficult enough to read even when each command is written on its own line.
+
+### Comment
+
+You can use a comment to document a script by describing its purpose.
+
+In System V's version of sed, a comment is permitted only on the first line.
+
+The number sign (\#) must be the first character on the line.
+
+If necessary, the comment can be continued on multiple lines by ending the preceding line with a backslash. For consistency, you might begin the continuation line with a \# so the line's purpose is obvious.
+
+If the next character following \# is **n**, the script will not automatically produce output. It is equivalent to specify the command-line option `-n`. Under the POSIX standard, \#n used in this way must be the first two characters in the file.
