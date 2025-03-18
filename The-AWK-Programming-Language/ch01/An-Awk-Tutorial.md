@@ -580,3 +580,33 @@ $ awk -f interest1.awk
         1464.10
         1610.51
 ```
+
+#### For Statement
+
+```
+$ cat interest2.awk
+# interest2 - compute compound interest
+#   input: amount rate years
+#   output: compounded value at the end of each year
+{
+  for (i = 1; i <= $3 ; i++) {
+    printf("\t%.2f\n", $1 * (1 + $2) ^ i)
+  }
+}
+```
+
+```
+$ awk -f interest2.awk
+1000 0.05 5
+        1050.00
+        1102.50
+        1157.63
+        1215.51
+        1276.28
+1000 0.10 5
+        1100.00
+        1210.00
+        1331.00
+        1464.10
+        1610.51
+```
