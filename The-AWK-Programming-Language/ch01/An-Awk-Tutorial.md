@@ -361,3 +361,34 @@ Susie       17      18
 
 An action is a sequence of statements separated by newlines or semicolons.  In these statements, you can use not only the built-in variables like NF, but you can create your own variables performing calculations, storing data, and the like. In Awk, created variables are not declared; they come into existence when you use them.
 
+#### Counting
+
+This program uses a variable emp to count the number of employees who have worked more than 15 hours:
+
+```
+$3 > 15 { emp = emp + 1 }
+END     { print emp, "employees worked more than 15 hours." }
+```
+
+```
+$ awk '$3 > 15 { emp = emp + 1 }
+> END     { print emp, "employees worked more than 15 hours." }' emp.data
+3 employees worked more than 15 hours.
+```
+
+Statements like 
+
+`emp = emp + 1`
+
+occur so frequently that C and languages inspired by it will provide an increment operator ++ as a shorthand equivalent.
+
+```
+$3 > 15 { emp++ }
+END     { print emp, "employees worked more than 15 hours." }
+```
+
+```
+$ awk '$3 > 15 { emp++ }
+> END     { print emp, "employees worked more than 15 hours." }' emp.data
+3 employees worked more than 15 hours.
+```
