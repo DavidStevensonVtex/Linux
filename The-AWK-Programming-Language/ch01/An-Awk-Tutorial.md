@@ -467,7 +467,7 @@ $ awk '    { names = names $1 " " }
 Beth Dan Kathy Mark Mary Susie 
 ```
 
-### Printing the Last Input Line
+#### Printing the Last Input Line
 
 Built in variables like NR retain their value in an END action, and so do fields like $0. The program:
 
@@ -478,4 +478,21 @@ is one way to print the last line.
 ```
 $ awk 'END { print $0 }' emp.data
 Susie       17      18
+```
+
+#### [Built-in Functions](https://www.gnu.org/software/gawk/manual/html_node/Built_002din.html)
+
+Besides arithmetic functions for square roots, logarithms, random numbers, and the like, there are also functions that manipulate text. One of these is length, which counts the number of characters in a string.
+For example, this program computes the length of each person's name:
+
+`{ print $1, length($1) }`
+
+```
+$ awk '{ print $1, length($1) }' emp.data
+Beth 4
+Dan 3
+Kathy 5
+Mark 4
+Mary 4
+Susie 5
 ```
