@@ -340,3 +340,19 @@ If there are no errors, there's no output.
 ```
 $ awk -f emp.validate emp.data
 ```
+
+#### BEGIN and END
+
+The special pattern `BEGIN` matches before the first line of the first input file is read, and `END` matches after the last line of the last file has been processed.
+
+```
+$ awk 'BEGIN { print "NAME    RATE        HOURS"; print "" }; { print $0 }' emp.data
+NAME    RATE        HOURS
+
+Beth        21      0
+Dan         19      0
+Kathy       15.50   10
+Mark        25      20
+Mary        22.50   22
+Susie       17      18
+```
