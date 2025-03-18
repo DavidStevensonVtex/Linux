@@ -518,3 +518,31 @@ $ awk '{ nc += length($0) + 1
 
 Awk provides an `if-else` statement for making decisiosn and several statements for writing loops, all modeled on those found in the C programming language. They can only be used in actions.
 
+#### If-Else Statement
+
+The fololowing program computes the total and average pay of employees making more than $30 an hour. It uses an `if` to defined against any potential division by zero in computing the average pay.
+
+```
+$2 > 30 { n++; pay += $2 * $3 }
+END   { if (n > 0) {
+          print n, "high-pay employees, total pay is", pay, " average pay is", pay/n
+        } else {
+          print "No employees are paid more than $30/hour"
+        } 
+      }
+```
+
+Note also that if an `if` statement controls only a single statement, no braces are necessary, though they are if more than one statement is controlled. This version
+
+```
+$ awk '$2 > 30 { n++; pay += $2 * $3 }
+> END   { if (n > 0) {
+>           print n, "high-pay employees, total pay is", pay, " average pay is", pay/n
+>         } else {
+>           print "No employees are paid more than $30/hour"
+>         } 
+>       }' emp.data
+No employees are paid more than $30/hour
+```
+
+uses braces around both `if` and `else` parts to make it clear what the scope of control is. In general, it's good practice to use such redundant braces.
