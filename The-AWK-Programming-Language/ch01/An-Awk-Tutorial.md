@@ -466,3 +466,16 @@ $ awk '    { names = names $1 " " }
 > END { print names }' emp.data
 Beth Dan Kathy Mark Mary Susie 
 ```
+
+### Printing the Last Input Line
+
+Built in variables like NR retain their value in an END action, and so do fields like $0. The program:
+
+`END { print $0 }`
+
+is one way to print the last line.
+
+```
+$ awk 'END { print $0 }' emp.data
+Susie       17      18
+```
