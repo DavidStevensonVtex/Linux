@@ -447,3 +447,22 @@ highest hourly rate: 25 for Mark
 ```
 
 In this program the variable _maxrate_ holds a numeric value, while the variable `maxemp` holds a string.
+
+#### String Concatenation
+
+New strings may be created by pasting together old ones; this operation is called _concatenation_.
+
+The string concatenation operation is represented in an Awk program by writing wring values one after the other; there is no explicit concatenation operator.
+
+An example:
+
+```
+    { names = names $1 " " }
+END { print names }
+```
+
+```
+$ awk '    { names = names $1 " " }
+> END { print names }' emp.data
+Beth Dan Kathy Mark Mary Susie 
+```
