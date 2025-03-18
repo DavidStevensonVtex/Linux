@@ -513,3 +513,8 @@ $ awk '{ nc += length($0) + 1
 > END { print NR, "lines,", nw, "words,", nc, "characters" }' emp.data
 6 lines, 18 words, 136 characters
 ```
+
+### 1.6 Control-Flow Statements
+
+Awk provides an `if-else` statement for making decisiosn and several statements for writing loops, all modeled on those found in the C programming language. They can only be used in actions.
+
