@@ -630,3 +630,32 @@ BEGIN {
 ```
 
 All of the computation is done in the BEGIN block; any filename arguments are simply ignored.
+
+### 1.7 Arrays
+
+Awk provides arrays for storing groups of related values.
+This program prints its input in reverse order by line.
+
+```
+$ cat reverse.awk
+# reverse - print input in reverse order by lines
+
+        { line[NR] = $0 }   # remember each input line
+END     {
+    for ( i = NR; i > 0; i--) {
+        print line[i]
+    }
+}
+```
+
+```
+$ awk -f reverse.awk emp.data
+Susie       17      18
+Mary        22.50   22
+Mark        25      20
+Kathy       15.50   10
+Dan         19      0
+Beth        21      0
+```
+
+The subscripts in this example are numeric, but one of the most useful features of Awk is that array subscripts are not limited to numeric values; they can be arbitrary strings of characters.
