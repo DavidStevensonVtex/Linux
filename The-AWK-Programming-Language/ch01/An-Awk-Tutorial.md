@@ -546,3 +546,37 @@ No employees are paid more than $30/hour
 ```
 
 uses braces around both `if` and `else` parts to make it clear what the scope of control is. In general, it's good practice to use such redundant braces.
+
+#### While Statement
+
+A `whilte` statement has a condition and a body. The statements in the body are performed repeatedly while the condition is true.
+
+```
+$ cat interest1.awk
+# interest1 - compute compound interest
+#   input: amount rate years
+#   output: compounded value at the end of each year
+{
+  i = 1
+  while (i <= $3) {
+    printf("\t%.2f\n", $1 * (1 + $2) ^ i)
+    i++
+  }
+}
+```
+
+```
+$ awk -f interest1.awk
+1000 .05 5
+        1050.00
+        1102.50
+        1157.63
+        1215.51
+        1276.28
+1000 .10 5
+        1100.00
+        1210.00
+        1331.00
+        1464.10
+        1610.51
+```
