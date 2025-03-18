@@ -496,3 +496,20 @@ Mark 4
 Mary 4
 Susie 5
 ```
+
+#### Counting Lines, Words and Characters
+
+This program uses length, NF and NR to count the number of lines, words, and characters in the input, like the unix program wc.
+
+```
+{ nc += length($0) + 1
+  nw += NF }
+END { print NR, "lines,", nw, "words,", nc, "characters" }
+```
+
+```
+$ awk '{ nc += length($0) + 1
+>   nw += NF }
+> END { print NR, "lines,", nw, "words,", nc, "characters" }' emp.data
+6 lines, 18 words, 136 characters
+```
