@@ -356,3 +356,8 @@ Mark        25      20
 Mary        22.50   22
 Susie       17      18
 ```
+
+### 1.5 Computing with Awk
+
+An action is a sequence of statements separated by newlines or semicolons.  In these statements, you can use not only the built-in variables like NF, but you can create your own variables performing calculations, storing data, and the like. In Awk, created variables are not declared; they come into existence when you use them.
+
