@@ -431,3 +431,19 @@ The operator += is an abbreviation for incrementing a variable; it increments th
 
 `     { pay += $2 * $3 }`
 
+#### Handling Text
+
+Awk variables can hold strings of characters aw well as numbers. This program finds the employee who is paid the most per hour:
+
+```
+$2 > maxrate { maxrate = $2; maxemp = $1 }
+END { print "highest hourly rate:", maxrate, "for", maxemp }
+```
+
+```
+$ awk '$2 > maxrate { maxrate = $2; maxemp = $1 }
+> END { print "highest hourly rate:", maxrate, "for", maxemp }' emp.data
+highest hourly rate: 25 for Mark
+```
+
+In this program the variable _maxrate_ holds a numeric value, while the variable `maxemp` holds a string.
