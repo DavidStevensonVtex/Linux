@@ -80,3 +80,53 @@ The _replacement_ is a string of characters that will match what is matched by t
 _Flags_ can be used in combination where it makes sense. For instance, **gp** makes the substitution globally on the line and prints the line. The global flag is by far the most commonly used. Without it, the replacement is made only for the first occurrence on the line.
 
 Because the default action is to pass through all lines, regardless of whether any action is taken, the print and write flags are typically used when the default output is suppressed (the `-n` option).
+
+### Replacement Metacharacters
+
+The replacement metacharacters are backslash (\\), apmersand (&), and `\n`.
+
+"•" represents an actual tab character.
+
+Replace the second tab on each line with a newline.
+```
+s/•/\
+/2
+```
+
+Note that no spaces are permitted after the backslash.
+
+This script produces the following result:
+
+```
+Column1•Column2
+Column3•Column4
+```
+
+As a metacharacter, the ampersand (&) represents the extent of the pattern match, not the line that was matched.
+
+Because backslashes are also replacement metacharacters, two backslashes are necessary to output a single backslash. Tjhe "&" in the replacement string refers to "UNIX".
+
+`s/UNIX\\s-2&\\s0/g
+
+If the input line is:
+
+on the UNIX Operating System.
+
+then the substitute command produces:
+
+on the \s-2UNIX\s0 Operating System.
+
+The ampersand is particularly useful when the regular expression matches variations of a word. It allows you to specify varaible replacement string that corresponds to what was actually matched.
+
+A pair of escaped parentheses are use used in _sed_ to enclose any part of a regular expression and save it for recall.
+
+Up to nine "saves" are permitted for a single line. "\n" is used to recall the portion of the match that was saved.
+
+```
+$ cat test1
+first:second
+one:two
+$ sed 's/\(.*\):\(.*\)/\2:\1/' test1
+second:first
+two:one
+```
