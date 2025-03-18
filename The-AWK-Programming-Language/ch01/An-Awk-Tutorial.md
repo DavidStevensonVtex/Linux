@@ -392,3 +392,42 @@ $ awk '$3 > 15 { emp++ }
 > END     { print emp, "employees worked more than 15 hours." }' emp.data
 3 employees worked more than 15 hours.
 ```
+
+#### Computing Sums and Averages
+
+To count the number of employees, we could isntead use the built-in variable NR, which holds the number of lines read so far; its value at the end of all input is the total number of lines read.
+
+`END { print NR, "employees" }`
+
+```
+$ awk 'END { print NR, "employees" }' emp.data
+6 employees
+```
+
+Here is a program that uses NR to compute the average pay.
+
+```
+      { pay = pay + $2 * $3 }
+END   { print NR, "employees"
+        print "total pay is", pay
+        print "average pay is", pay/NR
+      }
+```
+
+```
+$ awk '      { pay = pay + $2 * $3 }
+> END   { print NR, "employees"
+>         print "total pay is", pay
+>         print "average pay is", pay/NR
+>       }' emp.data
+6 employees
+total pay is 1456
+average pay is 242.667
+```
+
+Clearly, printf could be used to produce neater output, for example to produce exactly two digits after the decimal point.
+
+The operator += is an abbreviation for incrementing a variable; it increments the variable on its left by the value of the expression on its right, so the first line of the program above could be more compactly written as:
+
+`     { pay += $2 * $3 }`
+
