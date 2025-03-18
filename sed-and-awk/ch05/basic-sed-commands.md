@@ -46,3 +46,37 @@ The number sign (\#) must be the first character on the line.
 If necessary, the comment can be continued on multiple lines by ending the preceding line with a backslash. For consistency, you might begin the continuation line with a \# so the line's purpose is obvious.
 
 If the next character following \# is **n**, the script will not automatically produce output. It is equivalent to specify the command-line option `-n`. Under the POSIX standard, \#n used in this way must be the first two characters in the file.
+
+### Substitution
+
+`[address]s/pattern/replacement/flags`
+
+The flats that modify the substitution are:
+
+```
+n       A number (1 to 512) indicating that a replacement should be made for only the nth occurrence of the pattern.
+g       Make thechanges globally on all occurrences in the pattern space. Normally only the first occurrence is replace.d
+p       Print the contents of the pattern space
+w file  Write the contents of the pattern space to file
+```
+
+Unlike addresses, which require a slash (/) as a delimiter, the regular expression can be delimited by any character except a newline. Thusk, if the pattern contained slashes, you could choose another charater, such as an exclamation mark, as the delimiter.
+
+`s!/usr/mail!/usr2/mail!`
+
+Note that the delimiter appears three times and is required after the _replacement_.
+Regardless of which delimiter you use, if it does appear in the regular expression, or in the replacement text, use a backslash (\\) to escape it.
+
+Since newline is just another character when stored internally, a regular expression can use "\n" to match an _embedded_ newline.
+
+The _replacement_ is a string of characters that will match what is matched by the regular expression.
+
+```
+&   Replaced by the string matched by the regular expression.
+\n  Matches the nth substring (n is a single digit) previously specified in the pattern using "\(" and "\)".
+\   Used to escape the ampersand (&), the backslash (\), and the subtitution command's delimiter when they are used literally in the replacement section. In addition, it can be used to escape the newline and create a multiline replacement string.
+```
+
+_Flags_ can be used in combination where it makes sense. For instance, **gp** makes the substitution globally on the line and prints the line. The global flag is by far the most commonly used. Without it, the replacement is made only for the first occurrence on the line.
+
+Because the default action is to pass through all lines, regardless of whether any action is taken, the print and write flags are typically used when the default output is suppressed (the `-n` option).
