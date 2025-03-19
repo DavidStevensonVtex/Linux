@@ -62,3 +62,9 @@ $ ./cf 30
 The \$\* in the script is the shell notation for the arguments that the program was called with; the shell expands it into a list of strings that are passed to the program.
 
 Awk stores the arguments that the program was called with in the arry ARGV, where ARGV[1] is the first argument, ARGV[2] is the second, and so on to ARGV[ARGC-1]. ARGC is the number of arguments and ARGV[0] is the name of the program, usually _awk_.
+
+#### A Reminder About Shell Scripts
+
+To make a file executable on Unix systems, run _chmod_ ("change mode") once:
+
+`$ chmod +x bmi cf`
