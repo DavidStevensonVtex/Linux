@@ -122,3 +122,29 @@ END {
     }
 }' $*
 ```
+
+### 2.3 Transformation
+
+Transforming input into output is what computers do, but there's a specific kind of transformatin that Awk is meant for: text data enters, some modest change is made to all or some selected lines, and then it leaves.
+
+#### Carriage Returns
+
+On Widows, each line of text file ends with a carriage return character \\r and a newline character \\n, where on macOS and Unix, each line ends with a newline only.
+
+Awk uses the newline-only model, though if the input is in Windows format, it will be processed correctly.
+
+We can use one of Awk's text substution functions, _sub_, to eliminate the \\r on each line. The function sub(re, repl, str) replaces the first match of the regulare expression _re_ in _str_ by the replacement text _repl_.
+
+`{ sub(/\r$/, ""); print }
+
+removes any carriage return at the end of a line before printing.
+
+The function _gsub_ is siimilar but replaces all occurrences of text that match the regular expression; _g_ implies "global". Both _sub_ and _gsub_ return the number of replacements they made so you can tell whether anything changed.
+
+Going in the other direction, it's easy to insert a carriage return before each newline if there isn't one there already:
+
+`{ if (!/\r$/) sub(/$/, "\r"); print }`
+
+The test succeeds if the regular expression does not match, that is, if there is no carriage return at the end of the line.
+
+Regular expressions are covered in great detail in the Section A.1.4 of the reference manual.
