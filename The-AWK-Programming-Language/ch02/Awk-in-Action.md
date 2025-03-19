@@ -68,3 +68,57 @@ Awk stores the arguments that the program was called with in the arry ARGV, wher
 To make a file executable on Unix systems, run _chmod_ ("change mode") once:
 
 `$ chmod +x bmi cf`
+
+### 2.2 Selection
+
+The Unix command _head_ by default prints the first 10 lines of its input. 
+The following Awk one-liner provides the same functionality:
+
+`NR <= 10`
+
+It isn't efficient on large inputs. An improved version would print each line but exit after the tenth.
+
+```
+{ print }
+NR > 10 { exit }
+```
+
+What if you want a program that will print the first three and the last three lines of its input, for example to see the most common and least common values in a numerically sorted list?
+
+```
+awk '{ line[NR] == $0 }
+END {
+    for (i = 1; i <= 3; i++ ) print line[i] 
+    print"..."
+    for (i = NR - 2; i <= NR ; i++) print line[i]
+}' $*
+```
+
+This isn't correct for inputs shorter than 7 lines, but as a personal tool, that may not matter as long as you remain aware of the limitation.
+
+Another approach is to print the first three lines as they arrive, and then retain only the most recent three lines, printing them at the end.
+
+```
+awk 'NR < 3 { print; next }
+    { line[1] = line[2]; line[2] = line[3]; line[3] = $0 }
+END {
+    print "..." 
+    for ( i = 1; i <= 3; i++) print line[i] } ' $*
+```
+
+The _next_ statement stops processing the current record and starts processing the next one, starting with the first statement of the Awk program.
+
+Somewhat surprisingly, this version is about one third slower than the first, perhaps because it's copying a lot of lines. A third option would be to treat the input as a circular buffer: store only three lines and cycle an index from 1 to 2 to 3 to 1 for the last three lines so there's no extra copying:
+
+```
+awk 'NR <= 3 { print; next }
+    { line[NR%3] = $0 }
+END {
+    print "..."
+    if = (NR+1) %3
+    for ( j = 0; j < 3 ; j++) {
+        print line[i]
+        i = (i+1) % 3
+    }
+}' $*
+```
