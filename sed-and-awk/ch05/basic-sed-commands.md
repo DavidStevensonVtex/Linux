@@ -130,3 +130,24 @@ $ sed 's/\(.*\):\(.*\)/\2:\1/' test1
 second:first
 two:one
 ```
+
+### Correcting index entries
+
+### Delete
+
+Delete command (**d**). It takes an address and deletes the contents of the pattern space if the line matches the address.
+
+The delete command is also a command that can change the flow of control in a script. That is because once it is executed, no further c ommands are executed on the "empty" pattern space.*
+
+* UNIX documentation reads "no further commands are attempted on the corpse of a deleted line".
+
+To delete blank lines:
+
+`/^$/d
+
+The delete command can be used to delete a range of lines.
+
+`/\.TS/,/\.TE/d`
+
+There is also a delete command (**D**) used to delete a portion of a multiline pattern space. This advanced command is presented in the next chapter.
+
