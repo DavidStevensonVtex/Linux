@@ -148,3 +148,61 @@ Going in the other direction, it's easy to insert a carriage return before each 
 The test succeeds if the regular expression does not match, that is, if there is no carriage return at the end of the line.
 
 Regular expressions are covered in great detail in the Section A.1.4 of the reference manual.
+
+#### Multiple Columns
+
+Our next example is a program that prints its input in multiple columnns, under the assumptino that most lines are shortish, for example a list of filenames or the names of people.
+
+One basic choice is whether to read the entire input to figure out the range of sizes, or to produce the output on the fly without knowing what is to come. Another choice is whether to produce the output in row order (which is what we'll do) or in column order; if the latter, then  necessarily all the input has to be read before any output can be produced.
+
+Let's do a streaming version first. The program assumes that input lines are no more than 10 characters wide, so with a couple of spaces between columns, there's room for 5 columns in a 60 character line. We can truncate too-long lines, with or without an indicator, or we can insert ellipses in the moddle, or we can print them across multiple columns.  Such choices could be parameterized, though that's definitely overkill for what is meant to be a simple example.
+
+
+```
+# mc: streaming version of multi-column printing
+
+{
+    out = sprintf("%s%-10.10s  ", out, $0)
+    if (n++ > 5) {
+        print substr(out, 1, length(out) - 2)
+        out = ""
+        n = 0
+    }
+}
+
+END {
+    if (n > 0) 
+        print substr(out, 1, length(out)-2)
+}
+```
+
+```
+$ awk -f mc names
+Alice       Archie      Eva         Liam        Louis       Mary        Naomi     
+Rafael      Sierra      Sydney 
+```
+
+```
+# mc2: multi-column printer
+
+{   lines[NR] = $0
+    if (length($0) > max)
+        max = length($0)
+}
+END {
+    fmt = sprintf("%%-%d.%ds", max, max)    # make a format string
+    ncol = int(60 / max + 0.5)              # returns integer value of x
+    for ( i = 1; i <= NR ; i+= ncol) {
+        out = ""
+        for (j = i ; j < i + ncol && j <= NR ; j++)
+            out = out sprintf(fmt, lines[j]) "  "
+        sub(/ +$/, "", out)                 # remove trailing spaces
+        print out
+    }
+}
+```
+
+```
+$ awk -f mc2 names
+Alice   Archie  Eva     Liam    Louis   Mary    Naomi   Rafael  Sierra  Sydney
+```
