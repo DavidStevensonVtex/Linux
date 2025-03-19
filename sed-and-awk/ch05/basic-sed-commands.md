@@ -139,7 +139,7 @@ Delete command (**d**). It takes an address and deletes the contents of the patt
 
 The delete command is also a command that can change the flow of control in a script. That is because once it is executed, no further c ommands are executed on the "empty" pattern space.*
 
-* UNIX documentation reads "no further commands are attempted on the corpse of a deleted line".
+\* UNIX documentation reads "no further commands are attempted on the corpse of a deleted line".
 
 To delete blank lines:
 
@@ -151,3 +151,71 @@ The delete command can be used to delete a range of lines.
 
 There is also a delete command (**D**) used to delete a portion of a multiline pattern space. This advanced command is presented in the next chapter.
 
+### Append, Insert, and Change
+
+The append (**a**), insert (**i**), and change (**c**) commands provide editing functions that are commonly performed with an interactive editor, such as **vi**.
+
+The syntax of these commands is unusual for sed because they must be specified over multiple lines.
+
+```
+append [line-address]a\
+text
+insert [line-address]i\
+text
+change [address]c\
+text
+```
+
+The insert command places the supplied text before the current line in the pattern space. The append command places it after the c urrent line. The change command replaces the contents of the pattern space with the supplied text.
+
+Each of these commands requires a backslash following it to escape the first end-of-line. The _text_ must begin on the next line. To input multiple lines of text, each successive line must end with a backslash, with the exception of the various last line.
+
+```
+/<Larry's Address>/i\
+4700 Cross Court\
+French Lick, IN
+```
+
+Also, if the text contains a literal backslash, add an extra backslash to escape it.
+
+The append and insert commands can be applied only to a single line address, not a range of lines. The change command, however, can address a range of lines. In this case, it replaces _all_ addressed lines with a single copy of the text.
+
+```
+/^From /,/^$/c\
+<Mail Header Removed>
+```
+
+Note that you will see the opposite behavior when the change command is one of a group of commands, enclosed in braces, that act on a range of lines. For instance, the following script:
+
+```
+^From/, /^$/{
+    s/^From //p
+    c\
+<Mail Header Removed>
+}
+```
+
+will output "<Mail Header Removed>" for each line in the range.
+
+The change command clears the pattern space, having the same effect on the pattern space as the delete command. No command following the change command in the script is applied.
+
+The insert and append commands do not affect the contents of the pattern space.
+
+```
+1i\
+New First Line\
+New Second Line
+```
+
+```
+$a\
+New Last Line
+```
+
+The \$ is a line-addressing symbol that matches the last line of a file.
+
+The insert command can be used to put a blank line before the curreent line, or the append command to put one after, by leaving the line following it blank.
+
+The change command replaces the contents of the pattern space with the text you provide. In effect, it deletes the current line and puts the supplied text in its place.
+
+It can be used when you want to match a line and replace it entirely.
