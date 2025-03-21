@@ -254,3 +254,49 @@ END {
     printf("  7: %.0f  30: %.0f  90: %.0f 1yr: %0.f %.1f hr: %.0f\n", w/7, m/30, q/90, yr/365, NR/365, s/NR)
 }' $*
 ```
+
+#### Stock Prices
+
+### 2.6 A Personal Library
+
+Awk provides a modest ibrary of built-in functions like _length_, _sub_, _substr_, _printf_, and a dozen or two more; they are listed in Section A.2.1 of the reference manual.
+
+
+It's possible to create more functions of your own, to be included in an Awk program when you need them.
+
+One good example would be a function that uses _sub_ or _gsub_, but returns the modified string rather than a count.
+
+```
+$ cat rest
+# rest(n): returns fields n..NF as a space-separated string
+
+function rest(n, s) {
+    s = ""
+    for (j = n; j <= NF ; j++) {
+        s = s $j " "
+    }
+    return substr(s, 1, length(s)-1)
+}
+
+# test it:
+{
+    for (i = 1; i <= NF ; i++)
+        printf("%3d [%s]\n", i, rest(i))
+}
+```
+
+```
+$ cat test
+abc def ghi
+xyz mno pqr
+```
+
+```
+$ awk -f rest test
+  1 [abc def ghi]
+  2 [def ghi]
+  3 [ghi]
+  1 [xyz mno pqr]
+  2 [mno pqr]
+  3 [pqr]
+```
