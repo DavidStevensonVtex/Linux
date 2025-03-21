@@ -206,3 +206,32 @@ END {
 $ awk -f mc2 names
 Alice   Archie  Eva     Liam    Louis   Mary    Naomi   Rafael  Sierra  Sydney
 ```
+
+### 2.4 Summarization
+
+Awk is useful for getting a quick summary of files that contain tabular data: maximum and minimum values, sums of columns and the like. These are also useful fo data validation -- what is in each field, whether there are empty values, and so on.
+
+The _addup_ script adds up the values in each column of its input and reports the sums at the end. It's a simple exercise in array subscripts.
+
+```
+$ cat addup
+# addup: add up values in each field separately
+
+{
+    for ( i = 1; i <= NF ; i++ )
+        field[i] += $i
+    if ( NF > maxnf)
+        maxnf = NF
+}
+
+END {
+    for (i = 1; i <= maxnf ; i++) {
+        printf("%6g\t", field[i])
+    }
+    printf("\n")
+}
+```
+
+What if some value or even an entire column is not numeric? No problem? Awkuses the numeric prefix of a string as its numeric value, so if a value doesn't have a numeric appearing prefix, its value is zero. For example, the numeric value of a string like "50% off" is 50.
+
+Some spreadsheet tools provide similar functionality, as in Google Sheets, and so does the Pandas library for Python. the advantage of using Awk is that you can tailor the computation to your specific need; naturally the corresponding disadvantage is that you have to wriet aa bit of code yourself.
