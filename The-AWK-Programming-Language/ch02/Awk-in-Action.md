@@ -235,3 +235,22 @@ END {
 What if some value or even an entire column is not numeric? No problem? Awkuses the numeric prefix of a string as its numeric value, so if a value doesn't have a numeric appearing prefix, its value is zero. For example, the numeric value of a string like "50% off" is 50.
 
 Some spreadsheet tools provide similar functionality, as in Google Sheets, and so does the Pandas library for Python. the advantage of using Awk is that you can tailor the computation to your specific need; naturally the corresponding disadvantage is that you have to wriet aa bit of code yourself.
+
+### 2.5 Personal Databases
+
+```
+#!/bin/bash
+
+# sliding-window-averages
+
+awk '
+{ s += $2; x[NR] = $2 }
+
+END {
+    for (i = NR-6;    i <= NR; i++) w += x[i]
+    for (i = NR-30;   i <= NR; i++) m += x[i]
+    for (i = NR-90;   i <= NR; i++) q += x[i]
+    for (i = NR-365 ; i <= NR ; i++) yr += x[i]
+    printf("  7: %.0f  30: %.0f  90: %.0f 1yr: %0.f %.1f hr: %.0f\n", w/7, m/30, q/90, yr/365, NR/365, s/NR)
+}' $*
+```
