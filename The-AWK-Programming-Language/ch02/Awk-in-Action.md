@@ -349,3 +349,38 @@ $ ./current-date
 Mon 24 Mar 2025 03:29:36 PM EDT
 24 Mar 2025, 03:29:36
 ```
+
+```
+$ cat isplit.awk
+
+# isplit - make an indexed array from str
+
+function isplit(str, arr,   n, i, temp) {
+    n = split(str, temp)
+    for (i = 1; i <= n ; i++) 
+        arr[temp[i]] = i
+    return n
+}
+
+BEGIN {
+    isplit("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec", m)
+    for ( key in m ) 
+       print key, m[key]
+}
+```
+
+```
+$ awk -f isplit.awk 
+Feb 2
+Sep 9
+May 5
+Apr 4
+Jan 1
+Dec 12
+Nov 11
+Jul 7
+Mar 3
+Oct 10
+Aug 8
+Jun 6
+```
