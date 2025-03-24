@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# current-date
+
+awk '
+    {
+        "date" | getline date       # get current date and time
+        print(date)
+        split(date, d, / /)         # or equivalently, " "
+        date = d[2] " " d[3] " " d[4] ", " d[5]
+        print(date)
+    }
+' $*

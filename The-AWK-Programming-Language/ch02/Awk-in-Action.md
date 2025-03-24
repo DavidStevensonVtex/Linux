@@ -325,3 +325,27 @@ $ ./datefix
 12/25/23
 2023-12-25
 ```
+
+```
+'$ cat current-date
+#!/bin/bash
+
+# current-date
+
+awk '
+    {
+        "date" | getline date       # get current date and time
+        print(date)
+        split(date, d, / /)         # or equivalently, " "
+        date = d[2] " " d[3] " " d[4] ", " d[5]
+        print(date)
+    }
+' $*
+```
+
+```
+$ ./current-date
+
+Mon 24 Mar 2025 03:29:36 PM EDT
+24 Mar 2025, 03:29:36
+```
