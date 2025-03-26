@@ -1,0 +1,8 @@
+# arr_to_csv - convert an indexed array to arr_to_csv
+
+function arr_to_csv(arr,    s, i, n) {
+    n = length(arr)
+    for (i = 1; i <= n; i++)
+        s = s to_csv(arr[i]) ","
+    return substr(s, 1, length(s)-1)    # remove trailing comma
+}

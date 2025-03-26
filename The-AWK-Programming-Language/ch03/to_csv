@@ -1,0 +1,6 @@
+# to_csv - convert s to proper "..."
+
+function to_csv(s) {
+    gsub(/"/, "\"\"")
+    return "\"" s "\""
+}
