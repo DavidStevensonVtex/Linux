@@ -219,3 +219,9 @@ The insert command can be used to put a blank line before the curreent line, or 
 The change command replaces the contents of the pattern space with the text you provide. In effect, it deletes the current line and puts the supplied text in its place.
 
 It can be used when you want to match a line and replace it entirely.
+
+### List
+
+The list command (l) displays the contents of the pattern space, shwoing non-printing characters as two-digit ASCII codes. It is similar to the list (:l) command in **vi**. You can use this command to detect "invisible" characters in the input.
+
+Because the list command causes immediate output, we suppress the default output or we would get duplicate copies of the line.
