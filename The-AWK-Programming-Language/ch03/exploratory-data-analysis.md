@@ -202,3 +202,40 @@ $ gawk -vFPAT='[^,]*|"[^"]*"'  '$5 < 1' passengers.csv | head
 "1115","3rd",0,"Peacock, Master Alfred Edward",0.5833,"","","","","","male"
 "1246","3rd",0,"Thomas, Master Assad Alexander",0.4167,"","","","","","male"
 ```
+
+#### Some Further Checking
+
+Suppose we check somethng absolutely basic, like how many passengers there were in the passengers file.
+
+```
+$ gawk -vFPAT='[^,]*|"[^"]*"'  'END { print NR }' passengers.csv 
+1314
+```
+
+This program adds up the counts for non-crew members from the third field of the su mmary file:
+
+```
+$ awk '!/Crew/ { s += $3 }; END { print s }' titanic.tsv
+1316
+```
+
+How many children were there?
+
+```
+$ awk '$1 == "Child" { s += $3 } ; END { print s }' titanic.tsv
+109
+```
+
+```
+$ gawk -vFPAT='[^,]*|"[^"]*"'  '$5 < 12' passengers.csv | wc -l
+97
+```
+
+Perhaps children are those 13 or younger?
+
+```
+$ gawk -vFPAT='[^,]*|"[^"]*"'  '$5 <= 13' passengers.csv | wc -l
+106
+```
+
+In both of these cases, numbers that ought to be the same are in fact different, which suggests that the data is still flaky. When exploring data, you should always be prepared for errors and inconsistencies in form and content.
